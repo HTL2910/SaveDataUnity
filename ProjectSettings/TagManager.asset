@@ -34,9 +34,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Walls
+  - Grounds
+  - Doors
   m_SortingLayers:
   - name: Default
     uniqueID: 0
