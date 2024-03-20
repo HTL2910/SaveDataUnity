@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 742466102
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1396ac2c1f4d6bea82df8b6f3e7761b8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 60a932c7e9f10e3acf4a06d451c6076f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BundledAssets/testbundle/home building.prefab
+Dependencies:
+- C:/Users/tgl/Music/SaveData/SaveDataUnity/Assets/AssetBundles/testbundle
