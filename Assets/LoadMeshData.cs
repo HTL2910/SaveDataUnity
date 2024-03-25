@@ -7,7 +7,7 @@ public class LoadMeshData : MonoBehaviour
     public string levelFileName = "level1_MeshCollection"; // Tên của tệp dữ liệu bạn muốn tải
     public GameObject parentObject; // Tham chiếu đến GameObject cha
 
-    void Start()
+    public void Load()
     {
         string filePath = levelFileName + ".mesh";
         if (File.Exists(filePath))
@@ -26,7 +26,7 @@ public class LoadMeshData : MonoBehaviour
 
                 // Tạo GameObject mới và gán mesh vào MeshFilter của nó
                 GameObject newObject = new GameObject();
-                newObject.name = levelFileName + "_" + "1"; // Đặt tên của đối tượng mới
+                newObject.name = meshData.objectName; // Đặt tên của đối tượng mới từ dữ liệu tên
                 newObject.transform.SetParent(parentObject.transform); // Gán cha cho đối tượng mới
                 MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
                 meshFilter.mesh = mesh;
@@ -54,6 +54,7 @@ public class LoadMeshData : MonoBehaviour
         public Vector3[] normals;
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
+        public string objectName; // Thêm dữ liệu tên đối tượng
     }
 
     [System.Serializable]

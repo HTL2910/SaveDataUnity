@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class SaveDataGameObject : MonoBehaviour
 {
     public int levelInt = 1;
-
-    void Start()
+    public void Save()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
 
@@ -22,6 +21,7 @@ public class SaveDataGameObject : MonoBehaviour
                 meshData.normals = meshFilter.sharedMesh.normals;
                 meshData.triangles = meshFilter.sharedMesh.triangles;
                 meshData.position = obj.transform.position; // Lưu vị trí của đối tượng
+                meshData.objectName = obj.name; // Lưu tên của đối tượng
 
                 meshDataCollection.meshDataList.Add(meshData);
 
@@ -51,6 +51,7 @@ public class SaveDataGameObject : MonoBehaviour
         public Vector3[] normals;
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
+        public string objectName; // Thêm dữ liệu tên đối tượng
     }
 
     [System.Serializable]
