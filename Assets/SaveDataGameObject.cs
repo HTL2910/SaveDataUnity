@@ -4,27 +4,25 @@ using System.Collections.Generic;
 
 public class SaveDataGameObject : MonoBehaviour
 {
-    public int levelInt = 1; // Giả sử levelInt được gán giá trị 1
+    public int levelInt = 1;
 
     void Start()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
 
-        MeshDataCollection meshDataCollection = new MeshDataCollection(); // Tạo một đối tượng mới để lưu trữ dữ liệu của tất cả các mesh
+        MeshDataCollection meshDataCollection = new MeshDataCollection();
 
         foreach (GameObject obj in objects)
         {
-            // Get the MeshFilter component
             MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
             if (meshFilter != null && meshFilter.sharedMesh != null)
             {
-                // Tạo một đối tượng MeshData mới để lưu trữ dữ liệu của mesh
                 MeshData meshData = new MeshData();
                 meshData.vertices = meshFilter.sharedMesh.vertices;
                 meshData.normals = meshFilter.sharedMesh.normals;
                 meshData.triangles = meshFilter.sharedMesh.triangles;
+                meshData.position = obj.transform.position; // Lưu vị trí của đối tượng
 
-                // Thêm MeshData mới vào danh sách MeshDataCollection
                 meshDataCollection.meshDataList.Add(meshData);
 
                 Debug.Log("Mesh data saved for object: " + obj.name);
@@ -35,12 +33,14 @@ public class SaveDataGameObject : MonoBehaviour
             }
         }
 
-        // Convert MeshDataCollection object to JSON
         string jsonData = JsonUtility.ToJson(meshDataCollection);
 
-        // Write JSON data to file
         string filePath = "level" + levelInt + "_MeshCollection.mesh";
-        File.WriteAllText(filePath, jsonData);
+        using (StreamWriter streamWriter = new StreamWriter(filePath))
+        {
+            streamWriter.Write(jsonData);
+        }
+
         Debug.Log("Mesh data collection saved to: " + filePath);
     }
 
@@ -50,11 +50,12 @@ public class SaveDataGameObject : MonoBehaviour
         public Vector3[] vertices;
         public Vector3[] normals;
         public int[] triangles;
+        public Vector3 position; // Thêm dữ liệu vị trí
     }
 
     [System.Serializable]
     public class MeshDataCollection
     {
-        public List<MeshData> meshDataList = new List<MeshData>(); // Danh sách các MeshData được lưu
+        public List<MeshData> meshDataList = new List<MeshData>();
     }
 }

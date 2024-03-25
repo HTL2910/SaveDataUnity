@@ -999,7 +999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87ba36fb1defad41a3e514a5c2fe2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFileName: level1
+  levelFileName: level1_MeshCollection
+  parentObject: {fileID: 1668771653}
 --- !u!1 &2102555457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3281521247664394557, guid: 7a2ab35ff99efe84785a83804eea2129, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281521247664394557, guid: 7a2ab35ff99efe84785a83804eea2129, type: 3}
       propertyPath: m_TagString
