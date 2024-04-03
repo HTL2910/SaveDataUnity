@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 public class LoadMeshData : MonoBehaviour
 {
-    public string levelFileName = "level1_MeshCollection"; // Tên của tệp dữ liệu bạn muốn tải
     public GameObject parentObject; // Tham chiếu đến GameObject cha
 
     public void Load()
     {
-        string filePath = levelFileName + ".mesh";
+        string filePath = PlayerPrefs.GetString("NameFile", string.Empty);
         if (File.Exists(filePath))
         {
             string jsonData = File.ReadAllText(filePath);

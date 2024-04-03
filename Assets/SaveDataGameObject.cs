@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
-
+using TMPro;
+using UnityEngine.UI;
 public class SaveDataGameObject : MonoBehaviour
 {
-    public int levelInt = 1;
+    public TMP_InputField nameInputField;
+    public GameObject model3D;
+    public List<GameObject> listGameObjects=new List<GameObject>();
     public void Save()
     {
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
+
+        for(int i = 0;i<model3D.transform.childCount;i++)
+        {
+            listGameObjects.Add(model3D.transform.GetChild(i).gameObject);
+        }    
+        
 
         MeshDataCollection meshDataCollection = new MeshDataCollection();
 
-        foreach (GameObject obj in objects)
+        foreach (GameObject obj in listGameObjects)
         {
             MeshFilter meshFilter = obj.GetComponent<MeshFilter>();
             if (meshFilter != null && meshFilter.sharedMesh != null)
@@ -35,7 +43,8 @@ public class SaveDataGameObject : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(meshDataCollection);
 
-        string filePath = "level" + levelInt + "_MeshCollection.mesh";
+        string filePath = nameInputField.text + ".mesh";
+        PlayerPrefs.SetString("NameFile", filePath);
         using (StreamWriter streamWriter = new StreamWriter(filePath))
         {
             streamWriter.Write(jsonData);
