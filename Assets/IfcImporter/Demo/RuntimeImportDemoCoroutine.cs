@@ -27,9 +27,10 @@ public class RuntimeImportDemoCoroutine : MonoBehaviour
     public string assetPath = "Assets/IfcImporter/Demo/";
     public string filename = "demo_duplex.ifc";
 
-    void Start()
+    public void Import()
     {
         StartCoroutine(Demo());
+        
     }
 
     ///<summary>A coroutine for starting the Importer coroutine and printing out some debug information.</summary>
