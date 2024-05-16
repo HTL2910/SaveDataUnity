@@ -35,7 +35,20 @@ public class LoadMeshData : MonoBehaviour
 
                 // Tạo Renderer để hiển thị mesh
                 MeshRenderer renderer = newObject.AddComponent<MeshRenderer>();
-                renderer.material = new Material(Shader.Find("Standard")); // Đặt vật liệu cho renderer
+                Material material = new Material(Shader.Find("Standard")); // Tạo vật liệu mới
+                material.name = meshData.material.materialName;
+                material.color = meshData.material.color;
+                // Gán texture nếu có
+                if (!string.IsNullOrEmpty(meshData.material.texturePath))
+                {
+                    Texture texture = (Texture)Resources.Load(meshData.material.texturePath);
+                    if (texture != null)
+                    {
+                        material.mainTexture = texture;
+                    }
+                }
+
+                renderer.material = material; // Đặt vật liệu cho renderer
 
                 Debug.Log("Mesh data loaded from: " + filePath);
             }
@@ -54,11 +67,20 @@ public class LoadMeshData : MonoBehaviour
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
         public string objectName; // Thêm dữ liệu tên đối tượng
+        public MaterialData material; // Thêm dữ liệu material
+    }
+
+    [System.Serializable]
+    public class MaterialData
+    {
+        public string materialName;
+        public Color color;
+        public string texturePath; // Thêm dữ liệu texture
     }
 
     [System.Serializable]
     public class MeshDataCollection
     {
-        public List<MeshData> meshDataList = new List<MeshData>(); // Danh sách các MeshData được lưu
+        public List<MeshData> meshDataList = new List<MeshData>();
     }
 }
