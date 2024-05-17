@@ -30,17 +30,17 @@ public class FileSelect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Mở hộp thoại chọn file IFC khi nhấn phím Space
-            filePath = fileChooser.OpenIFCFile();
+            ////filePath = fileChooser.OpenIFCFile();
 
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                // Xử lý file IFC đã chọn ở đây
-                Debug.Log("Đã chọn file IFC: " + filePath);
-            }
-            else
-            {
-                Debug.Log("Người dùng đã hủy chọn file IFC.");
-            }
+            //if (!string.IsNullOrEmpty(filePath))
+            //{
+            //    // Xử lý file IFC đã chọn ở đây
+            //    Debug.Log("Đã chọn file IFC: " + filePath);
+            //}
+            //else
+            //{
+            //    Debug.Log("Người dùng đã hủy chọn file IFC.");
+            //}
         }
     }
 
