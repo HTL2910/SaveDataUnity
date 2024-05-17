@@ -35,20 +35,7 @@ public class SaveDataGameObject : MonoBehaviour
                 meshData.position = obj.transform.position;
                 
                 meshData.objectName = obj.name;
-
-                // Lưu thông tin về material
-                MaterialData materialData = new MaterialData();
-                materialData.materialName = meshRenderer.sharedMaterial.name;
-                materialData.color = meshRenderer.sharedMaterial.color;
-
-                // Lưu texture nếu có
-                if (meshRenderer.sharedMaterial.mainTexture != null)
-                {
-                    materialData.texturePath = AssetDatabase.GetAssetPath(meshRenderer.sharedMaterial.mainTexture);
-                }
-
-                meshData.material = materialData;
-
+                meshData.materialName=meshRenderer.sharedMaterial.name;
                 meshDataCollection.meshDataList.Add(meshData);
 
                 Debug.Log("Mesh data saved for object: " + obj.name);
@@ -78,16 +65,10 @@ public class SaveDataGameObject : MonoBehaviour
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
         public string objectName; // Thêm dữ liệu tên đối tượng
-        public MaterialData material; // Thêm dữ liệu material
+        public string materialName; // Thêm dữ liệu material
     }
 
-    [System.Serializable]
-    public class MaterialData
-    {
-        public string materialName;
-        public Color color;
-        public string texturePath; // Thêm dữ liệu texture
-    }
+    
 
     [System.Serializable]
     public class MeshDataCollection

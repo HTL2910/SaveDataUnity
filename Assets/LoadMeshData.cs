@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LoadMeshData : MonoBehaviour
 {
     public GameObject parentObject; // Tham chiếu đến GameObject cha
-
+    public List<Material> materials;
     public void Load()
     {
         string filePath = PlayerPrefs.GetString("NameFile", string.Empty);
@@ -35,20 +35,9 @@ public class LoadMeshData : MonoBehaviour
 
                 // Tạo Renderer để hiển thị mesh
                 MeshRenderer renderer = newObject.AddComponent<MeshRenderer>();
-                Material material = new Material(Shader.Find("Standard")); // Tạo vật liệu mới
-                material.name = meshData.material.materialName;
-                material.color = meshData.material.color;
-                // Gán texture nếu có
-                if (!string.IsNullOrEmpty(meshData.material.texturePath))
-                {
-                    Texture texture = (Texture)Resources.Load(meshData.material.texturePath);
-                    if (texture != null)
-                    {
-                        material.mainTexture = texture;
-                    }
-                }
 
-                renderer.material = material; // Đặt vật liệu cho renderer
+                
+                renderer.material = FindMaterialWithName(meshData.materialName); // Đặt vật liệu cho renderer
 
                 Debug.Log("Mesh data loaded from: " + filePath);
             }
@@ -58,7 +47,17 @@ public class LoadMeshData : MonoBehaviour
             Debug.LogWarning("File not found: " + filePath);
         }
     }
-
+    public Material FindMaterialWithName(string name)
+    {
+        for (int i = 0;i<materials.Count;i++)
+        {
+            if (materials[i].name == name)
+            {
+                return materials[i];
+            }    
+        }
+        return materials[0];
+    }    
     [System.Serializable]
     public class MeshData
     {
@@ -67,15 +66,7 @@ public class LoadMeshData : MonoBehaviour
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
         public string objectName; // Thêm dữ liệu tên đối tượng
-        public MaterialData material; // Thêm dữ liệu material
-    }
-
-    [System.Serializable]
-    public class MaterialData
-    {
-        public string materialName;
-        public Color color;
-        public string texturePath; // Thêm dữ liệu texture
+        public string materialName; // Thêm dữ liệu material
     }
 
     [System.Serializable]
