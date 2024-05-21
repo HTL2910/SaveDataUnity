@@ -33,7 +33,8 @@ public class SaveDataGameObject : MonoBehaviour
                 meshData.normals = meshFilter.sharedMesh.normals;
                 meshData.triangles = meshFilter.sharedMesh.triangles;
                 meshData.position = obj.transform.position;
-                
+                meshData.rotation = obj.transform.rotation.eulerAngles;
+                meshData.scale = obj.transform.localScale;
                 meshData.objectName = obj.name;
                 meshData.materialName=meshRenderer.sharedMaterial.name;
                 meshDataCollection.meshDataList.Add(meshData);
@@ -64,6 +65,8 @@ public class SaveDataGameObject : MonoBehaviour
         public Vector3[] normals;
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
+        public Vector3 rotation;
+        public Vector3 scale;
         public string objectName; // Thêm dữ liệu tên đối tượng
         public string materialName; // Thêm dữ liệu material
     }

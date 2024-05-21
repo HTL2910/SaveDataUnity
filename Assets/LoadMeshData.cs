@@ -32,7 +32,8 @@ public class LoadMeshData : MonoBehaviour
 
                 // Gán vị trí của đối tượng mới từ dữ liệu vị trí
                 newObject.transform.position = meshData.position;
-
+                newObject.transform.rotation = Quaternion.Euler(meshData.rotation);
+                newObject.transform.localScale = meshData.scale;
                 // Tạo Renderer để hiển thị mesh
                 MeshRenderer renderer = newObject.AddComponent<MeshRenderer>();
 
@@ -65,6 +66,8 @@ public class LoadMeshData : MonoBehaviour
         public Vector3[] normals;
         public int[] triangles;
         public Vector3 position; // Thêm dữ liệu vị trí
+        public Vector3 rotation;
+        public Vector3 scale;
         public string objectName; // Thêm dữ liệu tên đối tượng
         public string materialName; // Thêm dữ liệu material
     }
