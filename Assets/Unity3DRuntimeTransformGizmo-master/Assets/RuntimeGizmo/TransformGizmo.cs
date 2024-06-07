@@ -23,20 +23,13 @@ namespace RuntimeGizmos
 		public KeyCode SetMoveType = KeyCode.W;
 		public KeyCode SetRotateType = KeyCode.E;
 		public KeyCode SetScaleType = KeyCode.R;
-		//public KeyCode SetRectToolType = KeyCode.T;
-		public KeyCode SetAllTransformType = KeyCode.Y;
-		public KeyCode SetSpaceToggle = KeyCode.X;
-		public KeyCode SetPivotModeToggle = KeyCode.Z;
-		public KeyCode SetCenterTypeToggle = KeyCode.C;
-		public KeyCode SetScaleTypeToggle = KeyCode.S;
-		public KeyCode translationSnapping = KeyCode.LeftControl;
-		public KeyCode AddSelection = KeyCode.LeftShift;
-		public KeyCode RemoveSelection = KeyCode.LeftControl;
-		public KeyCode ActionKey = KeyCode.LeftShift; //Its set to shift instead of control so that while in the editor we dont accidentally undo editor changes =/
-		public KeyCode UndoAction = KeyCode.Z;
-		public KeyCode RedoAction = KeyCode.Y;
+        public KeyCode translationSnapping = KeyCode.LeftControl;
+        public KeyCode AddSelection = KeyCode.LeftShift;
+        public KeyCode RemoveSelection = KeyCode.LeftControl;
+        public KeyCode ActionKey = KeyCode.LeftShift;
 
-		public Color xColor = new Color(1, 0, 0, 0.8f);
+
+        public Color xColor = new Color(1, 0, 0, 0.8f);
 		public Color yColor = new Color(0, 1, 0, 0.8f);
 		public Color zColor = new Color(0, 0, 1, 0.8f);
 		public Color allColor = new Color(.7f, .7f, .7f, 0.8f);
@@ -153,8 +146,6 @@ namespace RuntimeGizmos
 
 		void Update()
 		{
-			HandleUndoRedo();
-
 			SetSpaceAndType();
 
 			if(manuallyHandleGizmo)
@@ -249,22 +240,7 @@ namespace RuntimeGizmos
 			return color;
 		}
 
-		void HandleUndoRedo()
-		{
-			if(maxUndoStored != UndoRedoManager.maxUndoStored) { UndoRedoManager.maxUndoStored = maxUndoStored; }
 
-			if(Input.GetKey(ActionKey))
-			{
-				if(Input.GetKeyDown(UndoAction))
-				{
-					UndoRedoManager.Undo();
-				}
-				else if(Input.GetKeyDown(RedoAction))
-				{
-					UndoRedoManager.Redo();
-				}
-			}
-		}
 
 		//We only support scaling in local space.
 		public TransformSpace GetProperTransformSpace()
@@ -310,38 +286,11 @@ namespace RuntimeGizmos
 			if(Input.GetKeyDown(SetMoveType)) transformType = TransformType.Move;
 			else if(Input.GetKeyDown(SetRotateType)) transformType = TransformType.Rotate;
 			else if(Input.GetKeyDown(SetScaleType)) transformType = TransformType.Scale;
-			//else if(Input.GetKeyDown(SetRectToolType)) type = TransformType.RectTool;
-			else if(Input.GetKeyDown(SetAllTransformType)) transformType = TransformType.All;
+			
 
 			if(!isTransforming) translatingType = transformType;
 
-			if(Input.GetKeyDown(SetPivotModeToggle))
-			{
-				if(pivot == TransformPivot.Pivot) pivot = TransformPivot.Center;
-				else if(pivot == TransformPivot.Center) pivot = TransformPivot.Pivot;
-
-				SetPivotPoint();
-			}
-
-			if(Input.GetKeyDown(SetCenterTypeToggle))
-			{
-				if(centerType == CenterType.All) centerType = CenterType.Solo;
-				else if(centerType == CenterType.Solo) centerType = CenterType.All;
-
-				SetPivotPoint();
-			}
-
-			if(Input.GetKeyDown(SetSpaceToggle))
-			{
-				if(space == TransformSpace.Global) space = TransformSpace.Local;
-				else if(space == TransformSpace.Local) space = TransformSpace.Global;
-			}
-
-			if(Input.GetKeyDown(SetScaleTypeToggle))
-			{
-				if(scaleType == ScaleType.FromPoint) scaleType = ScaleType.FromPointOffset;
-				else if(scaleType == ScaleType.FromPointOffset) scaleType = ScaleType.FromPoint;
-			}
+			
 
 			if(transformType == TransformType.Scale)
 			{
@@ -1067,25 +1016,7 @@ namespace RuntimeGizmos
 			return closestDistance;
 		}
 
-		//float DistanceFromMouseToPlane(List<Vector3> planeLines)
-		//{
-		//	if(planeLines.Count >= 4)
-		//	{
-		//		Ray mouseRay = myCamera.ScreenPointToRay(Input.mousePosition);
-		//		Plane plane = new Plane(planeLines[0], planeLines[1], planeLines[2]);
-
-		//		float distanceToPlane;
-		//		if(plane.Raycast(mouseRay, out distanceToPlane))
-		//		{
-		//			Vector3 pointOnPlane = mouseRay.origin + (mouseRay.direction * distanceToPlane);
-		//			Vector3 planeCenter = (planeLines[0] + planeLines[1] + planeLines[2] + planeLines[3]) / 4f;
-
-		//			return Vector3.Distance(planeCenter, pointOnPlane);
-		//		}
-		//	}
-
-		//	return float.MaxValue;
-		//}
+		
 
 		void SetAxisInfo()
 		{
@@ -1140,10 +1071,7 @@ namespace RuntimeGizmos
 				AddQuads(pivotPoint, axisInfo.zDirection, axisInfo.xDirection, axisInfo.yDirection, zLineLength, lineWidth, handleLines.z);
 			}
 		}
-		int AxisDirectionMultiplier(Vector3 direction, Vector3 otherDirection)
-		{
-			return ExtVector3.IsInDirection(direction, otherDirection) ? 1 : -1;
-		}
+		
 
 		void SetHandlePlanes()
 		{
@@ -1338,21 +1266,7 @@ namespace RuntimeGizmos
 			}
 		}
 
-		void DrawLines(List<Vector3> lines, Color color)
-		{
-			if(lines.Count == 0) return;
-
-			GL.Begin(GL.LINES);
-			GL.Color(color);
-
-			for(int i = 0; i < lines.Count; i += 2)
-			{
-				GL.Vertex(lines[i]);
-				GL.Vertex(lines[i + 1]);
-			}
-
-			GL.End();
-		}
+		
 
 		void DrawTriangles(List<Vector3> lines, Color color)
 		{
