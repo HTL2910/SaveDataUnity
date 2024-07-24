@@ -1,9 +1,11 @@
 ﻿using StreamChat.Core;
+using StreamChat.Core.StatefulModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Scripting;
 public class ChatManager : MonoBehaviour
@@ -11,6 +13,8 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _messageText;
     [SerializeField] private TMP_InputField messageInputField;
     private IStreamChatClient _chatClient;
+   
+
     private async void Start()
     {
         _chatClient = StreamChatClient.CreateDefaultClient();
@@ -22,9 +26,9 @@ public class ChatManager : MonoBehaviour
         {
             Debug.Log("av");
             OnSendMessagesButtonClicked();
-            OnDisplayMessagesButtonClicked();
+            
         }
-        
+        OnDisplayMessagesButtonClicked();
     }
     //connect
     public async Task ConnectAsync()
@@ -54,13 +58,32 @@ public class ChatManager : MonoBehaviour
     {
         DateTime time = DateTime.Now;
         string timeString=time.ToString("F");
+
         var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "2");
         Debug.Log($"Connected to channel {channel.Id}");
         var message = await channel.SendNewMessageAsync(timeString + ":"+messageInputField.text+"\n");
         Debug.Log($"Sent message: {message.Text}");
         messageInputField.text = string.Empty;
-        StartCoroutine(DisplayMessages());
+        OnDisplayMessagesButtonClicked();
     }
+    public async void DeleteMessage(IStreamMessage message, bool hardDelete = false)
+    {
+        if (hardDelete)
+        {
+            await message.HardDeleteAsync();
+        }
+        else
+        {
+            await message.SoftDeleteAsync();
+        }
+        Debug.Log($"Message deleted: {message.Id}");
+    }
+
+    private void OnMessageReceived(IStreamMessage message)
+    {
+        Debug.Log($"Message received from {message.User.Name}: {message.Text}");
+    }
+
     public void OnSendMessagesButtonClicked()
     {
         StartCoroutine(SendMessage());
