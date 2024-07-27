@@ -4,6 +4,8 @@ using TMPro;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System;
+using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
@@ -60,15 +62,15 @@ public class AudioManager : MonoBehaviour
     {
         foreach (int index in listIndex)
         {
-            if (index >= 0 && index < audioClips.Length)
+            if (index >= 0 && index < 8)
             {
-                audioSource.clip = audioClips[index];
+                audioSource.clip = audioClips[index-1];
                 audioSource.PlayOneShot(audioSource.clip);
                 yield return new WaitForSeconds(waitTime); // Chờ thời gian ngắn giữa các nốt nhạc
             }
         }
     }
-
+      
     public static List<int> ExtractNumbers(string input)
     {
         List<int> numbers = new List<int>();
@@ -90,4 +92,32 @@ public class AudioManager : MonoBehaviour
     {
         audioInputField.text = "4 3 3 2 3 4 3 1 4 3 3 2 3 4 3 4 4 4 5 6 6 6 6 5 4 5 3 1 4 3 3 2 3 4 3 1 4 3 3 2 3 4 3 4 4 4 5 6 6 6 6 5 4 3 5";
     }
+    public void RandomMusic()
+    {
+        int number = 0;
+        if (audioInputField.text == null || audioInputField.text==string.Empty)
+        {
+            number = 50;
+        }
+        if(int.TryParse(audioInputField.text, out int count))
+        {
+            number = count;
+        }    
+        PlaySoundCount(number);
+    }    
+    private void PlaySoundCount(int count)
+    {
+        audioInputField.text = string.Empty;
+        if (count > 10)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                int tmpCount = UnityEngine.Random.Range(1, 9);
+                audioInputField.text += " "+tmpCount.ToString();
+            }
+        }
+        Debug.Log(audioInputField.text);
+        GetListIndex();
+        
+    }    
 }
