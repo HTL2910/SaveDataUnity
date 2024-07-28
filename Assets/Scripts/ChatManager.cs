@@ -12,7 +12,9 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _messageText;
     [SerializeField] private TMP_InputField messageInputField;
     private IStreamChatClient _chatClient;
-   
+    //string channelName = "2";//5 là public ,N
+    string channelName = "110";//5 là public ,H
+
 
     private async void Start()
     {
@@ -58,7 +60,7 @@ public class ChatManager : MonoBehaviour
         DateTime time = DateTime.Now;
         string timeString=time.ToString("F");
 
-        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "5");//2 for me
+        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, channelName);//2 for me
         Debug.Log($"Connected to channel {channel.Id}");
         var message = await channel.SendNewMessageAsync(timeString + ":"+messageInputField.text+"\n");
         Debug.Log($"Sent message: {message.Text}");
@@ -95,7 +97,7 @@ public class ChatManager : MonoBehaviour
     //view message (view history)
     public async Task DisplayMessagesAsync()
     {
-        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "5");
+        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, channelName);
         Debug.Log($"Messages in channel {channel.Id}:");
         _messageText.text = string.Empty;
         _messageText.text = channel.Name+": ";
@@ -157,7 +159,7 @@ public class ChatManager : MonoBehaviour
     // Send simple reaction with a score of 1
     public async Task LikeMessageAsync()
     {
-        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "5");
+        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, channelName);
 
         var messageToReact = channel.Messages[0]; // Ví dụ: Lấy tin nhắn đầu tiên
         await messageToReact.SendReactionAsync("like");
@@ -167,7 +169,7 @@ public class ChatManager : MonoBehaviour
     // Hàm gửi phản ứng "clap" với giá trị điểm số tùy chỉnh
     public async Task ClapMessageAsync()
     {
-        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "5");
+        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, channelName);
         var messageToReact = channel.Messages[0]; // Ví dụ: Lấy tin nhắn đầu tiên
         await messageToReact.SendReactionAsync("clap", 10);
         Debug.Log("Sent 'clap' reaction with score 10.");
@@ -176,7 +178,7 @@ public class ChatManager : MonoBehaviour
     // Hàm gửi phản ứng "love" và thay thế tất cả các phản ứng trước đó từ người dùng này
     public async Task LoveMessageAsync()
     {
-        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, "5");
+        var channel = await _chatClient.GetOrCreateChannelWithIdAsync(ChannelType.Messaging, channelName);
 
         var messageToReact = channel.Messages[0]; // Ví dụ: Lấy tin nhắn đầu tiên
         await messageToReact.SendReactionAsync("love", enforceUnique: true);
