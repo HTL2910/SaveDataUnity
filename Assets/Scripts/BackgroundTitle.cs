@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundTitle : MonoBehaviour
 {
-    public GameObject[] dots;
+    
 
     private void Start()
     {
@@ -13,9 +13,6 @@ public class BackgroundTitle : MonoBehaviour
     }
     private void Initialize()
     {
-        int dotToUse=Random.Range(0, dots.Length);
-        GameObject dot = Instantiate(dots[dotToUse],transform.position,Quaternion.identity);
-        dot.transform.parent= transform;
-        dot.name=this.gameObject.name;
+        
     }    
 }

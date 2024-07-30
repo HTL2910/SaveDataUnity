@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    public GameObject[] dots;
     public int width;
     public int height;
     public GameObject tilePrefab;
     private BackgroundTitle[,] allTiles;
+    public GameObject[,] allDots;
     private void Start()
     {
         allTiles = new BackgroundTitle[width, height];
+        allDots= new GameObject[width, height];
         SetUp();
     }
     private void SetUp()
@@ -23,6 +26,11 @@ public class Board : MonoBehaviour
                 GameObject backGroundTiles=Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
                 backGroundTiles.transform.parent=this.transform;
                 backGroundTiles.name="("+i+","+j+")";
+                int dotToUse = Random.Range(0, dots.Length);
+                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
+                dot.transform.parent = transform;
+                dot.name = "(" + i + "," + j + ")";
+                allDots[i, j] = dot;
             }
         }
     }
