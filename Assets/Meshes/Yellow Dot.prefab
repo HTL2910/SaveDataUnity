@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6550402415551758352}
   m_Layer: 0
   m_Name: Yellow Dot
-  m_TagString: Untagged
+  m_TagString: Yellow Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,4 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5928bbca40b5e141acf2bd8d0314441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  column: 0
+  row: 0
+  targetX: 0
+  targetY: 0
+  board: {fileID: 0}
+  isMatched: 0
   SwipeAngle: 0
