@@ -18,7 +18,7 @@ public class Dot : MonoBehaviour
     private Vector2 finalTouchPosition;
     private Vector2 tempPosition;
     public float SwipeAngle = 0;
-
+    public float swipeResist = 1f;
     private void Start()
     {
         board = FindObjectOfType<Board>();
@@ -75,8 +75,12 @@ public class Dot : MonoBehaviour
 
     void CalculateAngle()
     {
-        SwipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x)*180/Mathf.PI;
-        MovePieces();
+        if(Mathf.Abs(finalTouchPosition.y-firstTouchPosition.y)>swipeResist||
+            Mathf.Abs(finalTouchPosition.x-firstTouchPosition.x)>swipeResist)
+        {
+            SwipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
+            MovePieces();
+        }
     }
     public IEnumerator CheckMoveCo()
     {
@@ -131,23 +135,32 @@ public class Dot : MonoBehaviour
         {
             GameObject leftDot = board.allDots[column-1,row];
             GameObject rightDot = board.allDots[column+1,row];
-            if(leftDot.gameObject.tag==gameObject.tag && rightDot.gameObject.tag == gameObject.tag)
+            if(leftDot!=null && rightDot!=null)
             {
-                leftDot.GetComponent<Dot>().isMatched = true;
-                rightDot.GetComponent<Dot>().isMatched= true;
-                isMatched = true;
+                if (leftDot.gameObject.tag == gameObject.tag && rightDot.gameObject.tag == gameObject.tag)
+                {
+                    leftDot.GetComponent<Dot>().isMatched = true;
+                    rightDot.GetComponent<Dot>().isMatched = true;
+                    isMatched = true;
+                }
             }
+            
         }
         if (row > 0 && row < board.height - 1)
         {
             GameObject downtDot = board.allDots[column , row - 1];
             GameObject upDot = board.allDots[column , row+1];
-            if (downtDot.gameObject.tag == gameObject.tag && upDot.gameObject.tag == gameObject.tag)
+            if(downtDot!=null && downtDot!=null)
             {
-                downtDot.GetComponent<Dot>().isMatched = true;
-                upDot.GetComponent<Dot>().isMatched = true;
-                isMatched = true;
+                if (downtDot.gameObject.tag == gameObject.tag && upDot.gameObject.tag == gameObject.tag)
+                {
+                    downtDot.GetComponent<Dot>().isMatched = true;
+                    upDot.GetComponent<Dot>().isMatched = true;
+                    isMatched = true;
+                }
             }
+            
         }
     }
+    
 }
