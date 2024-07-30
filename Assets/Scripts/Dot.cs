@@ -9,6 +9,8 @@ public class Dot : MonoBehaviour
     public int row;
     public int targetX;
     public int targetY;
+    public int previousColumn;
+    public int previousRow;
     public Board board;
     public bool isMatched=false;
     private GameObject otherDot;
@@ -24,6 +26,8 @@ public class Dot : MonoBehaviour
         targetY=(int)transform.position.y;
         column = targetX;
         row = targetY;
+        previousColumn = column;
+        previousRow = row;
     }
     private void Update()
     {
@@ -74,16 +78,31 @@ public class Dot : MonoBehaviour
         SwipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x)*180/Mathf.PI;
         MovePieces();
     }
+    public IEnumerator CheckMoveCo()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(otherDot!=null)
+        {
+            if(!isMatched && !otherDot.GetComponent<Dot>().isMatched)
+            {
+                otherDot.GetComponent<Dot>().column = column;
+                otherDot.GetComponent<Dot>().row = row;
+                row = previousRow;
+                column= previousColumn;
+            }
+            otherDot = null;
+        }
+    }
     void MovePieces()
     {
-        if(SwipeAngle>-45 && SwipeAngle<=45 && column<board.width)
+        if(SwipeAngle>-45 && SwipeAngle<=45 && column<board.width-1)
         {
             //right
             otherDot = board.allDots[column + 1, row];
             otherDot.GetComponent<Dot>().column -= 1;
             column += 1;
         }
-        else if (SwipeAngle > 45 && SwipeAngle <= 135 && row<board.height)
+        else if (SwipeAngle > 45 && SwipeAngle <= 135 && row<board.height-1)
         {
             //Up
             otherDot = board.allDots[column , row+1];
@@ -104,6 +123,7 @@ public class Dot : MonoBehaviour
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
+        StartCoroutine(CheckMoveCo());
     }
     void FindMatches()
     {
