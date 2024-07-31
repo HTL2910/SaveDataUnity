@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum GameStates
+{
+    Wait,
+    Move
+}
 public class Board : MonoBehaviour
 {
+    public GameStates currentStates = GameStates.Move;
     public GameObject[] dots;
     public int width;
     public int height;
@@ -166,6 +171,8 @@ public class Board : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             DestroyMatches();
-        }    
+        }
+        yield return new WaitForSeconds(0.5f);
+        currentStates = GameStates.Move;
     }    
 }
