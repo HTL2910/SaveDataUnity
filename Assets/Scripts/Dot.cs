@@ -22,12 +22,12 @@ public class Dot : MonoBehaviour
     private void Start()
     {
         board = FindObjectOfType<Board>();
-        targetX=(int)transform.position.x;
-        targetY=(int)transform.position.y;
-        column = targetX;
-        row = targetY;
-        previousColumn = column;
-        previousRow = row;
+        //targetX=(int)transform.position.x;
+        //targetY=(int)transform.position.y;
+        //column = targetX;
+        //row = targetY;
+        //previousColumn = column;
+        //previousRow = row;
     }
     private void Update()
     {
@@ -115,6 +115,8 @@ public class Dot : MonoBehaviour
         {
             //right
             otherDot = board.allDots[column + 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<Dot>().column -= 1;
             column += 1;
         }
@@ -122,6 +124,8 @@ public class Dot : MonoBehaviour
         {
             //Up
             otherDot = board.allDots[column , row+1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<Dot>().row -= 1;
             row += 1;
         }
@@ -129,6 +133,8 @@ public class Dot : MonoBehaviour
         {
             //left
             otherDot = board.allDots[column - 1, row];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<Dot>().column += 1;
             column -= 1;
         }
@@ -136,6 +142,8 @@ public class Dot : MonoBehaviour
         {
             //down
             otherDot = board.allDots[column , row-1];
+            previousColumn = column;
+            previousRow = row;
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
@@ -162,7 +170,7 @@ public class Dot : MonoBehaviour
         {
             GameObject downtDot = board.allDots[column , row - 1];
             GameObject upDot = board.allDots[column , row+1];
-            if(downtDot!=null && downtDot!=null)
+            if(downtDot!=null && upDot!=null)
             {
                 if (downtDot.gameObject.tag == gameObject.tag && upDot.gameObject.tag == gameObject.tag)
                 {
