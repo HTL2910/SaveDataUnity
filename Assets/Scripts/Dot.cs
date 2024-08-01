@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Dot : MonoBehaviour
 {
+    [Header("Board Variables")]
     public int column;
     public int row;
     public int targetX;
@@ -13,15 +14,24 @@ public class Dot : MonoBehaviour
     public int previousRow;
     public Board board;
     public bool isMatched=false;
+    [Header("Other"),Space(10)]
     private FindMatches findMatches;
     private GameObject otherDot;
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
     private Vector2 tempPosition;
+    [Header("Swipe Stuff")]
     public float SwipeAngle = 0;
     public float swipeResist = 1f;
+    [Header("Powerup Stuff"), Space(10)]
+    public bool isColumnBomb;
+    public bool isRowBomb;
+    public GameObject rowArrow;
+    public GameObject columnArrow;
     private void Start()
     {
+        isColumnBomb=false;
+        isRowBomb = false;
         board = FindObjectOfType<Board>();
         findMatches = FindObjectOfType<FindMatches>();
         //targetX=(int)transform.position.x;
@@ -30,6 +40,22 @@ public class Dot : MonoBehaviour
         //row = targetY;
         //previousColumn = column;
         //previousRow = row;
+    }
+    //testing
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isColumnBomb = true;
+            GameObject arrow=Instantiate(columnArrow,transform.position,Quaternion.identity);
+            arrow.transform.parent = transform;
+        }
+        if (Input.GetMouseButtonDown(2))
+        {
+            isRowBomb = true;
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+            arrow.transform.parent = transform;
+        }
     }
     private void Update()
     {
