@@ -11,12 +11,15 @@ public class Board : MonoBehaviour
     private FindMatches findMatches;
     public GameStates currentStates = GameStates.Move;
     public GameObject[] dots;
+    #region
     public int width;
     public int height;
     public int offSets;
+    public GameObject destroyEffect;
     public GameObject tilePrefab;
     private BackgroundTitle[,] allTiles;
     public GameObject[,] allDots;
+    #endregion
     private void Start()
     {
         findMatches=FindObjectOfType<FindMatches>();
@@ -91,6 +94,8 @@ public class Board : MonoBehaviour
         if (allDots[column,row].GetComponent<Dot>().isMatched)
         {
             findMatches.currentMatches.Remove(allDots[column, row]);
+            GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+            Destroy(particle, 0.5f);
             Destroy(allDots[column,row]);
             allDots[column,row] = null;
         }
