@@ -8,6 +8,7 @@ public enum GameStates
 }
 public class Board : MonoBehaviour
 {
+    private FindMatches findMatches;
     public GameStates currentStates = GameStates.Move;
     public GameObject[] dots;
     public int width;
@@ -18,6 +19,7 @@ public class Board : MonoBehaviour
     public GameObject[,] allDots;
     private void Start()
     {
+        findMatches=FindObjectOfType<FindMatches>();
         allTiles = new BackgroundTitle[width, height];
         allDots= new GameObject[width, height];
         SetUp();
@@ -88,6 +90,7 @@ public class Board : MonoBehaviour
     {
         if (allDots[column,row].GetComponent<Dot>().isMatched)
         {
+            findMatches.currentMatches.Remove(allDots[column, row]);
             Destroy(allDots[column,row]);
             allDots[column,row] = null;
         }
