@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4b06a6984b22342ab0153927afce0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStates: 1
   dots:
   - {fileID: 1291614715263065961, guid: b6afc66ace688704cbb96de1b1e6b5e5, type: 3}
   - {fileID: 8350983130351093725, guid: a04e39228935a4641a09b4f4bcdd0bef, type: 3}
@@ -356,6 +357,7 @@ MonoBehaviour:
   - {fileID: 1752276505532287261, guid: 3eb6f4d54ce716d48a1d7680c7f589ed, type: 3}
   width: 9
   height: 10
+  offSets: 20
   tilePrefab: {fileID: 3513558677776735737, guid: 5822b701a55228c4b993951681e79eeb, type: 3}
 --- !u!1 &2102555457
 GameObject:
