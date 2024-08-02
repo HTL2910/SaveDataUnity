@@ -26,8 +26,10 @@ public class Dot : MonoBehaviour
     [Header("Powerup Stuff"), Space(10)]
     public bool isColumnBomb;
     public bool isRowBomb;
+    public bool isColorBomb;
     public GameObject rowArrow;
     public GameObject columnArrow;
+    public GameObject colorBomb;
     private void Start()
     {
         isColumnBomb=false;
@@ -57,6 +59,15 @@ public class Dot : MonoBehaviour
     //        arrow.transform.parent = transform;
     //    }
     //}
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isColorBomb = true;
+            GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
+            color.transform.parent = transform;
+        }
+    }
     private void Update()
     {
         //if(isMatched)
@@ -134,6 +145,16 @@ public class Dot : MonoBehaviour
     }
     public IEnumerator CheckMoveCo()
     {
+        if (isColorBomb)
+        {
+            findMatches.MatchPiecesOfColor(otherDot.tag);
+            isMatched= true;
+        }
+        else if (otherDot.GetComponent<Dot>().isColorBomb)
+        {
+            findMatches.MatchPiecesOfColor(this.gameObject.tag);
+            otherDot.GetComponent<Dot>().isMatched = true;
+        }
         yield return new WaitForSeconds(0.5f);
         if(otherDot!=null)
         {
