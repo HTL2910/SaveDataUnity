@@ -16,7 +16,7 @@ public class Dot : MonoBehaviour
     public bool isMatched=false;
     [Header("Other"),Space(10)]
     private FindMatches findMatches;
-    private GameObject otherDot;
+    public GameObject otherDot;
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
     private Vector2 tempPosition;
@@ -42,29 +42,28 @@ public class Dot : MonoBehaviour
         //previousRow = row;
     }
     //testing
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            isColumnBomb = true;
-            GameObject arrow=Instantiate(columnArrow,transform.position,Quaternion.identity);
-            arrow.transform.parent = transform;
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            isRowBomb = true;
-            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
-            arrow.transform.parent = transform;
-        }
-    }
+    //private void OnMouseOver()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        isColumnBomb = true;
+    //        GameObject arrow=Instantiate(columnArrow,transform.position,Quaternion.identity);
+    //        arrow.transform.parent = transform;
+    //    }
+    //    if (Input.GetMouseButtonDown(2))
+    //    {
+    //        isRowBomb = true;
+    //        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+    //        arrow.transform.parent = transform;
+    //    }
+    //}
     private void Update()
     {
-        FindMatches();
-        if(isMatched)
-        {
-            SpriteRenderer mySprite=GetComponent<SpriteRenderer>();
-            mySprite.color = new Color(0f, 0f, 0f, 0.2f);
-        }
+        //if(isMatched)
+        //{
+        //    SpriteRenderer mySprite=GetComponent<SpriteRenderer>();
+        //    mySprite.color = new Color(0f, 0f, 0f, 0.2f);
+        //}
         targetX = column;
         targetY = row;
         if (Mathf.Abs(targetX - transform.position.x) > 0.1f)
@@ -125,10 +124,12 @@ public class Dot : MonoBehaviour
             SwipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
             MovePieces();
             board.currentStates = GameStates.Wait;
+            board.currentDot = this;
         }
         else
         {
             board.currentStates=GameStates.Move;
+           
         }
     }
     public IEnumerator CheckMoveCo()
@@ -143,6 +144,7 @@ public class Dot : MonoBehaviour
                 row = previousRow;
                 column= previousColumn;
                 yield return new WaitForSeconds(0.5f);
+                board.currentDot = null; 
                 board.currentStates = GameStates.Move;
             }
             else
@@ -227,5 +229,16 @@ public class Dot : MonoBehaviour
             
         }
     }
-    
+    public void MakeRowBomb()
+    {
+        isRowBomb = true;
+        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = transform;
+    }    
+    public void MakeColumnBomb()
+    {
+        isColumnBomb = true;
+        GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = transform;
+    }
 }

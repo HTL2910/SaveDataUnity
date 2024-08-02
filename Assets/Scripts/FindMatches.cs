@@ -83,19 +83,19 @@ public class FindMatches : MonoBehaviour
                                     upDot.GetComponent<Dot>().isColumnBomb ||
                                     downDot.GetComponent<Dot>().isColumnBomb)
                                 {
-                                    currentMatches.Union(GetColumnPieces(j));
+                                    currentMatches.Union(GetColumnPieces(i));
                                 }
                                 if (currentDot.GetComponent<Dot>().isRowBomb)
                                 {
-                                    currentMatches.Union(GetRowPieces(i));
+                                    currentMatches.Union(GetRowPieces(j));
                                 }
                                 if (upDot.GetComponent<Dot>().isRowBomb)
                                 {
-                                    currentMatches.Union(GetRowPieces(i + 1));
+                                    currentMatches.Union(GetRowPieces(j + 1));
                                 }
                                 if (downDot.GetComponent<Dot>().isRowBomb)
                                 {
-                                    currentMatches.Union(GetRowPieces(i - 1));
+                                    currentMatches.Union(GetRowPieces(j - 1));
                                 }
                                 if (!currentMatches.Contains(upDot))
                                 {
@@ -146,5 +146,30 @@ public class FindMatches : MonoBehaviour
         }
 
         return dots;
+    }
+    public void CheckBombs()
+    {
+        if (board.currentDot != null)
+        {
+            if (board.currentDot.isMatched)
+            {
+                board.currentDot.isMatched=false;
+                int typeOfBomb = Random.Range(0, 100);
+                if(typeOfBomb<50)
+                {
+                    //row bomd
+                    board.currentDot.MakeRowBomb();
+                }    
+                else if (typeOfBomb >= 50)
+                {
+                    //column bomb
+                    board.currentDot.MakeColumnBomb();
+                }
+            }
+        }
+        else if (board.currentDot.otherDot!=null)
+        {
+
+        }
     }
 }
