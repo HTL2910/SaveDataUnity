@@ -360,6 +360,7 @@ MonoBehaviour:
   offSets: 20
   destroyEffect: {fileID: 5456018387559173011, guid: d8e570109bb99fd4d87b23a98a7c26bc, type: 3}
   tilePrefab: {fileID: 3513558677776735737, guid: 5822b701a55228c4b993951681e79eeb, type: 3}
+  currentDot: {fileID: 0}
 --- !u!1 &1501893545
 GameObject:
   m_ObjectHideFlags: 0
