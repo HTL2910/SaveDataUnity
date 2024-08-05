@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource audioSource;
     public TMP_InputField audioInputField;
     public List<int> listIndex = new List<int>();
-    public float waitTime = 0.4f; // Thời gian chờ giữa các nốt nhạc
+    public float waitTime ; // Thời gian chờ giữa các nốt nhạc
 
     void Start()
     {
@@ -27,22 +27,38 @@ public class AudioManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             // Kiểm tra nếu TMP_InputField đang được chọn
-            if (audioInputField.isFocused)
-            {
-                TabSuggest();
-            }
+            
+              TabSuggest();
+            
         }
     }
 
     public void GetListIndex()
     {
-        string tmpString = audioInputField.text;
-        listIndex.Clear();
-        listIndex = ExtractNumbers(tmpString);
-        StartCoroutine(PlayNotesSequentially());
-        audioInputField.text = string.Empty;
+        int number = 0;
+        if (audioInputField.text == null || audioInputField.text == string.Empty)
+        {
+            number = 50;
+            if (int.TryParse(audioInputField.text, out int count))
+            {
+                number = count;
+            }
+            PlaySoundCount(number);
+        }
+        else
+        {
+            string tmpString = audioInputField.text;
+            listIndex.Clear();
+            listIndex = ExtractNumbers(tmpString);
+            StartCoroutine(PlayNotesSequentially());
+            audioInputField.text = string.Empty;
+        }
     }
-
+    public void PlaySound(int index)
+    {
+        audioSource.clip = audioClips[index];
+        audioSource.PlayOneShot(audioSource.clip);
+    }    
     void LoadAllAudioClips()
     {
         // Tải tất cả các AudioClip từ thư mục Resources/Audio
@@ -62,10 +78,11 @@ public class AudioManager : MonoBehaviour
     {
         foreach (int index in listIndex)
         {
-            if (index >= 0 && index < 8)
+            if (index >= 0 && index <= 24)
             {
                 audioSource.clip = audioClips[index-1];
                 audioSource.PlayOneShot(audioSource.clip);
+                waitTime = UnityEngine.Random.Range(0.357f, 0.5f);
                 yield return new WaitForSeconds(waitTime); // Chờ thời gian ngắn giữa các nốt nhạc
             }
         }
@@ -92,19 +109,6 @@ public class AudioManager : MonoBehaviour
     {
         audioInputField.text = "4 3 3 2 3 4 3 1 4 3 3 2 3 4 3 4 4 4 5 6 6 6 6 5 4 5 3 1 4 3 3 2 3 4 3 1 4 3 3 2 3 4 3 4 4 4 5 6 6 6 6 5 4 3 5";
     }
-    public void RandomMusic()
-    {
-        int number = 0;
-        if (audioInputField.text == null || audioInputField.text==string.Empty)
-        {
-            number = 50;
-        }
-        if(int.TryParse(audioInputField.text, out int count))
-        {
-            number = count;
-        }    
-        PlaySoundCount(number);
-    }    
     private void PlaySoundCount(int count)
     {
         audioInputField.text = string.Empty;
@@ -112,7 +116,7 @@ public class AudioManager : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                int tmpCount = UnityEngine.Random.Range(1, 9);
+                int tmpCount = UnityEngine.Random.Range(12, 24);
                 audioInputField.text += " "+tmpCount.ToString();
             }
         }
