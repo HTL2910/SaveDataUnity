@@ -270,7 +270,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -294,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 5, z: -10}
+  m_LocalPosition: {x: 7, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -347,15 +347,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStates: 1
   dots:
-  - {fileID: 1291614715263065961, guid: b6afc66ace688704cbb96de1b1e6b5e5, type: 3}
-  - {fileID: 8350983130351093725, guid: a04e39228935a4641a09b4f4bcdd0bef, type: 3}
-  - {fileID: 7745412673594431115, guid: 743d2a61e3904a244990f882327268f8, type: 3}
-  - {fileID: 6284591178562238619, guid: 759756075cb3d5346a7f81392cbbddfb, type: 3}
-  - {fileID: 7088366129599167041, guid: 9b9286fbb8646ba41a9bc75fe2186a42, type: 3}
-  - {fileID: 937078980546872934, guid: 2062f8668ae024147a353a35ad408ed7, type: 3}
-  - {fileID: 4219836820811072384, guid: 922d6b9405761e94689bed7383fc8990, type: 3}
-  - {fileID: 1752276505532287261, guid: 3eb6f4d54ce716d48a1d7680c7f589ed, type: 3}
-  width: 9
+  - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
+  - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
+  - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
+  - {fileID: 141080, guid: 61b0811442153784f854e40753a2f925, type: 3}
+  - {fileID: 125166, guid: 0fa72a843191b2e4c924dfe0c98fd45e, type: 3}
+  - {fileID: 134416, guid: 8f369d2b14e20f0468de46e59b5b587b, type: 3}
+  - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
+  - {fileID: 178846, guid: 58194b4a856312545a557025edfb6937, type: 3}
+  - {fileID: 151478, guid: 26017852f58bdfe4584111c080628521, type: 3}
+  - {fileID: 160020, guid: e300dff7dc1b9594492c09f5bfd331ea, type: 3}
+  width: 16
   height: 10
   offSets: 20
   destroyEffect: {fileID: 5456018387559173011, guid: d8e570109bb99fd4d87b23a98a7c26bc, type: 3}

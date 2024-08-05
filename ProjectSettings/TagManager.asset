@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dark Green Dot
+  - Green Dot
+  - Indigo Dot
+  - Orange Dot
+  - Red Dot
+  - Salmon Dot
+  - Teal Dot
+  - Yellow Dot
+  - Fruit_Blue_1
+  - Fruit_Blue_2
+  - Fruit_Green_1
+  - Fruit_Green_2
+  - Fruit_Orange_1
+  - Fruit_Orange_2
+  - Fruit_Red_1
+  - Fruit_Red_2
+  - Fruit_Yellow_1
+  - Fruit_Yellow_2
   layers:
   - Default
   - TransparentFX
