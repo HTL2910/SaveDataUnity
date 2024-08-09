@@ -92,6 +92,7 @@ public class FindMatches : MonoBehaviour
                                     currentMatches.Union(IsColumnBomb(leftDotDot, currentDotDot, rightDotDot));
 
                                     GetNearByPieces(leftDot, currentDot, rightDot);
+                                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
                                 }
                             }
                         } 
@@ -113,6 +114,7 @@ public class FindMatches : MonoBehaviour
                                     currentMatches.Union(IsColumnBomb(upDotDot, currentDotDot, downDotDot));
 
                                     GetNearByPieces(upDot, currentDot, downDot);
+                                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
                                 }
                             }
                         }
@@ -137,6 +139,7 @@ public class FindMatches : MonoBehaviour
                 }    
             }    
         }
+        UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoomColor);
     }    
     private List<GameObject> GetColumnPieces(int column)
     {
@@ -190,10 +193,12 @@ public class FindMatches : MonoBehaviour
                    || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
                 {
                     board.currentDot.MakeRowBomb();
+                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
                 else
                 {
                     board.currentDot.MakeColumnBomb();
+                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
             }
         }
@@ -220,10 +225,12 @@ public class FindMatches : MonoBehaviour
                     || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
                 {
                     otherDot.MakeRowBomb();
+                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
                 else
                 {
                     otherDot.MakeColumnBomb();
+                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
 
             }
