@@ -269,4 +269,16 @@ public class Dot : MonoBehaviour
         GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
         arrow.transform.parent = transform;
     }
+    public void MakeColorBomb()
+    {
+        isColorBomb = true;
+        GameObject color=Instantiate(colorBomb, transform.position, Quaternion.identity);   
+        color.transform.parent = transform;
+    }
+    public void MakeAdjacenBomb()
+    {
+        isAdjacenBomb = true;
+        GameObject maker = Instantiate(adjacentMaker, transform.position, Quaternion.identity);
+        maker.transform.parent = transform;
+    }
 }
