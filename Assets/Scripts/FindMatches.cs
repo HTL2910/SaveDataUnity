@@ -16,6 +16,24 @@ public class FindMatches : MonoBehaviour
     {
         StartCoroutine(FindAllMatchesCo());
     }
+    private List<GameObject> IsAdjacenBomb(Dot dot1,Dot dot2,Dot dot3)
+    {
+        List<GameObject> currentDots = new List<GameObject>();
+        if (dot1.isAdjacenBomb)
+        {
+            currentMatches.Union(GetAdjancentPieces(dot1.column,dot1.row));
+            
+        }
+        if (dot2.isAdjacenBomb)
+        {
+            currentMatches.Union(GetAdjancentPieces(dot2.column, dot2.row));
+        }
+        if (dot3.isAdjacenBomb)
+        {
+            currentMatches.Union(GetAdjancentPieces(dot3.column, dot3.row));
+        }
+        return currentDots;
+    }    
     private List<GameObject> IsRowBomd(Dot dot1,Dot dot2,Dot dot3)
     {
         List<GameObject> currentDots=new List<GameObject>();
@@ -90,6 +108,7 @@ public class FindMatches : MonoBehaviour
                                 {
                                     currentMatches.Union(IsRowBomd(leftDotDot, currentDotDot, rightDotDot));
                                     currentMatches.Union(IsColumnBomb(leftDotDot, currentDotDot, rightDotDot));
+                                    currentMatches.Union(IsAdjacenBomb(leftDotDot, currentDotDot, rightDotDot));
 
                                     GetNearByPieces(leftDot, currentDot, rightDot);
                                     UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
@@ -112,6 +131,7 @@ public class FindMatches : MonoBehaviour
 
                                     currentMatches.Union(IsRowBomd(upDotDot, currentDotDot, downDotDot));
                                     currentMatches.Union(IsColumnBomb(upDotDot, currentDotDot, downDotDot));
+                                    currentMatches.Union(IsAdjacenBomb(upDotDot, currentDotDot, downDotDot));
 
                                     GetNearByPieces(upDot, currentDot, downDot);
                                     UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
@@ -141,6 +161,23 @@ public class FindMatches : MonoBehaviour
         }
         UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoomColor);
     }    
+    List<GameObject> GetAdjancentPieces(int column,int  row)
+    {
+        List<GameObject> dots = new List<GameObject>();
+        for(int i=column-1;i<=column+1;i++)
+        {
+            for(int j=row-1;j<=row+1;j++)
+            {
+                if (i >= 0 && i<board.width && j>=0 && j<board.height)
+                {
+                    dots.Add(board.allDots[i, j]);
+                    board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                }
+            }    
+            
+        }
+        return dots;
+    }
     private List<GameObject> GetColumnPieces(int column)
     {
         List<GameObject> dots = new List<GameObject>();
