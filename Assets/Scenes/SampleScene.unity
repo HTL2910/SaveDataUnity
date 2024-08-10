@@ -801,10 +801,8 @@ MonoBehaviour:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
   - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
   - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
-  - {fileID: 141080, guid: 61b0811442153784f854e40753a2f925, type: 3}
   - {fileID: 125166, guid: 0fa72a843191b2e4c924dfe0c98fd45e, type: 3}
   - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
-  - {fileID: 178846, guid: 58194b4a856312545a557025edfb6937, type: 3}
   - {fileID: 151478, guid: 26017852f58bdfe4584111c080628521, type: 3}
   width: 16
   height: 10
@@ -830,7 +828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1414565367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,7 +974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1683750882
 RectTransform:
   m_ObjectHideFlags: 0
