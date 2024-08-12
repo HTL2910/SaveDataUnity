@@ -825,6 +825,31 @@ MonoBehaviour:
   offSets: 20
   destroyEffect: {fileID: 5456018387559173011, guid: d8e570109bb99fd4d87b23a98a7c26bc, type: 3}
   tilePrefab: {fileID: 3513558677776735737, guid: 5822b701a55228c4b993951681e79eeb, type: 3}
+  boardLayout:
+  - x: 2
+    y: 0
+    tileKind: 1
+  - x: 2
+    y: 1
+    tileKind: 1
+  - x: 3
+    y: 0
+    tileKind: 1
+  - x: 4
+    y: 0
+    tileKind: 1
+  - x: 2
+    y: 2
+    tileKind: 1
+  - x: 2
+    y: 5
+    tileKind: 1
+  - x: 2
+    y: 7
+    tileKind: 1
+  - x: 2
+    y: 8
+    tileKind: 1
   currentDot: {fileID: 0}
 --- !u!1 &1414565366
 GameObject:

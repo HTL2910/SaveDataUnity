@@ -190,11 +190,18 @@ public class Dot : MonoBehaviour
         otherDot = board.allDots[column +(int)direction.x, row+(int)direction.y];
         previousColumn = column;
         previousRow = row;
-        otherDot.GetComponent<Dot>().column += -1*(int)direction.x;
-        otherDot.GetComponent<Dot>().row += -1*(int)direction.y;
-        column += (int)direction.x;
-        row += (int)direction.y;
-        StartCoroutine(CheckMoveCo());
+        if(otherDot!=null)
+        {
+            otherDot.GetComponent<Dot>().column += -1 * (int)direction.x;
+            otherDot.GetComponent<Dot>().row += -1 * (int)direction.y;
+            column += (int)direction.x;
+            row += (int)direction.y;
+            StartCoroutine(CheckMoveCo());
+        }
+        else
+        {
+            board.currentStates=GameStates.Move;
+        }        
     }    
     void MovePieces()
     {

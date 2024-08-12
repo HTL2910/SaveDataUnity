@@ -252,7 +252,30 @@ public class Board : MonoBehaviour
             }
         }
         findMatches.currentMatches.Clear();
-        StartCoroutine(DecreaseRowCo());
+        StartCoroutine(DecreaseRowCo2());
+    }
+    private IEnumerator DecreaseRowCo2()
+    {
+        for(int i=0;i<width;i++)
+        {
+            for(int j=0;j<height;j++)
+            {
+                if (!blankSpaces[i,j] && allDots[i, j] == null)
+                {
+                    for(int k=j+1;k<height;k++)
+                    {
+                        if (allDots[i,k]!= null)
+                        {
+                            allDots[i, k].GetComponent<Dot>().row = j;
+                            allDots[i, k] = null;
+                            break;
+                        }    
+                    }    
+                }
+            }    
+        }
+        yield return new WaitForSeconds(0.4f);
+        StartCoroutine(FillBoardCo());
     }
     private IEnumerator DecreaseRowCo()
     {
@@ -282,7 +305,7 @@ public class Board : MonoBehaviour
         {
             for(int j=0;j<height;j++)
             {
-                if (allDots[i,j]== null)
+                if (allDots[i,j]== null && !blankSpaces[i,j])
                 {
                     Vector2 tempPos = new Vector2(i, j+offSets);
                     int dotToUse = Random.Range(0, dots.Length);
