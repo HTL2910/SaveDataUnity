@@ -479,7 +479,7 @@ public class Board : MonoBehaviour
                 {
                     int pieceToUse = Random.Range(0, newBoard.Count);
                     int maxInteration = 0;
-                    while (MatchesAt(i, j, dots[pieceToUse]) && maxInteration < 100)
+                    while (MatchesAt(i, j, newBoard[pieceToUse]) && maxInteration < 100)
                     {
                         pieceToUse = Random.Range(0,newBoard.Count);
                         maxInteration++;
