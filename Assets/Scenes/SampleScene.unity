@@ -828,10 +828,10 @@ MonoBehaviour:
   boardLayout:
   - x: 2
     y: 0
-    tileKind: 1
+    tileKind: 0
   - x: 2
     y: 1
-    tileKind: 1
+    tileKind: 0
   - x: 3
     y: 0
     tileKind: 1
@@ -840,13 +840,13 @@ MonoBehaviour:
     tileKind: 1
   - x: 2
     y: 2
-    tileKind: 1
+    tileKind: 0
   - x: 2
     y: 5
-    tileKind: 1
+    tileKind: 0
   - x: 2
     y: 7
-    tileKind: 1
+    tileKind: 0
   - x: 2
     y: 8
     tileKind: 1
