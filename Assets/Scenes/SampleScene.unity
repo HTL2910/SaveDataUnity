@@ -483,7 +483,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.22
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -579,7 +579,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2cd7391d9b9e2be44a27a2cc2e5227c0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.51
+  m_Volume: 0.28
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -778,6 +778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1150982746}
   - component: {fileID: 1150982747}
+  - component: {fileID: 1150982748}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -858,6 +859,21 @@ MonoBehaviour:
     tileKind: 0
   currentDot: {fileID: 0}
   breakableTilePrefabs: {fileID: 4853298648924566348, guid: 34308ea9958af5c4a9e4777a85df82cb, type: 3}
+--- !u!114 &1150982748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150982745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4151fb21277d50f41aa1ac3bfc3ea059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintDelay: 3
+  hintParticle: {fileID: 4699117871464408938, guid: bb51eb0fc0801af4682b5aaf9758c93f, type: 3}
+  currentHint: {fileID: 0}
 --- !u!1 &1414565366
 GameObject:
   m_ObjectHideFlags: 0
