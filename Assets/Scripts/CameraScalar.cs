@@ -20,7 +20,7 @@ public class CameraScalar : MonoBehaviour
 
     void RepositionCamera(float x,float y)
     {
-        Vector3 tempPosition = new Vector3(x/2,y/2,cameraoffset);
+        Vector3 tempPosition = new Vector3(x/2,y/2+1,cameraoffset);
         transform.position = tempPosition;
         if (board.width >= board.height)
         {
