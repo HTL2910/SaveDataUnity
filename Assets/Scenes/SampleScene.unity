@@ -850,7 +850,14 @@ MonoBehaviour:
   - x: 2
     y: 8
     tileKind: 1
+  - x: 2
+    y: 9
+    tileKind: 0
+  - x: 5
+    y: 8
+    tileKind: 0
   currentDot: {fileID: 0}
+  breakableTilePrefabs: {fileID: 4853298648924566348, guid: 34308ea9958af5c4a9e4777a85df82cb, type: 3}
 --- !u!1 &1414565366
 GameObject:
   m_ObjectHideFlags: 0

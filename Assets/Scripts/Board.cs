@@ -35,9 +35,12 @@ public class Board : MonoBehaviour
     private bool[,] blankSpaces;
     public GameObject[,] allDots;
     public Dot currentDot;
+    public BackgroundTitle[,] breakableTiles;
+    public GameObject breakableTilePrefabs;
     #endregion
     private void Start()
     {
+        breakableTiles=new BackgroundTitle[width,height];
         findMatches=FindObjectOfType<FindMatches>();
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
@@ -53,9 +56,23 @@ public class Board : MonoBehaviour
             }
         }
     }
+    public void GenerateBreakableTiles()
+    {
+        for (int i = 0; i < boardLayout.Length; i++)
+        {
+            if (boardLayout[i].tileKind == TileKind.Breakable)
+            {
+                Vector2 tempPosition = new Vector2(boardLayout[i].x, boardLayout[i].y);
+
+                GameObject tile=Instantiate(breakableTilePrefabs,tempPosition,Quaternion.identity);
+                breakableTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTitle>();
+            }
+        }
+    }
     private void SetUp()
     {
         GenerateBlankSpaces();
+        GenerateBreakableTiles();
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -232,6 +249,14 @@ public class Board : MonoBehaviour
             if(findMatches.currentMatches.Count>=4)
             {
                 CheckToMakeBombs();
+            }
+            if (breakableTiles[column,row]!= null)
+            {
+                breakableTiles[column, row].TakeDamage(1);
+                if(breakableTiles[column, row].hitPoints <= 0)
+                {
+                    breakableTiles[column, row] = null;
+                }
             }    
             GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
             Destroy(particle, 0.5f);

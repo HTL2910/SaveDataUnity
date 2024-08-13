@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackgroundTitle : MonoBehaviour
 {
-    
+    #region
     //tip
-    
+
     //1 q,w,a,s,d,e
     //2 Alt+ Move arrow (lên xuống dòng code)
     //3 Layout: Animation
@@ -20,8 +20,8 @@ public class BackgroundTitle : MonoBehaviour
     //11 C chuyển animation( keyframe->curve)
     //12 Ctrl K C và Ctrl K U : comment code và uncomment
     //13 Ctrl P: play
-        //Ctrl Shift P:Pause
-        //Ctrl Alt P: tiền từng frame
+    //Ctrl Shift P:Pause
+    //Ctrl Alt P: tiền từng frame
     //14 [SerializeField view variable và HideInspector: hide
     //15 GameObject: ---------Name-------- view dễ hơn
     //16 [Header] và [Space] không gian
@@ -35,14 +35,30 @@ public class BackgroundTitle : MonoBehaviour
     //24 [ContextMenu("Function/Test");
 
     //tip
+    #endregion
+    private SpriteRenderer _spriteRenderer;
+    public int hitPoints;
     private void Start()
     {
-        
-        Initialize();
-          
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    private void Initialize()
+    private void Update()
     {
-        
-    }    
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+    public void TakeDamage(int damage)
+    {
+        hitPoints-=damage;
+        MakeLighter();
+    }
+    void MakeLighter()
+    {
+        Color color=_spriteRenderer.color;
+        float newAlpha=color.a*0.5f;
+        _spriteRenderer.color=new Color(color.r,color.g,color.b,newAlpha);
+    }
 }
