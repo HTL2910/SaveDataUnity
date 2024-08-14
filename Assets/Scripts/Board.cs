@@ -41,6 +41,8 @@ public class Board : MonoBehaviour
     public int basePieceValue = 20;
     private int streakValue=1;
     public float refillDelay = 0.5f;
+
+    public int[] scoreGoal;
     #endregion
     private void Start()
     {
