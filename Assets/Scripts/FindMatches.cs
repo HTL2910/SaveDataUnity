@@ -111,7 +111,7 @@ public class FindMatches : MonoBehaviour
                                     currentMatches.Union(IsAdjacenBomb(leftDotDot, currentDotDot, rightDotDot));
 
                                     GetNearByPieces(leftDot, currentDot, rightDot);
-                                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
+                                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
                                 }
                             }
                         } 
@@ -134,7 +134,7 @@ public class FindMatches : MonoBehaviour
                                     currentMatches.Union(IsAdjacenBomb(upDotDot, currentDotDot, downDotDot));
 
                                     GetNearByPieces(upDot, currentDot, downDot);
-                                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
+                                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
                                 }
                             }
                         }
@@ -159,7 +159,7 @@ public class FindMatches : MonoBehaviour
                 }    
             }    
         }
-        UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoomColor);
+        //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoomColor);
     }    
     List<GameObject> GetAdjancentPieces(int column,int  row)
     {
@@ -240,12 +240,12 @@ public class FindMatches : MonoBehaviour
                    || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
                 {
                     board.currentDot.MakeRowBomb();
-                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
                 else
                 {
                     board.currentDot.MakeColumnBomb();
-                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
             }
         }
@@ -272,12 +272,12 @@ public class FindMatches : MonoBehaviour
                     || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
                 {
                     otherDot.MakeRowBomb();
-                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
                 else
                 {
                     otherDot.MakeColumnBomb();
-                    UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
                 }
 
             }

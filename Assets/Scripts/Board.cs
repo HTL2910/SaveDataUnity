@@ -267,6 +267,7 @@ public class Board : MonoBehaviour
                 }
             }    
             GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+            UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
             Destroy(particle, 0.5f);
             Destroy(allDots[column,row]);
             scoreManager.IncreaseScore(basePieceValue*streakValue);
