@@ -37,11 +37,15 @@ public class Board : MonoBehaviour
     public Dot currentDot;
     public BackgroundTitle[,] breakableTiles;
     public GameObject breakableTilePrefabs;
+    private ScoreManager scoreManager;
+    public int basePieceValue = 20;
+    private int streakValue=1;
     #endregion
     private void Start()
     {
         breakableTiles=new BackgroundTitle[width,height];
         findMatches=FindObjectOfType<FindMatches>();
+        scoreManager=FindObjectOfType<ScoreManager>();
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();
@@ -80,7 +84,8 @@ public class Board : MonoBehaviour
                 if (!blankSpaces[i,j])
                 {
                     Vector2 tempPosition = new Vector2(i, j + offSets);
-                    GameObject backGroundTiles = Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
+                    Vector2 tilePosition = new Vector2(i, j);
+                    GameObject backGroundTiles = Instantiate(tilePrefab, tilePosition, Quaternion.identity) as GameObject;
                     backGroundTiles.transform.parent = this.transform;
                     backGroundTiles.name = "(" + i + "," + j + ")";
                     int dotToUse = Random.Range(0, dots.Length);
@@ -261,6 +266,7 @@ public class Board : MonoBehaviour
             GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
             Destroy(particle, 0.5f);
             Destroy(allDots[column,row]);
+            scoreManager.IncreaseScore(basePieceValue*streakValue);
             allDots[column,row] = null;
         }
     }
@@ -365,6 +371,7 @@ public class Board : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         while(MatchesInBoard())
         {
+            streakValue += 1;
             yield return new WaitForSeconds(0.5f);
             DestroyMatches();
         }
@@ -375,6 +382,7 @@ public class Board : MonoBehaviour
         {
             ShuffleBoard();
         }
+        streakValue = 1;
         currentStates = GameStates.Move;
     }    
     private void SwitchPieces(int column,int row,Vector2 direction)
