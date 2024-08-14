@@ -9,7 +9,12 @@ public class ScoreManager : MonoBehaviour
     private Board board;
     public TextMeshProUGUI scoreText;
     public Image scorebarImage;
+    public GameObject barGoal;
+    public List<Sprite> barSprites;
+    public TextMeshProUGUI levelText;
+    int levelScore = 0;
     public int score;
+    public int indexLevel=1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + score.ToString();
+        levelText.text = "Level: " + indexLevel.ToString();
     }
 
     public void IncreaseScore(int amoutToIncrease)
@@ -28,7 +34,17 @@ public class ScoreManager : MonoBehaviour
         if(board!=null && scorebarImage!=null)
         {
             int length=board.scoreGoal.Length;
-            scorebarImage.fillAmount = (float)score / (float)board.scoreGoal[length-1];
+            scorebarImage.fillAmount =  (float)(score-levelScore) / (float)(board.scoreGoal[indexLevel-1]-levelScore);
+            if (scorebarImage.fillAmount >= 1)
+            {
+                int randombar=Random.Range(0, barSprites.Count);
+                barGoal.GetComponent<Image>().sprite = barSprites[randombar];
+                scorebarImage.fillAmount = 0f;
+                levelScore = score;
+                indexLevel++;
+                StartCoroutine(board.ShuffleBoard());
+                //Debug.Log("levelScore: " + levelScore + ":" + "score:" + score);
+            }
         }
     }
 }

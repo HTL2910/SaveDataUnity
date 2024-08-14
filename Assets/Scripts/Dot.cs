@@ -126,7 +126,7 @@ public class Dot : MonoBehaviour
         if (board.currentStates == GameStates.Move)
         {
             firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(firstTouchPosition);
+            //Debug.Log(firstTouchPosition);
         }
       
     }
