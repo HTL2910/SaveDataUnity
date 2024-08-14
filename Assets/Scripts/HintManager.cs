@@ -70,6 +70,7 @@ public class HintManager : MonoBehaviour
         if(move != null)
         {
             currentHint = Instantiate(hintParticle, move.transform.position, Quaternion.identity);
+            currentHint.transform.parent = this.transform;
         }
     }
     public void DestroyHint()

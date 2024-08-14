@@ -177,7 +177,7 @@ public class Dot : MonoBehaviour
                 otherDot.GetComponent<Dot>().row = row;
                 row = previousRow;
                 column= previousColumn;
-                UIManager.Instance.PlaySound(UIManager.Instance.audioclipFall);
+                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipFall);
                 yield return new WaitForSeconds(0.5f);
                 board.currentDot = null; 
                 board.currentStates = GameStates.Move;
@@ -186,7 +186,7 @@ public class Dot : MonoBehaviour
             else
             {
                 board.DestroyMatches();
-                UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
+                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
 
             }
             otherDot = null;

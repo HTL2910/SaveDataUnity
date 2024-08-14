@@ -72,6 +72,7 @@ public class Board : MonoBehaviour
                 Vector2 tempPosition = new Vector2(boardLayout[i].x, boardLayout[i].y);
 
                 GameObject tile=Instantiate(breakableTilePrefabs,tempPosition,Quaternion.identity);
+                tile.transform.parent = this.transform;
                 breakableTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTitle>();
             }
         }
