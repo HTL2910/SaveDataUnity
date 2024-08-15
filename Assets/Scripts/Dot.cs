@@ -17,6 +17,7 @@ public class Dot : MonoBehaviour
     public bool isMatched=false;
     [Header("Other"),Space(10)]
     private FindMatches findMatches;
+    private EndGameManager endGameManager;
     public GameObject otherDot;
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
@@ -39,7 +40,7 @@ public class Dot : MonoBehaviour
         isRowBomb = false;
         isColorBomb = false;
         isAdjacenBomb = false;
-
+        endGameManager=FindObjectOfType<EndGameManager>();
         hintManager=FindObjectOfType<HintManager>();
         board = FindObjectOfType<Board>();
         findMatches = FindObjectOfType<FindMatches>();
@@ -185,6 +186,13 @@ public class Dot : MonoBehaviour
             }
             else
             {
+                if (endGameManager != null)
+                {
+                    if (endGameManager.endGameRequirements.gameType == GameType.Moves)
+                    {
+                        endGameManager.DecreaseCounterValue();
+                    }
+                }
                 board.DestroyMatches();
                 //UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
 
