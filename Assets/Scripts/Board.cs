@@ -4,7 +4,10 @@ using UnityEngine;
 public enum GameStates
 {
     Wait,
-    Move
+    Move,
+    Win,
+    Lose,
+    Pause
 }
 public enum TileKind
 {
@@ -59,6 +62,7 @@ public class Board : MonoBehaviour
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();
+        currentStates = GameStates.Pause;
     }
    
     public void GenerateBlankSpaces()

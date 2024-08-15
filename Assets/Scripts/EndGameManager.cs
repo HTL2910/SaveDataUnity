@@ -19,11 +19,15 @@ public class EndGameManager : MonoBehaviour
     public EndGameRequirements endGameRequirements;
     public GameObject timeLabel;
     public GameObject movesLabel;
+    public GameObject tryAgainPanel;
+    public GameObject winGamePanel;
     public TextMeshProUGUI counter;
     public int currentCounterValue;
     private float timeSeconds;
+    private Board board;
     private void Start()
     {
+        board=FindObjectOfType<Board>();
         SetUpGame();
     }
     void SetUpGame()
@@ -44,15 +48,34 @@ public class EndGameManager : MonoBehaviour
     }
     public void DecreaseCounterValue()
     {
-        currentCounterValue --;
-        counter.text = "" + currentCounterValue;
-        if (currentCounterValue <=0)
+        if (board.currentStates != GameStates.Pause)
         {
-            currentCounterValue=0;
+
+            currentCounterValue--;
             counter.text = "" + currentCounterValue;
-        
-            Debug.Log("You Lose");
+            if (currentCounterValue <= 0)
+            {
+                LoseGame();
+               
+            }
         }
+    }
+    public void LoseGame()
+    {
+        tryAgainPanel.SetActive(true);
+        board.currentStates = GameStates.Lose;
+        currentCounterValue = 0;
+        counter.text = "" + currentCounterValue;
+        FadePanelAnimController fadePanel = FindObjectOfType<FadePanelAnimController>();
+        fadePanel.GameOver();
+    }
+    public void WinGame()
+    {
+        winGamePanel.SetActive(true);
+        board.currentStates= GameStates.Win;
+        currentCounterValue = 0;
+        counter.text = "" + currentCounterValue;
+        
     }
     private void Update()
     {

@@ -19,9 +19,11 @@ public class GoalsManager : MonoBehaviour
     public GameObject goalPrefabs;
     public GameObject goalIntroParent;
     public GameObject goalGameParent;
+    private EndGameManager endGame;
 
     private void Start()
     {
+        endGame=FindObjectOfType<EndGameManager>();
         SetUpIntroGoals();
     }
     void SetUpIntroGoals()
@@ -57,7 +59,11 @@ public class GoalsManager : MonoBehaviour
         }
         if (goalsCompleted >= levelGoals.Length)
         {
-            Debug.Log("You win");
+
+            if (endGame != null)
+            {
+                endGame.WinGame();
+            }
         }
     }
     public void CompareGoal(string goalToCompare)
