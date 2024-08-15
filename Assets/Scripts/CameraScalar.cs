@@ -16,6 +16,7 @@ public class CameraScalar : MonoBehaviour
         {
             RepositionCamera(board.width - 1, board.height - 1);
         }
+        else { }
     }
 
     void RepositionCamera(float width, float height)

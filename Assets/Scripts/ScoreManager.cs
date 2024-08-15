@@ -44,7 +44,7 @@ public class ScoreManager : MonoBehaviour
                 scorebarImage.fillAmount = 0f;
                 levelScore = score;
                 indexLevel++;
-                StartCoroutine(board.ShuffleBoard());
+                //StartCoroutine(board.ShuffleBoard());
                 //Debug.Log("levelScore: " + levelScore + ":" + "score:" + score);
             }
         }
