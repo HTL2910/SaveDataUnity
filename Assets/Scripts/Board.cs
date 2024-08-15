@@ -24,6 +24,7 @@ public class Board : MonoBehaviour
 {
     private FindMatches findMatches;
     public GameStates currentStates = GameStates.Move;
+    //public GameObject[] alldotsUse;
     public GameObject[] dots;
     #region
     public int width;
@@ -44,6 +45,10 @@ public class Board : MonoBehaviour
 
     public int[] scoreGoal;
     #endregion
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     private void Start()
     {
         breakableTiles=new BackgroundTitle[width,height];
@@ -53,6 +58,7 @@ public class Board : MonoBehaviour
         allDots= new GameObject[width, height];
         SetUp();
     }
+   
     public void GenerateBlankSpaces()
     {
         for(int i=0;i<boardLayout.Length;i++)
@@ -479,7 +485,7 @@ public class Board : MonoBehaviour
         }
         return true;
     }
-    private IEnumerator ShuffleBoard()
+    public IEnumerator ShuffleBoard()
     {
         yield return new WaitForSeconds(0.5f);
         List<GameObject> newBoard = new List<GameObject>();

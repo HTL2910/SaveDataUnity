@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject barGoal;
     public List<Sprite> barSprites;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI goalTextResult;
     int levelScore = 0;
     public int score;
     public int indexLevel=1;
@@ -19,6 +20,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         board=FindObjectOfType<Board>();
+        goalTextResult.text= "Last Goal: "+board.scoreGoal[board.scoreGoal.Length-1].ToString();
     }
 
     // Update is called once per frame
