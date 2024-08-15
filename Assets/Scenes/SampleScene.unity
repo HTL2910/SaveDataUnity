@@ -2028,8 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bfc349add0d814b9ab8209dbc39b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraoffset: -10
-  aspectRatio: 0.65
+  cameraOffset: -10
   padding: 2
 --- !u!222 &963194230
 CanvasRenderer:
@@ -2691,7 +2690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 11400000, guid: 2f915165f79342f43a5d6695d7fc360f, type: 2}
-  level: 0
+  level: 2
   currentStates: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}

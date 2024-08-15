@@ -1,34 +1,47 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraScalar : MonoBehaviour
 {
     private Board board;
-    public float cameraoffset=-10f;
-    public float aspectRatio = 0.65f;
-    public float padding = 2;
+    public float cameraOffset = -10f;
+    public float padding = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
-        board=FindObjectOfType<Board>();
-        if(board!=null )
+        board = FindObjectOfType<Board>();
+        if (board != null)
         {
-            RepositionCamera(board.width-1,board.height-1);
-        }    
+            RepositionCamera(board.width - 1, board.height - 1);
+        }
     }
 
-    void RepositionCamera(float x,float y)
+    void RepositionCamera(float width, float height)
     {
-        Vector3 tempPosition = new Vector3(x/2,y/2+1,cameraoffset);
-        transform.position = tempPosition;
-        if (board.width >= board.height)
+        // Tính tỷ lệ khung hình của màn hình
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float targetAspect = width / height;
+
+        // Tính toán kích thước orthographic size của camera
+        float orthoSize;
+        if (screenAspect >= targetAspect)
         {
-            Camera.main.orthographicSize = (board.width / 2 + padding) * aspectRatio;
+            // Màn hình rộng hơn, giới hạn chiều cao
+            orthoSize = height / 2 + padding;
         }
         else
         {
-            Camera.main.orthographicSize = (board.height / 2 +padding);
+            // Màn hình cao hơn, giới hạn chiều rộng
+            float differenceInSize = targetAspect / screenAspect;
+            orthoSize = (height / 2 + padding) * differenceInSize;
         }
-    }    
+
+        Camera.main.orthographicSize = orthoSize;
+
+        // Đặt vị trí camera để trung tâm vào bảng
+        Vector3 tempPosition = new Vector3(width / 2, height / 2 + 1, cameraOffset);
+        transform.position = tempPosition;
+    }
 }
