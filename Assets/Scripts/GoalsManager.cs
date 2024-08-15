@@ -20,11 +20,26 @@ public class GoalsManager : MonoBehaviour
     public GameObject goalIntroParent;
     public GameObject goalGameParent;
     private EndGameManager endGame;
-
+    private Board board;
     private void Start()
     {
+        board=FindObjectOfType<Board>();
         endGame=FindObjectOfType<EndGameManager>();
+        GetGoals();
         SetUpIntroGoals();
+    }
+    void GetGoals()
+    {
+        if(board!=null && board.world != null)
+        {
+            if (board.level < board.world.levels.Length)
+            {
+                if (board.world.levels[board.level] != null)
+                {
+                    levelGoals = board.world.levels[board.level].levelGoals;
+                }
+            }
+        }
     }
     void SetUpIntroGoals()
     {

@@ -25,8 +25,13 @@ public class TileType
 
 public class Board : MonoBehaviour
 {
+    [Header("Scriptsable Object Stuff")]
+    public World world;
+    public int level;
+
     private FindMatches findMatches;
     public GameStates currentStates = GameStates.Move;
+    [Header("Board Dimensions")]
     //public GameObject[] alldotsUse;
     public GameObject[] dots;
     #region
@@ -52,6 +57,21 @@ public class Board : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        if (world != null)
+        {
+            if (level < world.levels.Length)
+            {
+                if (world.levels[level] != null)
+                {
+                    width = world.levels[level].width;
+                    height = world.levels[level].height;
+                    dots = world.levels[level].dots;
+                    scoreGoal = world.levels[level].scoreGoal;
+                    boardLayout = world.levels[level].boardLayout;
+
+                }
+            }
+        }
     }
     private void Start()
     {

@@ -28,7 +28,21 @@ public class EndGameManager : MonoBehaviour
     private void Start()
     {
         board=FindObjectOfType<Board>();
+        SetGameType();
         SetUpGame();
+    }
+    void SetGameType()
+    {
+        if (board.world != null)
+        {
+            if (board.level < board.world.levels.Length)
+            {
+                if (board.world.levels[board.level] != null)
+                {
+                    endGameRequirements = board.world.levels[board.level].endGameRequirements;
+                }
+            }
+        }
     }
     void SetUpGame()
     {

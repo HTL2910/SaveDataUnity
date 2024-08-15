@@ -2690,6 +2690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4b06a6984b22342ab0153927afce0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 11400000, guid: 2f915165f79342f43a5d6695d7fc360f, type: 2}
+  level: 0
   currentStates: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
