@@ -22,6 +22,7 @@ TagManager:
   - Fruit_Red_2
   - Fruit_Yellow_1
   - Fruit_Yellow_2
+  - Breakable
   layers:
   - Default
   - TransparentFX

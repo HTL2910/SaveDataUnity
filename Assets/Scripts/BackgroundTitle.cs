@@ -38,14 +38,21 @@ public class BackgroundTitle : MonoBehaviour
     #endregion
     private SpriteRenderer _spriteRenderer;
     public int hitPoints;
+    private GoalsManager _goalsManager;
     private void Start()
     {
+        _goalsManager=FindObjectOfType<GoalsManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
         if (hitPoints <= 0)
         {
+            if (_goalsManager != null)
+            {
+                _goalsManager.CompareGoal(this.gameObject.tag);
+                _goalsManager.UpdateGoal();
+            }
             Destroy(gameObject);
         }
 

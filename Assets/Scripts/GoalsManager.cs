@@ -14,6 +14,8 @@ public class GoalsManager : MonoBehaviour
 {
     public BlankGoal[] allLevelGoals;
     public BlankGoal[] levelGoals;
+    public List<GoalPanel> currentGoals = new List<GoalPanel>();
+
     public GameObject goalPrefabs;
     public GameObject goalIntroParent;
     public GameObject goalGameParent;
@@ -35,8 +37,37 @@ public class GoalsManager : MonoBehaviour
             GameObject gameGoal = Instantiate(goalPrefabs, goalGameParent.transform.position, Quaternion.identity);
             gameGoal.transform.SetParent(goalGameParent.transform, false);
             panel = gameGoal.GetComponent<GoalPanel>();
+            currentGoals.Add(panel);
             panel.thisSprite = levelGoals[i].goalSprite;
             panel.thisString = "0/" + levelGoals[i].numberNeeded;
+        }
+    }
+    public void UpdateGoal()
+    {
+        int goalsCompleted = 0;
+        for(int i=0;i<levelGoals.Length; i++)
+        {
+            currentGoals[i].thisText.text = "" + levelGoals[i].numberCollected + "/" + levelGoals[i].numberNeeded;
+            if (levelGoals[i].numberCollected >= levelGoals[i].numberNeeded)
+            {
+                goalsCompleted++;
+                currentGoals[i].thisText.text= "" + levelGoals[i].numberNeeded + "/" + levelGoals[i].numberNeeded;
+
+            }
+        }
+        if (goalsCompleted >= levelGoals.Length)
+        {
+            Debug.Log("You win");
+        }
+    }
+    public void CompareGoal(string goalToCompare)
+    {
+        for(int i = 0; i < levelGoals.Length; i++)
+        {
+            if (goalToCompare == levelGoals[i].matchValue)
+            {
+                levelGoals[i].numberCollected++;
+            }
         }
     }
 }

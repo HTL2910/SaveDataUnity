@@ -39,6 +39,7 @@ public class Board : MonoBehaviour
     public BackgroundTitle[,] breakableTiles;
     public GameObject breakableTilePrefabs;
     private ScoreManager scoreManager;
+    private GoalsManager goalsManager;
     public int basePieceValue = 20;
     private int streakValue=1;
     public float refillDelay = 0.5f;
@@ -53,6 +54,7 @@ public class Board : MonoBehaviour
     {
         breakableTiles=new BackgroundTitle[width,height];
         findMatches=FindObjectOfType<FindMatches>();
+        goalsManager = FindObjectOfType<GoalsManager>();
         scoreManager=FindObjectOfType<ScoreManager>();
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
@@ -272,7 +274,12 @@ public class Board : MonoBehaviour
                 {
                     breakableTiles[column, row] = null;
                 }
-            }    
+            }
+            if (goalsManager != null)
+            {
+                goalsManager.CompareGoal(allDots[column, row].tag);
+                goalsManager.UpdateGoal();
+            }
             GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
             UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
             Destroy(particle, 0.5f);
