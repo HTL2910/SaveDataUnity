@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         board=FindObjectOfType<Board>();
-        goalTextResult.text= "Last Goal: "+board.scoreGoal[board.scoreGoal.Length-1].ToString();
+        goalTextResult.text= "Last Target Score: "+board.scoreGoal[board.scoreGoal.Length-1].ToString();
     }
 
     // Update is called once per frame
