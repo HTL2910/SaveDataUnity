@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 public enum GameStates
 {
@@ -53,6 +54,8 @@ public class Board : MonoBehaviour
     public float refillDelay = 0.5f;
 
     public int[] scoreGoal;
+
+    public TextMeshProUGUI levelText;
     #endregion
     private void Awake()
     {
@@ -61,6 +64,7 @@ public class Board : MonoBehaviour
         {
             level = PlayerPrefs.GetInt("Current Level");
         }
+        levelText.text = "LEVEL: "+(level+1).ToString();
         if (world != null)
         {
             if (level < world.levels.Length)

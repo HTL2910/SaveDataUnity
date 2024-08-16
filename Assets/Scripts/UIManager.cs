@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,4 +20,8 @@ public class UIManager : MonoBehaviour
     {
         actionAudio.PlayOneShot(clip);
     }    
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }

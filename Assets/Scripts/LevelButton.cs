@@ -15,22 +15,15 @@ public class LevelButton : MonoBehaviour
     public Image[] stars;
     public TextMeshProUGUI levelText;
     public int level;
-    public GameObject confirmPanel;
 
     private void Start()
     {
         buttonImage = gameObject.transform.GetChild(0).GetComponent<Image>();
         myButton = gameObject.transform.GetChild(0).GetComponent<Button>();
         ActivateStars();
-        ShowLevel();
         DecideSprite();
     }
-    public void ConfirmPanel(int level)
-    {
-        confirmPanel.GetComponent<ConfirmPanel>().level=level;  
-        confirmPanel.SetActive(true);
-        
-    }
+  
     void ActivateStars()
     {
         for(int i=0; i<stars.Length; i++)
@@ -53,8 +46,5 @@ public class LevelButton : MonoBehaviour
             levelText.enabled = false;
         }
     }
-    private void ShowLevel()
-    {
-        levelText.text = "" + level.ToString();
-    }
+ 
 }

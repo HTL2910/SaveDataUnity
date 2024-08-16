@@ -11,7 +11,6 @@ public class ScoreManager : MonoBehaviour
     public Image scorebarImage;
     public GameObject barGoal;
     public List<Sprite> barSprites;
-    public TextMeshProUGUI levelText;
     public TextMeshProUGUI goalTextResult;
     int levelScore = 0;
     public int score;
@@ -27,7 +26,6 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: " + score.ToString();
-        levelText.text = "Level: " + indexLevel.ToString();
     }
 
     public void IncreaseScore(int amoutToIncrease)
