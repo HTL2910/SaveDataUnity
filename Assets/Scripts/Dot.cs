@@ -307,26 +307,38 @@ public class Dot : MonoBehaviour
     }
     public void MakeRowBomb()
     {
-        isRowBomb = true;
-        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
-        arrow.transform.parent = transform;
+        if(!isColumnBomb && !isColorBomb && !isAdjacenBomb)
+        {
+            isRowBomb = true;
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+            arrow.transform.parent = transform;
+        }
     }    
     public void MakeColumnBomb()
     {
-        isColumnBomb = true;
-        GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
-        arrow.transform.parent = transform;
+        if (!isRowBomb && !isColorBomb && !isAdjacenBomb)
+        {
+            isColumnBomb = true;
+            GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
+            arrow.transform.parent = transform;
+        }
     }
     public void MakeColorBomb()
     {
-        isColorBomb = true;
-        GameObject color=Instantiate(colorBomb, transform.position, Quaternion.identity);   
-        color.transform.parent = transform;
+        if (!isColumnBomb && !isRowBomb && !isAdjacenBomb)
+        {
+            isColorBomb = true;
+            GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
+            color.transform.parent = transform;
+        }
     }
     public void MakeAdjacenBomb()
     {
-        isAdjacenBomb = true;
-        GameObject maker = Instantiate(adjacentMaker, transform.position, Quaternion.identity);
-        maker.transform.parent = transform;
+        if (!isColumnBomb && !isColorBomb && !isRowBomb)
+        {
+            isAdjacenBomb = true;
+            GameObject maker = Instantiate(adjacentMaker, transform.position, Quaternion.identity);
+            maker.transform.parent = transform;
+        }
     }
 }
