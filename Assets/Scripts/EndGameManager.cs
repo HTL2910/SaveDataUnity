@@ -89,7 +89,7 @@ public class EndGameManager : MonoBehaviour
         board.currentStates= GameStates.Win;
         currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
-        
+        PlayerPrefs.SetInt("Unclock Level", board.level+2);
     }
     private void Update()
     {

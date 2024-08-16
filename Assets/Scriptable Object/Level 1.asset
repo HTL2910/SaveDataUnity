@@ -12,15 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5149821c03e83749abebff434d1e4b1, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  width: 6
-  height: 6
-  boardLayout:
-  - x: 0
-    y: 0
-    tileKind: 1
-  - x: 5
-    y: 5
-    tileKind: 1
+  width: 10
+  height: 10
+  boardLayout: []
   dots:
   - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
   - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
@@ -30,9 +24,9 @@ MonoBehaviour:
   scoreGoal: e8030000c409000088130000
   endGameRequirements:
     gameType: 0
-    counterValue: 50
+    counterValue: 20
   levelGoals:
-  - numberNeeded: 50
+  - numberNeeded: 10
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: ed4730490fc5b1744af7de2156da1f4e, type: 3}
     matchValue: Fruit_Blue_1

@@ -26,7 +26,7 @@ public class LevelSelect : MonoBehaviour
 
     private void Start()
     {
-        //unclockLevel = PlayerPrefs.GetInt("Unclock Level", 1);
+        unclockLevel = PlayerPrefs.GetInt("Unclock Level", 1);
         CreateButtonLevel();
         Page();
     }
@@ -117,5 +117,9 @@ public class LevelSelect : MonoBehaviour
             preViousButton.SetActive(true);
             nextButton.SetActive(true);
         }
+    }
+    public void Home()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

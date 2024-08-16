@@ -13,30 +13,10 @@ MonoBehaviour:
   m_Name: World
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: e9d5bf4ad26943145b2540bf4e0e6162, type: 2}
+  - {fileID: 11400000, guid: 2a8270fabaa3fe048ba8b09fdf271ca1, type: 2}
   - {fileID: 11400000, guid: 667f8f3bd1a8426438e6720c7379f864, type: 2}
   - {fileID: 11400000, guid: c9c8524ca791c004b8a3e90d90d243e9, type: 2}
   - {fileID: 11400000, guid: 06180f2dc5122c640b564fc35850dc6a, type: 2}
   - {fileID: 11400000, guid: edac05ad12bb0214c82885c712f01431, type: 2}
   - {fileID: 11400000, guid: 611c8bbc32a61354d95d05b2683c1bdd, type: 2}
   - {fileID: 11400000, guid: fbecc279d65c6e24a975f38a420c8c88, type: 2}
-  - {fileID: 11400000, guid: cec0a393abff53c48bf54c8706a0232b, type: 2}
-  - {fileID: 11400000, guid: fedeb69e54198d74a99740478ee0c26c, type: 2}
-  - {fileID: 11400000, guid: 3c9e1940ca0e99d4cb7dfbd911e11239, type: 2}
-  - {fileID: 11400000, guid: 05082df759f98f8458acde89308e37bc, type: 2}
-  - {fileID: 11400000, guid: e9ac08c0a0e16f94c8fd31aa84661865, type: 2}
-  - {fileID: 11400000, guid: cb8229dc04fea6e4bbbe92968b37a27c, type: 2}
-  - {fileID: 11400000, guid: 533b8e89fcaf7314abc92fc5c8327216, type: 2}
-  - {fileID: 11400000, guid: f60b8e28ed3042f45b85cdc2397c2af3, type: 2}
-  - {fileID: 11400000, guid: 958e4c2a809d2ef47850bccd1323de02, type: 2}
-  - {fileID: 11400000, guid: 19c8ab804d5fe9b4f9fb8cad970294ed, type: 2}
-  - {fileID: 11400000, guid: 1ae1e9fbb7070314e864244bb0aa3035, type: 2}
-  - {fileID: 11400000, guid: fd570676db32cfe4ab5f3ef07f9304c5, type: 2}
-  - {fileID: 11400000, guid: 7d68a747736bf29458e01a5e3e665f7a, type: 2}
-  - {fileID: 11400000, guid: 3483a47c61b1655499822a9fd102199a, type: 2}
-  - {fileID: 11400000, guid: 1cc620cfacaa66c44948b36615623eba, type: 2}
-  - {fileID: 11400000, guid: ae4943cafcdbf68469c3ee303267fa9e, type: 2}
-  - {fileID: 11400000, guid: 082fdef5a12bed049a7341325dee033c, type: 2}
-  - {fileID: 11400000, guid: 8e7c16aa68ad6e94eb7aa38602b91e68, type: 2}
-  - {fileID: 11400000, guid: 712a9f5ca7581884c9fb9fdf8980d420, type: 2}
-  - {fileID: 11400000, guid: cf6827721c154d8429cf4e5414bf9877, type: 2}

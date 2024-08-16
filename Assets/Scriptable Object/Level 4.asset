@@ -13,14 +13,8 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   width: 8
-  height: 5
-  boardLayout:
-  - x: 0
-    y: 0
-    tileKind: 1
-  - x: 3
-    y: 3
-    tileKind: 1
+  height: 9
+  boardLayout: []
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
   - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
@@ -32,11 +26,11 @@ MonoBehaviour:
     gameType: 1
     counterValue: 200
   levelGoals:
-  - numberNeeded: 50
+  - numberNeeded: 20
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 44538166d5aba8546ac0b9663f822ee1, type: 3}
     matchValue: Fruit_Red_1
-  - numberNeeded: 0
+  - numberNeeded: 20
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 1a2034619c98c46419e742a2be1a60cb, type: 3}
     matchValue: Fruit_Orange_1

@@ -547,18 +547,20 @@ public class Board : MonoBehaviour
         {
             streakValue += 1;
             DestroyMatches();
-            yield return new WaitForSeconds(2*refillDelay);
+            yield return new WaitForSeconds(4*refillDelay);
            
         }
         findMatches.currentMatches.Clear();
         currentDot = null;
-        yield return new WaitForSeconds(refillDelay);
+        yield return new WaitForSeconds(2*refillDelay);
         if (IsDeadLocked())
         {
             StartCoroutine(ShuffleBoard());
         }
         streakValue = 1;
         currentStates = GameStates.Move;
+
+        findMatches.FindAllMatches();
     }    
     private void SwitchPieces(int column,int row,Vector2 direction)
     {

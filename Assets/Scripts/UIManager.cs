@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public AudioSource backgroundAudio;
-    public AudioSource actionAudio;
+    public AudioSource backgroundAudio;//sound
+    public AudioSource actionAudio;//audio
     public AudioClip audioclipFall;
     public AudioClip audioclipgood;
     public AudioClip audioclipBoom;
@@ -15,6 +15,11 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+    private void Start()
+    {
+        backgroundAudio.volume= PlayerPrefs.GetFloat("Volume Sound", 0.5f);
+        actionAudio.volume= PlayerPrefs.GetFloat("Volume Audio", 0.5f);
     }
     public void PlaySound(AudioClip clip)
     {
