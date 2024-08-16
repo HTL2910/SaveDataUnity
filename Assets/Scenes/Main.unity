@@ -702,9 +702,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1329842260}
-        m_TargetAssemblyTypeName: FadePanelAnimController, Assembly-CSharp
-        m_MethodName: OK
+      - m_Target: {fileID: 1669243849}
+        m_TargetAssemblyTypeName: BackToSplash, Assembly-CSharp
+        m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1684,9 +1684,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1329842260}
-        m_TargetAssemblyTypeName: FadePanelAnimController, Assembly-CSharp
-        m_MethodName: OK
+      - m_Target: {fileID: 1669243849}
+        m_TargetAssemblyTypeName: BackToSplash, Assembly-CSharp
+        m_MethodName: OkWin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3644,6 +3644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669243847}
   - component: {fileID: 1669243848}
+  - component: {fileID: 1669243849}
   m_Layer: 0
   m_Name: EndGameManager
   m_TagString: Untagged
@@ -3687,6 +3688,19 @@ MonoBehaviour:
   winGamePanel: {fileID: 1975452145}
   counter: {fileID: 30065622}
   currentCounterValue: 0
+--- !u!114 &1669243849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669243846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f211175ae6aaafb4d931ab1b5673dbfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: Splash
 --- !u!1 &1679563209
 GameObject:
   m_ObjectHideFlags: 0
