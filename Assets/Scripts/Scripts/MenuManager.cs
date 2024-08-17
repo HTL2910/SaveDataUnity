@@ -51,6 +51,7 @@ public class MenuManager : MonoBehaviour
         setting.SetActive(false);
         PlayerPrefs.SetFloat("Volume Audio", volumeAudio);
         PlayerPrefs.SetFloat("Volume Sound", volumeSoundBackground);
+        PlayerPrefs.Save();
     }
     public void Setting()
     {

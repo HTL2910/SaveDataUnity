@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,6 +24,9 @@ public class LevelSelect : MonoBehaviour
 
     public TextMeshProUGUI pageText;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI starTextConfirm;
+    public TextMeshProUGUI scoreTextConfirm;
+    int star;
 
     private void Start()
     {
@@ -30,10 +34,12 @@ public class LevelSelect : MonoBehaviour
         CreateButtonLevel();
         Page();
     }
+    
     public void Play()
     {
        
         PlayerPrefs.SetInt("Current Level", level - 1);
+        PlayerPrefs.Save();
         //Debug.Log("Level" + level.ToString());
         SceneManager.LoadScene(leveltoLoad);
     }
@@ -50,7 +56,19 @@ public class LevelSelect : MonoBehaviour
             {
                 levelButton.GetComponent<LevelButton>().isActive = false;
             }
+            levelButton.GetComponent<LevelButton>().ActivateStars(levelButton.GetComponent<LevelButton>().stars.Length, false);
+        
             levelButton.transform.SetParent(transform,false);
+            if (i < unclockLevel-1)
+            {
+                for (int j = 1; j < unclockLevel; j++)
+                {
+                    int countStar = PlayerPrefs.GetInt("Star in Level_" + j, 0);
+                    levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
+
+                }
+            }
+            
             int index = i;
             Button btn=levelButton.transform.GetChild(0).GetComponent<Button>();
             levelButton.transform.GetChild(0).transform.GetChild(0).
@@ -63,7 +81,8 @@ public class LevelSelect : MonoBehaviour
         levelText.text = "LEVEL: "+(level+1).ToString();
         this.level = level+1;
         confirmPanel.SetActive(true);
-
+        starTextConfirm.text = "" + PlayerPrefs.GetInt("Star in Level_" + (level + 1).ToString(), 0)+" / "+"3";
+        scoreTextConfirm.text= "" + PlayerPrefs.GetInt("Score in Level_" +(level+1).ToString(), 0);
     }
 
     void PageLevel()

@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject barGoal;
     public List<Sprite> barSprites;
     public TextMeshProUGUI goalTextResult;
+    public TextMeshProUGUI starTextResult;
     int levelScore = 0;
     public int score;
     public int indexLevel=1;
@@ -20,6 +21,7 @@ public class ScoreManager : MonoBehaviour
     {
         board=FindObjectOfType<Board>();
         goalTextResult.text= "Last Target Score: "+board.scoreGoal[board.scoreGoal.Length-1].ToString();
+        starTextResult.text = (indexLevel-1).ToString();
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class ScoreManager : MonoBehaviour
                 scorebarImage.fillAmount = 0f;
                 levelScore = score;
                 indexLevel++;
+                starTextResult.text = (indexLevel-1).ToString();
                 //StartCoroutine(board.ShuffleBoard());
                 //Debug.Log("levelScore: " + levelScore + ":" + "score:" + score);
             }

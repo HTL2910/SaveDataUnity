@@ -20,15 +20,16 @@ public class LevelButton : MonoBehaviour
     {
         buttonImage = gameObject.transform.GetChild(0).GetComponent<Image>();
         myButton = gameObject.transform.GetChild(0).GetComponent<Button>();
-        ActivateStars();
+       
         DecideSprite();
     }
   
-    void ActivateStars()
+    public void ActivateStars(int count,bool isActive)
     {
-        for(int i=0; i<stars.Length; i++)
+        Debug.Log("ActivateStar");
+        for(int i=0; i< count; i++)
         {
-            stars[i].enabled = false;
+            stars[i].enabled = isActive;
         }
     }
     void DecideSprite()

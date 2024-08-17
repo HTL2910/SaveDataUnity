@@ -24,10 +24,12 @@ public class EndGameManager : MonoBehaviour
     public TextMeshProUGUI counter;
     public int currentCounterValue;
     private float timeSeconds;
+    private ScoreManager scoreManager;
     private Board board;
     private void Start()
     {
         board=FindObjectOfType<Board>();
+        scoreManager=FindObjectOfType<ScoreManager>();
         SetGameType();
         SetUpGame();
     }
@@ -90,6 +92,12 @@ public class EndGameManager : MonoBehaviour
         currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
         PlayerPrefs.SetInt("Unclock Level", board.level+2);
+        int star = scoreManager.indexLevel-1;
+       
+        PlayerPrefs.SetInt("Star in Level_" + (PlayerPrefs.GetInt("Current Level") + 1), star);
+        PlayerPrefs.SetInt("Score in Level_" + (PlayerPrefs.GetInt("Current Level") + 1), scoreManager.score);
+        PlayerPrefs.Save();
+
     }
     private void Update()
     {
