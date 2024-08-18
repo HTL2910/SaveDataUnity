@@ -7,6 +7,13 @@ public class FadePanelAnimController : MonoBehaviour
     public Animator fadePanelAnimator;
     public Animator resultPanelAnimator;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            OK();
+        }
+    }
     public void OK()
     {
         if(resultPanelAnimator != null && fadePanelAnimator!=null) 

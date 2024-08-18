@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public enum GameStates
 {
     Wait,
@@ -60,7 +61,7 @@ public class Board : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        if(PlayerPrefs.HasKey("Current Level"))
+        if (PlayerPrefs.HasKey("Current Level"))
         {
             level = PlayerPrefs.GetInt("Current Level");
         }
@@ -81,6 +82,7 @@ public class Board : MonoBehaviour
             }
         }
     }
+   
     private void Start()
     {
         breakableTiles=new BackgroundTitle[width,height];
