@@ -37,7 +37,7 @@ MonoBehaviour:
   scoreGoal: e8030000b80b000070170000
   endGameRequirements:
     gameType: 1
-    counterValue: 60
+    counterValue: 120
   levelGoals:
   - numberNeeded: 100
     numberCollected: 0
