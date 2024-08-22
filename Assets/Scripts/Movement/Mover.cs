@@ -7,7 +7,7 @@ namespace RPG.Movement
     public class Mover : MonoBehaviour
     {
         [SerializeField] Transform target;
-
+        NavMeshAgent navMeshAgent;
         //Ray lastRay;
         //private void Update() code move player to target and draw ray from camera to mouse position
         //{
@@ -18,7 +18,10 @@ namespace RPG.Movement
         //    }    
         //    Debug.DrawRay(lastRay.origin, lastRay.direction*100);
         //}
-
+        private void Start()
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
         private void Update()
         {
 
@@ -27,11 +30,16 @@ namespace RPG.Movement
 
         public void MoveTo(Vector3 destination)
         {
-            GetComponent<NavMeshAgent>().destination = destination;
+            navMeshAgent.destination = destination;
+            navMeshAgent.isStopped = false;
+        }
+        public void Stop()
+        {
+            navMeshAgent.isStopped = true;
         }
         private void UpdateAnimator()
         {
-            Vector3 veclocity = GetComponent<NavMeshAgent>().velocity;
+            Vector3 veclocity = navMeshAgent.velocity;
             Vector3 localVelocity = transform.InverseTransformDirection(veclocity);
             float speed = localVelocity.z;
             GetComponent<Animator>().SetFloat("ForwardSpeed", speed);
