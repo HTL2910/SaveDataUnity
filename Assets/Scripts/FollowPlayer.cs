@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class FollowPlayer : MonoBehaviour
+namespace RPG.Core
 {
-    [SerializeField] Transform target;
-    private void LateUpdate()
+    public class FollowPlayer : MonoBehaviour
     {
+        [SerializeField] Transform target;
+        private void LateUpdate()
+        {
 
-        transform.position = target.position;
+            transform.position = target.position;
+        }
+
+
     }
-    
-    
 }
