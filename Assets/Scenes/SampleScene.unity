@@ -919,36 +919,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6386488090459530821, guid: a23862c7d9ca14143afc0f9918885207, type: 3}
   m_PrefabInstance: {fileID: 1422010029}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1148130313 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8852189838590490863, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
-  m_PrefabInstance: {fileID: 8852189837456649446}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1148130317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8852189838590490859, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
   m_PrefabInstance: {fileID: 8852189837456649446}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1148130320
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148130313}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1a3737a1e6c25a44f8a803faf49e0f8e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1208335846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,18 +1749,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 84482827}
-    - target: {fileID: 8852189838590490857, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
-      propertyPath: m_Speed
-      value: 5.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 8852189838590490857, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
-      propertyPath: m_Acceleration
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8852189838590490857, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 8852189838590490859, guid: 159e5c6dff5ee5c4e98e4e16561688c9, type: 3}
       propertyPath: m_RootOrder
       value: 6
