@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 13
   m_EditorClassIdentifier: 
   width: 10
-  height: 10
+  height: 8
   boardLayout: []
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
@@ -25,9 +25,9 @@ MonoBehaviour:
   scoreGoal: e8030000b80b000070170000
   endGameRequirements:
     gameType: 1
-    counterValue: 120
+    counterValue: 180
   levelGoals:
-  - numberNeeded: 75
+  - numberNeeded: 35
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 6c96b4b2aca12904a91d00ba3182e10d, type: 3}
     matchValue: Fruit_Green_1
@@ -35,7 +35,7 @@ MonoBehaviour:
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 41270f81d8e46b143937878328a6432c, type: 3}
     matchValue: Fruit_Green_2
-  - numberNeeded: 50
+  - numberNeeded: 35
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 44538166d5aba8546ac0b9663f822ee1, type: 3}
     matchValue: Fruit_Red_1

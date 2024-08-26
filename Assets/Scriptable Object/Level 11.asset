@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 11
   m_EditorClassIdentifier: 
   width: 10
-  height: 10
+  height: 7
   boardLayout: []
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
@@ -35,7 +35,7 @@ MonoBehaviour:
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 13887ae2e86b56c409eb2ec749d217bd, type: 3}
     matchValue: Fruit_Red_2
-  - numberNeeded: 70
+  - numberNeeded: 45
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: f8b339b5ff3c433458c6436b67824ff1, type: 3}
     matchValue: Fruit_Yellow_2

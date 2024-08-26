@@ -2239,7 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraOffset: -10
-  padding: 2
+  padding: 1.5
 --- !u!222 &963194230
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2977,7 +2977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 11400000, guid: 2f915165f79342f43a5d6695d7fc360f, type: 2}
-  level: 2
+  level: 14
   currentStates: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 20
   m_EditorClassIdentifier: 
   width: 10
-  height: 10
+  height: 7
   boardLayout:
   - x: 5
     y: 5
@@ -37,7 +37,7 @@ MonoBehaviour:
   scoreGoal: e8030000b80b000070170000
   endGameRequirements:
     gameType: 0
-    counterValue: 60
+    counterValue: 80
   levelGoals:
   - numberNeeded: 55
     numberCollected: 0

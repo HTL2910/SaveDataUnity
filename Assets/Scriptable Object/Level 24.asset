@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 24
   m_EditorClassIdentifier: 
   width: 10
-  height: 10
+  height: 7
   boardLayout:
   - x: 5
     y: 5
