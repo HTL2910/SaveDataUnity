@@ -17,15 +17,27 @@ MonoBehaviour:
   boardLayout:
   - x: 5
     y: 5
-    tileKind: 1
+    tileKind: 0
   - x: 5
     y: 4
-    tileKind: 1
+    tileKind: 0
   - x: 4
     y: 5
-    tileKind: 1
+    tileKind: 0
   - x: 4
     y: 4
+    tileKind: 0
+  - x: 0
+    y: 0
+    tileKind: 1
+  - x: 0
+    y: 6
+    tileKind: 1
+  - x: 9
+    y: 6
+    tileKind: 1
+  - x: 9
+    y: 0
     tileKind: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
@@ -37,7 +49,7 @@ MonoBehaviour:
   scoreGoal: e8030000b80b000070170000
   endGameRequirements:
     gameType: 0
-    counterValue: 60
+    counterValue: 120
   levelGoals:
   - numberNeeded: 80
     numberCollected: 0

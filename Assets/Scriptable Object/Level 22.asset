@@ -17,15 +17,27 @@ MonoBehaviour:
   boardLayout:
   - x: 5
     y: 5
-    tileKind: 1
+    tileKind: 0
   - x: 5
     y: 4
-    tileKind: 1
+    tileKind: 0
   - x: 4
     y: 5
-    tileKind: 1
+    tileKind: 0
   - x: 4
     y: 4
+    tileKind: 0
+  - x: 0
+    y: 0
+    tileKind: 1
+  - x: 0
+    y: 6
+    tileKind: 1
+  - x: 9
+    y: 6
+    tileKind: 1
+  - x: 9
+    y: 0
     tileKind: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
@@ -37,17 +49,17 @@ MonoBehaviour:
   scoreGoal: e8030000b80b000070170000
   endGameRequirements:
     gameType: 0
-    counterValue: 60
+    counterValue: 90
   levelGoals:
-  - numberNeeded: 100
-    numberCollected: 0
+  - numberNeeded: 55
+    numberCollected: 16
     goalSprite: {fileID: 21300000, guid: 41270f81d8e46b143937878328a6432c, type: 3}
     matchValue: Fruit_Green_2
   - numberNeeded: 55
-    numberCollected: 0
+    numberCollected: 25
     goalSprite: {fileID: 21300000, guid: 1a2034619c98c46419e742a2be1a60cb, type: 3}
     matchValue: Fruit_Orange_1
   - numberNeeded: 50
-    numberCollected: 0
+    numberCollected: 21
     goalSprite: {fileID: 21300000, guid: 13887ae2e86b56c409eb2ec749d217bd, type: 3}
     matchValue: Fruit_Red_2
