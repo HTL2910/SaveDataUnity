@@ -139,11 +139,16 @@ public class Dot : MonoBehaviour
 
     public IEnumerator CheckMoveCo()
     {
-        HandleColorBombs();
-        yield return new WaitForSeconds(0.5f);
+        HandleBomb();
+         yield return new WaitForSeconds(0.5f);
         HandleMoveOutcome();
     }
-
+    private void HandleBomb()
+    {
+        HandleColorBombs();
+        HandleOtherBombs();
+    }
+//bomb
     private void HandleColorBombs()
     {
         if(isColorBomb && otherDot.GetComponent<Dot>().isColorBomb)
@@ -164,8 +169,40 @@ public class Dot : MonoBehaviour
             otherDot.GetComponent<Dot>().isMatched = true;
         }
     }
-   
+    private void HandleOtherBombs()
+    {
+        if (isAdjacenBomb && otherDot.GetComponent<Dot>().isAdjacenBomb)
+        {
+            findMatches.MatchAdjancentPieces(previousColumn,previousRow);
+            findMatches.MatchAdjancentPieces(column,row);
+        }
 
+        if (isColumnBomb && otherDot.GetComponent<Dot>().isColumnBomb)
+        {
+            findMatches.MatchColumnPieces(previousColumn);
+            findMatches.MatchColumnPieces(column);
+        }
+
+        if (isColumnBomb && otherDot.GetComponent<Dot>().isRowBomb)
+        {
+            findMatches.MatchColumnPieces(column);
+            findMatches.MatchRowPieces(previousRow);
+        }
+        else if(isRowBomb && otherDot.GetComponent<Dot>().isColumnBomb)
+        {
+            findMatches.MatchColumnPieces(row);
+            findMatches.MatchRowPieces(previousColumn);
+        }
+
+        if (isRowBomb && otherDot.GetComponent<Dot>().isRowBomb)
+        {
+            findMatches.MatchRowPieces(previousRow);
+            findMatches.MatchRowPieces(row);
+        }
+
+    }
+
+    //bomb
     private void HandleMoveOutcome()
     {
         if (otherDot != null)

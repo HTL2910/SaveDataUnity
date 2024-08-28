@@ -16,13 +16,14 @@ public class FindMatches : MonoBehaviour
     {
         StartCoroutine(FindAllMatchesCo());
     }
-    private List<GameObject> IsAdjacenBomb(Dot dot1,Dot dot2,Dot dot3)
+    #region
+    private List<GameObject> IsAdjacenBomb(Dot dot1, Dot dot2, Dot dot3)
     {
         List<GameObject> currentDots = new List<GameObject>();
         if (dot1.isAdjacenBomb)
         {
-            currentMatches.Union(GetAdjancentPieces(dot1.column,dot1.row));
-            
+            currentMatches.Union(GetAdjancentPieces(dot1.column, dot1.row));
+
         }
         if (dot2.isAdjacenBomb)
         {
@@ -33,10 +34,10 @@ public class FindMatches : MonoBehaviour
             currentMatches.Union(GetAdjancentPieces(dot3.column, dot3.row));
         }
         return currentDots;
-    }    
-    private List<GameObject> IsRowBomd(Dot dot1,Dot dot2,Dot dot3)
+    }
+    private List<GameObject> IsRowBomd(Dot dot1, Dot dot2, Dot dot3)
     {
-        List<GameObject> currentDots=new List<GameObject>();
+        List<GameObject> currentDots = new List<GameObject>();
         if (dot1.isRowBomb)
         {
             currentMatches.Union(GetRowPieces(dot1.row));
@@ -51,9 +52,9 @@ public class FindMatches : MonoBehaviour
         }
         return currentDots;
     }
-    private List<GameObject> IsColumnBomb(Dot dot1,Dot dot2,Dot dot3)
+    private List<GameObject> IsColumnBomb(Dot dot1, Dot dot2, Dot dot3)
     {
-        List<GameObject> currentDots=new List<GameObject>();
+        List<GameObject> currentDots = new List<GameObject>();
         if (dot1.isColumnBomb)
         {
             currentMatches.Union(GetColumnPieces(dot1.column));
@@ -68,6 +69,7 @@ public class FindMatches : MonoBehaviour
         }
         return currentDots;
     }
+    #endregion
     private void AddToListAndMatch(GameObject dot)
     {
         if (!currentMatches.Contains(dot))
@@ -144,6 +146,7 @@ public class FindMatches : MonoBehaviour
             }
         }
     }
+    //Match
     public void MatchPiecesOfColor(string color)
     {
         for(int i=0;i<board.width;i++)
@@ -160,30 +163,73 @@ public class FindMatches : MonoBehaviour
             }    
         }
         //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoomColor);
-    }    
-    List<GameObject> GetAdjancentPieces(int column,int  row)
+    }
+    public void MatchAdjancentPieces(int column,int  row)
     {
-        List<GameObject> dots = new List<GameObject>();
         for(int i=column-1;i<=column+1;i++)
         {
             for(int j=row-1;j<=row+1;j++)
             {
                 if (i >= 0 && i<board.width && j>=0 && j<board.height)
                 {
-                    dots.Add(board.allDots[i, j]);
                     board.allDots[i, j].GetComponent<Dot>().isMatched = true;
                 }
             }    
             
         }
-        return dots;
+        
     }
-    private List<GameObject> GetColumnPieces(int column)
+    public void MatchColumnPieces(int column)
     {
-        List<GameObject> dots = new List<GameObject>();
         for(int i=0;i<board.height;i++)
         {
             if (board.allDots[column,i]!=null)
+            {
+                Dot dot = board.allDots[column, i].GetComponent<Dot>();
+                dot.isMatched = true;
+            }    
+        }    
+    }
+    public void MatchRowPieces(int row)
+    {
+        for (int i = 0; i < board.width; i++)
+        {
+            if (board.allDots[i, row] != null)
+            {
+                Dot dot = board.allDots[i, row].GetComponent<Dot>();
+                dot.isMatched = true;
+            }
+        }
+    }
+    //Match
+
+    //Get
+    List<GameObject> GetAdjancentPieces(int column, int row)
+
+    {
+        List<GameObject> dots = new List<GameObject>();
+        for (int i = column - 1; i <= column + 1; i++)
+        {
+            for (int j = row - 1; j <= row + 1; j++)
+            {
+                if (i >= 0 && i < board.width && j >= 0 && j < board.height)
+                {
+                    dots.Add(board.allDots[i, j]);
+                    board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                }
+            }
+
+        }
+        return dots;
+
+    }
+    private List<GameObject> GetColumnPieces(int column)
+
+    {
+        List<GameObject> dots = new List<GameObject>();
+        for (int i = 0; i < board.height; i++)
+        {
+            if (board.allDots[column, i] != null)
             {
                 Dot dot = board.allDots[column, i].GetComponent<Dot>();
                 if (dot.isRowBomb)
@@ -192,12 +238,13 @@ public class FindMatches : MonoBehaviour
                 }
                 dots.Add(board.allDots[column, i]);
                 dot.isMatched = true;
-            }    
-        }    
+            }
+        }
 
         return dots;
     }
     private List<GameObject> GetRowPieces(int row)
+
     {
         List<GameObject> dots = new List<GameObject>();
         for (int i = 0; i < board.width; i++)
@@ -216,6 +263,7 @@ public class FindMatches : MonoBehaviour
 
         return dots;
     }
+    //Get
     //public void CheckBombs()
     //{
     //    if (board.currentDot != null)
