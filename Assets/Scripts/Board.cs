@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -60,11 +60,11 @@ public class Board : MonoBehaviour
     #endregion
     private void Awake()
     {
-        //Application.targetFrameRate = 60;
-        //if (PlayerPrefs.HasKey("Current Level"))
-        //{
-        //    level = PlayerPrefs.GetInt("Current Level");
-        //}
+        Application.targetFrameRate = 60;
+        if (PlayerPrefs.HasKey("Current Level"))
+        {
+            level = PlayerPrefs.GetInt("Current Level");
+        }
         levelText.text = "LEVEL: "+(level+1).ToString();
         if (world != null)
         {
@@ -95,7 +95,7 @@ public class Board : MonoBehaviour
         currentStates = GameStates.Pause;
     }
    
-    public void GenerateBlankSpaces()
+    public void GenerateBlankSpaces()//Start
     {
         for(int i=0;i<boardLayout.Length;i++)
         {
@@ -105,7 +105,7 @@ public class Board : MonoBehaviour
             }
         }
     }
-    public void GenerateBreakableTiles()
+    public void GenerateBreakableTiles()//Start
     {
         for (int i = 0; i < boardLayout.Length; i++)
         {
@@ -119,15 +119,13 @@ public class Board : MonoBehaviour
             }
         }
     }
-    private void SetUp()
+    private void InitBoardGame()//Start
     {
-        GenerateBlankSpaces();
-        GenerateBreakableTiles();
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                if (!blankSpaces[i,j])
+                if (!blankSpaces[i, j])
                 {
                     Vector2 tempPosition = new Vector2(i, j + offSets);
                     Vector2 tilePosition = new Vector2(i, j);
@@ -149,12 +147,21 @@ public class Board : MonoBehaviour
                     dot.transform.parent = transform;
                     dot.name = "(" + i + "," + j + ")";
                     allDots[i, j] = dot;
-                }    
-                
+                }
+
             }
         }
     }
-    private bool MatchesAt(int column, int row, GameObject piece)
+    private void SetUp()//Start
+    {
+        GenerateBlankSpaces();
+        GenerateBreakableTiles();
+        InitBoardGame();
+    }
+
+   
+    //check 3 dot similar in row and column
+    private bool MatchesAt(int column, int row, GameObject piece)//Start
     {
         if (column > 1 && row > 1)
         {
@@ -200,6 +207,7 @@ public class Board : MonoBehaviour
         }
         return false;
     }
+    //check to create bomb col and color adjacent
     private int ColumnOrRow()
     {
         List<GameObject> matchCopy=findMatches.currentMatches as List<GameObject>;
@@ -270,7 +278,9 @@ public class Board : MonoBehaviour
         //return (numberVertical == 5 || numberHorizontal == 5);
         #endregion
     }
-    private void CheckToMakeBombs()
+   
+    //Make bomb
+    private void CheckToMakeBombs()//Kiểm tra để tạo bomb nào
     {
         if (findMatches.currentMatches.Count > 3)
         {
@@ -320,6 +330,7 @@ public class Board : MonoBehaviour
                     {
                         if (currentDot.otherDot != null)
                         {
+
                             Dot otherDot = currentDot.otherDot.GetComponent<Dot>();
                             if (otherDot.isMatched)
                             {
@@ -336,7 +347,18 @@ public class Board : MonoBehaviour
         
             else if (typeOfMatch == 3)
             {
-                findMatches.CheckBombs();
+                //findMatches.CheckBombs();
+                int indexRan = Random.Range(0, 2);
+                currentDot.isMatched = false;
+                if (indexRan == 0)
+                {
+                    
+                    currentDot.MakeColumnBomb();
+                }
+                else
+                {
+                    currentDot.MakeRowBomb();
+                }
             }
         }
         #region
@@ -409,15 +431,14 @@ public class Board : MonoBehaviour
         //}
         #endregion
     }
-    private void DestroyMatchesAt(int column,int row)
+   
+    private void DestroyMatchesAt(int column,int row)//Xóa Dot ơ vị tri col and row
     {
+       
         if (allDots[column,row].GetComponent<Dot>().isMatched)
         {
-            //
-            if(findMatches.currentMatches.Count>=4)
-            {
-                CheckToMakeBombs();
-            }
+            CheckToMakeBombs();
+            
             if (breakableTiles[column,row]!= null)
             {
                 breakableTiles[column, row].TakeDamage(1);
@@ -438,8 +459,9 @@ public class Board : MonoBehaviour
             scoreManager.IncreaseScore(basePieceValue*streakValue);
             allDots[column,row] = null;
         }
+        else { }
     }
-    public void DestroyMatches()
+    public void DestroyMatches()//xóa dot đó sau khi check có match
     {
         for(int i=0;i<width;i++)
         {
@@ -548,6 +570,7 @@ public class Board : MonoBehaviour
         while(MatchesInBoard())
         {
             streakValue += 1;
+            findMatches.FindAllMatches();
             DestroyMatches();
             yield return new WaitForSeconds(4*refillDelay);
            

@@ -216,71 +216,71 @@ public class FindMatches : MonoBehaviour
 
         return dots;
     }
-    public void CheckBombs()
-    {
-        if (board.currentDot != null)
-        {
-            if (board.currentDot.isMatched)
-            {
-                board.currentDot.isMatched = false;
-                //cach 1
-                //int typeOfBomb = Random.Range(0, 100);
-                //if(typeOfBomb<50)
-                //{
-                //    //row bomd
-                //    board.currentDot.MakeRowBomb();
-                //}    
-                //else if (typeOfBomb >= 50)
-                //{
-                //    //column bomb
-                //    board.currentDot.MakeColumnBomb();
-                //}
-                //cach 2:
-                if ((board.currentDot.SwipeAngle > -45f && board.currentDot.SwipeAngle <= 45)
-                   || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
-                {
-                    board.currentDot.MakeRowBomb();
-                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
-                }
-                else
-                {
-                    board.currentDot.MakeColumnBomb();
-                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
-                }
-            }
-        }
-        else if (board.currentDot.otherDot != null)
-        {
-            Dot otherDot = board.currentDot.otherDot.GetComponent<Dot>();
-            if (otherDot.isMatched)
-            {
-                otherDot.isMatched = false;
-                //cach 1
-                //int typeOfBomb = Random.Range(0, 100);
-                //if (typeOfBomb < 50)
-                //{
-                //    //row bomd
-                //    otherDot.MakeRowBomb();
-                //}
-                //else if (typeOfBomb >= 50)
-                //{
-                //    //column bomb
-                //    otherDot.MakeColumnBomb();
-                //}
-                //cach 2:
-                if ((board.currentDot.SwipeAngle > -45f && board.currentDot.SwipeAngle <= 45)
-                    || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
-                {
-                    otherDot.MakeRowBomb();
-                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
-                }
-                else
-                {
-                    otherDot.MakeColumnBomb();
-                    //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
-                }
+    //public void CheckBombs()
+    //{
+    //    if (board.currentDot != null)
+    //    {
+    //        if (board.currentDot.isMatched)
+    //        {
+    //            board.currentDot.isMatched = false;
+    //            //cach 1
+    //            //int typeOfBomb = Random.Range(0, 100);
+    //            //if(typeOfBomb<50)
+    //            //{
+    //            //    //row bomd
+    //            //    board.currentDot.MakeRowBomb();
+    //            //}    
+    //            //else if (typeOfBomb >= 50)
+    //            //{
+    //            //    //column bomb
+    //            //    board.currentDot.MakeColumnBomb();
+    //            //}
+    //            //cach 2:
+    //            if ((board.currentDot.SwipeAngle > -45f && board.currentDot.SwipeAngle <= 45)
+    //               || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
+    //            {
+    //                board.currentDot.MakeRowBomb();
+    //                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+    //            }
+    //            else
+    //            {
+    //                board.currentDot.MakeColumnBomb();
+    //                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+    //            }
+    //        }
+    //    }
+    //    else if (board.currentDot.otherDot != null)
+    //    {
+    //        Dot otherDot = board.currentDot.otherDot.GetComponent<Dot>();
+    //        if (otherDot.isMatched)
+    //        {
+    //            otherDot.isMatched = false;
+    //            //cach 1
+    //            //int typeOfBomb = Random.Range(0, 100);
+    //            //if (typeOfBomb < 50)
+    //            //{
+    //            //    //row bomd
+    //            //    otherDot.MakeRowBomb();
+    //            //}
+    //            //else if (typeOfBomb >= 50)
+    //            //{
+    //            //    //column bomb
+    //            //    otherDot.MakeColumnBomb();
+    //            //}
+    //            //cach 2:
+    //            if ((board.currentDot.SwipeAngle > -45f && board.currentDot.SwipeAngle <= 45)
+    //                || (board.currentDot.SwipeAngle < -135 || board.currentDot.SwipeAngle >= 135))
+    //            {
+    //                otherDot.MakeRowBomb();
+    //                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+    //            }
+    //            else
+    //            {
+    //                otherDot.MakeColumnBomb();
+    //                //UIManager.Instance.PlaySound(UIManager.Instance.audioclipBoom);
+    //            }
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 }

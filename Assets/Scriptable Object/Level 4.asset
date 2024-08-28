@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
   - {fileID: 178846, guid: 58194b4a856312545a557025edfb6937, type: 3}
   - {fileID: 151478, guid: 26017852f58bdfe4584111c080628521, type: 3}
-  scoreGoal: e8030000b80b0000a00f0000
+  scoreGoal: e8030000b80b0000a00f0000a0860100
   endGameRequirements:
     gameType: 0
     counterValue: 60
