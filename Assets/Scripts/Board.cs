@@ -58,6 +58,7 @@ public class Board : MonoBehaviour
 
     public TextMeshProUGUI levelText;
     public GameObject panelItem;
+    public GameObject Ad;
     #endregion
     private void Awake()
     {
@@ -93,7 +94,7 @@ public class Board : MonoBehaviour
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();
-        panelItem.SetActive(false);
+        panelItem.SetActive(true);
         currentStates = GameStates.Pause;
     }
    
@@ -717,6 +718,7 @@ public class Board : MonoBehaviour
     //code Button
     private Vector2Int GetRandomPositionWithoutBomb()
     {
+        Ad.GetComponent<RewardedAdsButton>().Load();
         int ranWidth = Random.Range(0, width);
         int ranHeight = Random.Range(0, height);
         int attempts = 0;
@@ -765,14 +767,14 @@ public class Board : MonoBehaviour
 
     #endregion
     
-    public void ActivePanelItem()
-    {
-        panelItem.SetActive(true);
-        StartCoroutine(DeactivePanelItem());
-    }
-    public IEnumerator DeactivePanelItem()
-    {
-        yield return new WaitForSeconds(1f);
-        panelItem.SetActive(false);
-    }
+    //public void ActivePanelItem()
+    //{
+    //    panelItem.SetActive(true);
+    //    StartCoroutine(DeactivePanelItem());
+    //}
+    //public IEnumerator DeactivePanelItem()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    panelItem.SetActive(false);
+    //}
 }
