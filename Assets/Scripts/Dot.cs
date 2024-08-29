@@ -148,7 +148,22 @@ public class Dot : MonoBehaviour
         HandleColorBombs();
         HandleOtherBombs();
     }
-//bomb
+    private void OnDestroy()
+    {
+        if(isAdjacenBomb)
+        {
+            findMatches.MatchAdjancentPieces(column, row);
+        }
+        if (isColumnBomb)
+        {
+            findMatches.MatchColumnPieces(column);
+        }
+        if(isRowBomb)
+        {
+            findMatches.MatchRowPieces(row);
+        }
+    }
+    //bomb
     private void HandleColorBombs()
     {
         if(isColorBomb && otherDot.GetComponent<Dot>().isColorBomb)
@@ -190,8 +205,8 @@ public class Dot : MonoBehaviour
         }
         else if(isRowBomb && otherDot.GetComponent<Dot>().isColumnBomb)
         {
-            findMatches.MatchColumnPieces(row);
-            findMatches.MatchRowPieces(previousColumn);
+            findMatches.MatchRowPieces(row);
+            findMatches.MatchColumnPieces(previousColumn);
         }
 
         if (isRowBomb && otherDot.GetComponent<Dot>().isRowBomb)

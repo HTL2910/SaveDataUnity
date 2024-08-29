@@ -57,6 +57,7 @@ public class Board : MonoBehaviour
     public int[] scoreGoal;
 
     public TextMeshProUGUI levelText;
+    public GameObject panelItem;
     #endregion
     private void Awake()
     {
@@ -92,6 +93,7 @@ public class Board : MonoBehaviour
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();
+        panelItem.SetActive(false);
         currentStates = GameStates.Pause;
     }
    
@@ -710,5 +712,67 @@ public class Board : MonoBehaviour
         {
             StartCoroutine(ShuffleBoard());
         }
+    }
+    #region
+    //code Button
+    private Vector2Int GetRandomPositionWithoutBomb()
+    {
+        int ranWidth = Random.Range(0, width);
+        int ranHeight = Random.Range(0, height);
+        int attempts = 0;
+
+        while ((allDots[ranWidth, ranHeight].GetComponent<Dot>().isAdjacenBomb ||
+                allDots[ranWidth, ranHeight].GetComponent<Dot>().isColorBomb ||
+                allDots[ranWidth, ranHeight].GetComponent<Dot>().isColumnBomb ||
+                allDots[ranWidth, ranHeight].GetComponent<Dot>().isRowBomb) && attempts < 100)
+        {
+            ranWidth = Random.Range(0, width);
+            ranHeight = Random.Range(0, height);
+            attempts++;
+        }
+
+        if (attempts >= 100)
+        {
+            Debug.LogWarning("Không thể tìm thấy vị trí nào không chứa bom sau 100 lần thử.");
+        }
+
+        return new Vector2Int(ranWidth, ranHeight);
+    }
+
+    public void CreateColorBomb()
+    {
+        Vector2Int position = GetRandomPositionWithoutBomb();
+        allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+    }
+
+    public void CreateAdjacenBomb()
+    {
+        Vector2Int position = GetRandomPositionWithoutBomb();
+        allDots[position.x, position.y].GetComponent<Dot>().MakeAdjacenBomb();
+    }
+
+    public void CreateColumnBomb()
+    {
+        Vector2Int position = GetRandomPositionWithoutBomb();
+        allDots[position.x, position.y].GetComponent<Dot>().MakeColumnBomb();
+    }
+
+    public void CreateRowBomb()
+    {
+        Vector2Int position = GetRandomPositionWithoutBomb();
+        allDots[position.x, position.y].GetComponent<Dot>().MakeRowBomb();
+    }
+
+    #endregion
+    
+    public void ActivePanelItem()
+    {
+        panelItem.SetActive(true);
+        StartCoroutine(DeactivePanelItem());
+    }
+    public IEnumerator DeactivePanelItem()
+    {
+        yield return new WaitForSeconds(1f);
+        panelItem.SetActive(false);
     }
 }

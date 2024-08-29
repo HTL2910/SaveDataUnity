@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         board=FindObjectOfType<Board>();
-        goalTextResult.text= "Last Target Score: "+board.scoreGoal[board.scoreGoal.Length-1].ToString();
+        goalTextResult.text= "Last Target Score: "+board.scoreGoal[2].ToString();
         starTextResult.text = (indexLevel-1).ToString();
     }
 
@@ -35,19 +35,29 @@ public class ScoreManager : MonoBehaviour
         score += amoutToIncrease;
         if(board!=null && scorebarImage!=null)
         {
-            int length=board.scoreGoal.Length;
-            scorebarImage.fillAmount =  (float)(score-levelScore) / (float)(board.scoreGoal[indexLevel-1]-levelScore);
-            if (scorebarImage.fillAmount >= 1)
+
+            if (indexLevel > 3)
             {
-                int randombar=Random.Range(0, barSprites.Count);
-                barGoal.GetComponent<Image>().sprite = barSprites[randombar];
-                scorebarImage.fillAmount = 0f;
-                levelScore = score;
-                indexLevel++;
-                starTextResult.text = (indexLevel-1).ToString();
-                //StartCoroutine(board.ShuffleBoard());
-                //Debug.Log("levelScore: " + levelScore + ":" + "score:" + score);
+                
+                starTextResult.text = 3.ToString();
+                scorebarImage.fillAmount = 1f;
             }
+            else
+            {
+                scorebarImage.fillAmount = (float)(score - levelScore) / (float)(board.scoreGoal[indexLevel - 1] - levelScore);
+                if (scorebarImage.fillAmount >= 1)
+                {
+                    int randombar = Random.Range(0, barSprites.Count);
+                    barGoal.GetComponent<Image>().sprite = barSprites[randombar];
+
+                    scorebarImage.fillAmount = 0f;
+
+                    indexLevel++;
+                }
+                starTextResult.text = (indexLevel - 1).ToString();
+                
+            }
+            levelScore = score;
         }
     }
 }
