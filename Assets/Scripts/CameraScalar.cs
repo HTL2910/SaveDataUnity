@@ -39,7 +39,7 @@ public class CameraScalar : MonoBehaviour
             orthoSize = (height / 2 + padding) * differenceInSize;
         }
 
-        Camera.main.orthographicSize = orthoSize;
+        Camera.main.orthographicSize = orthoSize-2;
 
         // Đặt vị trí camera để trung tâm vào bảng
         Vector3 tempPosition = new Vector3(width / 2, height / 2 + 1, cameraOffset);

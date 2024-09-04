@@ -13,7 +13,7 @@ public class LevelSelect : MonoBehaviour
     [Header("index")]
     public int level;
     public int countLevel=100;
-    int page = 24;
+    int page = 15;
     int pageIndex=1;
     public int unclockLevel;
     [Header("Object")]
