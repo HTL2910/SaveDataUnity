@@ -62,12 +62,11 @@ public class LevelSelect : MonoBehaviour
             levelButton.transform.SetParent(transform,false);
             if (i < unclockLevel-1)
             {
-                for (int j = 1; j < unclockLevel; j++)
-                {
-                    int countStar = PlayerPrefs.GetInt("Star in Level_" + j, 0);
+               
+                    int countStar = PlayerPrefs.GetInt("Star in Level_" + (i+1), 0);
                     levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
 
-                }
+                
             }
             
             int index = i;

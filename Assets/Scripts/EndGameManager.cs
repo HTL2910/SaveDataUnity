@@ -91,11 +91,27 @@ public class EndGameManager : MonoBehaviour
         board.currentStates= GameStates.Win;
         currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
-        PlayerPrefs.SetInt("Unclock Level", board.level+2);
-        int star = scoreManager.indexLevel-1;
+        if(board.level== PlayerPrefs.GetInt("Unclock Level") - 1)
+        {
+            PlayerPrefs.SetInt("Unclock Level", board.level + 2);
+        }
        
-        PlayerPrefs.SetInt("Star in Level_" + (PlayerPrefs.GetInt("Current Level") + 1), star);
-        PlayerPrefs.SetInt("Score in Level_" + (PlayerPrefs.GetInt("Current Level") + 1), scoreManager.score);
+        int star = scoreManager.indexLevel-1;
+        if(PlayerPrefs.HasKey("Score in Level_" + (board.level + 1).ToString()))
+        {
+            if(PlayerPrefs.GetInt("Score in Level_" + (board.level + 1).ToString()) < scoreManager.score)
+            {
+                PlayerPrefs.SetInt("Star in Level_" + (board.level + 1).ToString(), star);
+                PlayerPrefs.SetInt("Score in Level_" + (board.level + 1).ToString(), scoreManager.score);
+            }
+            else { }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Star in Level_" + (board.level + 1).ToString(), star);
+            PlayerPrefs.SetInt("Score in Level_" + (board.level + 1).ToString(), scoreManager.score);
+        }
+        
         PlayerPrefs.Save();
 
     }

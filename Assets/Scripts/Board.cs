@@ -498,7 +498,7 @@ public class Board : MonoBehaviour
                 }
             }    
         }
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(refillDelay*0.5f);
         StartCoroutine(FillBoardCo());
     }
     private IEnumerator DecreaseRowCo()
@@ -574,12 +574,12 @@ public class Board : MonoBehaviour
             streakValue += 1;
             findMatches.FindAllMatches();
             DestroyMatches();
-            yield return new WaitForSeconds(4*refillDelay);
+            yield return new WaitForSeconds(2*refillDelay);
            
         }
         findMatches.currentMatches.Clear();
         currentDot = null;
-        yield return new WaitForSeconds(2*refillDelay);
+        yield return new WaitForSeconds(refillDelay);
         if (IsDeadLocked())
         {
             StartCoroutine(ShuffleBoard());

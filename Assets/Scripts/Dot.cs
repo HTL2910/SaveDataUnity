@@ -140,7 +140,7 @@ public class Dot : MonoBehaviour
     public IEnumerator CheckMoveCo()
     {
         HandleBomb();
-         yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
         HandleMoveOutcome();
     }
     private void HandleBomb()
