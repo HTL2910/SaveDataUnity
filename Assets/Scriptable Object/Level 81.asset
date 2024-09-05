@@ -12,54 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5149821c03e83749abebff434d1e4b1, type: 3}
   m_Name: Level 81
   m_EditorClassIdentifier: 
-  width: 7
-  height: 7
+  width: 8
+  height: 8
   boardLayout:
-  - x: 5
-    y: 5
-    tileKind: 0
-  - x: 5
+  - x: 0
     y: 4
-    tileKind: 0
-  - x: 4
-    y: 5
-    tileKind: 0
-  - x: 4
-    y: 4
-    tileKind: 0
-  - x: 7
-    y: 7
     tileKind: 1
-  - x: 7
-    y: 8
+  - x: 1
+    y: 4
+    tileKind: 1
+  - x: 2
+    y: 4
+    tileKind: 1
+  - x: 3
+    y: 4
+    tileKind: 1
+  - x: 4
+    y: 4
+    tileKind: 1
+  - x: 5
+    y: 4
     tileKind: 1
   - x: 6
-    y: 6
+    y: 4
     tileKind: 1
-  - x: 4
+  - x: 7
     y: 4
     tileKind: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
-  - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
-  - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
+  - {fileID: 125166, guid: 0fa72a843191b2e4c924dfe0c98fd45e, type: 3}
   - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
-  - {fileID: 141080, guid: 61b0811442153784f854e40753a2f925, type: 3}
-  - {fileID: 160020, guid: e300dff7dc1b9594492c09f5bfd331ea, type: 3}
-  scoreGoal: e8030000b80b000070170000a0860100
+  - {fileID: 151478, guid: 26017852f58bdfe4584111c080628521, type: 3}
+  scoreGoal: e8030000b80b000094110000a0860100
   endGameRequirements:
     gameType: 0
-    counterValue: 60
+    counterValue: 90
   levelGoals:
-  - numberNeeded: 75
-    numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 6c96b4b2aca12904a91d00ba3182e10d, type: 3}
-    matchValue: Fruit_Green_1
-  - numberNeeded: 55
-    numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 41270f81d8e46b143937878328a6432c, type: 3}
-    matchValue: Fruit_Green_2
-  - numberNeeded: 50
-    numberCollected: 0
+  - numberNeeded: 80
+    numberCollected: 41
     goalSprite: {fileID: 21300000, guid: 44538166d5aba8546ac0b9663f822ee1, type: 3}
     matchValue: Fruit_Red_1
+  - numberNeeded: 80
+    numberCollected: 49
+    goalSprite: {fileID: 21300000, guid: 5b864140d8838384f862f8d1e251408f, type: 3}
+    matchValue: Fruit_Yellow_1

@@ -14,11 +14,11 @@ public class CameraScalar : MonoBehaviour
         board = FindObjectOfType<Board>();
         if (board != null)
         {
-            RepositionCamera(board.width - 1, board.height - 1);
+            RepositionCamera(board.height - 1, board.width - 1);
         }
         else { }
     }
-
+    
     void RepositionCamera(float width, float height)
     {
         // Tính tỷ lệ khung hình của màn hình
@@ -39,10 +39,10 @@ public class CameraScalar : MonoBehaviour
             orthoSize = (height / 2 + padding) * differenceInSize;
         }
 
-        Camera.main.orthographicSize = orthoSize-2;
+        Camera.main.orthographicSize = orthoSize-1.8f;
 
         // Đặt vị trí camera để trung tâm vào bảng
-        Vector3 tempPosition = new Vector3(width / 2, height / 2 + 1, cameraOffset);
+        Vector3 tempPosition = new Vector3(height / 2, width / 2 + 1, cameraOffset);
         transform.position = tempPosition;
     }
 }

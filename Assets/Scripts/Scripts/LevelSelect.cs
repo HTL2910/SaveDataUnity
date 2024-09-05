@@ -15,7 +15,7 @@ public class LevelSelect : MonoBehaviour
     public int countLevel=100;
     int page = 15;
     int pageIndex=1;
-    public int unclockLevel;
+    //public int unclockLevel;
     [Header("Object")]
     public GameObject confirmPanel;
     public GameObject prefabLevelButton;
@@ -30,7 +30,7 @@ public class LevelSelect : MonoBehaviour
 
     private void Start()
     {
-        unclockLevel = PlayerPrefs.GetInt("Unclock Level", 1);
+        //unclockLevel = PlayerPrefs.GetInt("Unclock Level", 1);
         CreateButtonLevel();
         Page();
     }
@@ -49,26 +49,29 @@ public class LevelSelect : MonoBehaviour
         for(int i = 0; i < countLevel; i++)
         {
             GameObject levelButton=Instantiate(prefabLevelButton,transform.position,Quaternion.identity);
-            if(i<unclockLevel)
-            {
-                levelButton.GetComponent<LevelButton>().isActive = true;
-            }
-            else
-            {
-                levelButton.GetComponent<LevelButton>().isActive = false;
-            }
+            //if(i<unclockLevel)
+            //{
+            //    levelButton.GetComponent<LevelButton>().isActive = true;
+            //}
+            //else
+            //{
+            //    levelButton.GetComponent<LevelButton>().isActive = false;
+            //}
+            levelButton.GetComponent<LevelButton>().isActive = true;
             levelButton.GetComponent<LevelButton>().ActivateStars(levelButton.GetComponent<LevelButton>().stars.Length, false);
         
             levelButton.transform.SetParent(transform,false);
-            if (i < unclockLevel-1)
-            {
+            //if (i < unclockLevel-1)
+            //{
                
-                    int countStar = PlayerPrefs.GetInt("Star in Level_" + (i+1), 0);
-                    levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
+            //        int countStar = PlayerPrefs.GetInt("Star in Level_" + (i+1), 0);
+            //        levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
 
                 
-            }
-            
+            //}
+            int countStar = PlayerPrefs.GetInt("Star in Level_" + (i + 1), 0);
+            levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
+
             int index = i;
             Button btn=levelButton.transform.GetChild(0).GetComponent<Button>();
             levelButton.transform.GetChild(0).transform.GetChild(0).

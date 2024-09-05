@@ -12,41 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5149821c03e83749abebff434d1e4b1, type: 3}
   m_Name: Level 40
   m_EditorClassIdentifier: 
-  width: 10
+  width: 7
   height: 7
   boardLayout:
   - x: 5
     y: 5
-    tileKind: 0
+    tileKind: 1
   - x: 5
     y: 4
-    tileKind: 0
+    tileKind: 1
   - x: 4
     y: 5
-    tileKind: 0
+    tileKind: 1
   - x: 4
     y: 4
-    tileKind: 0
+    tileKind: 1
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
   - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
-  - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
   - {fileID: 125166, guid: 0fa72a843191b2e4c924dfe0c98fd45e, type: 3}
+  - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
+  - {fileID: 178846, guid: 58194b4a856312545a557025edfb6937, type: 3}
   - {fileID: 160020, guid: e300dff7dc1b9594492c09f5bfd331ea, type: 3}
   scoreGoal: e8030000b80b000070170000a0860100
   endGameRequirements:
     gameType: 0
-    counterValue: 120
+    counterValue: 80
   levelGoals:
-  - numberNeeded: 30
+  - numberNeeded: 55
     numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: ed4730490fc5b1744af7de2156da1f4e, type: 3}
-    matchValue: Fruit_Blue_1
-  - numberNeeded: 30
+    goalSprite: {fileID: 21300000, guid: 44538166d5aba8546ac0b9663f822ee1, type: 3}
+    matchValue: Fruit_Red_1
+  - numberNeeded: 75
     numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: b99346df828d5344dafd665deaa53d22, type: 3}
-    matchValue: Fruit_Blue_2
-  - numberNeeded: 30
+    goalSprite: {fileID: 21300000, guid: 13887ae2e86b56c409eb2ec749d217bd, type: 3}
+    matchValue: Fruit_Red_2
+  - numberNeeded: 100
     numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 6c96b4b2aca12904a91d00ba3182e10d, type: 3}
-    matchValue: Fruit_Green_1
+    goalSprite: {fileID: 21300000, guid: f8b339b5ff3c433458c6436b67824ff1, type: 3}
+    matchValue: Fruit_Yellow_2

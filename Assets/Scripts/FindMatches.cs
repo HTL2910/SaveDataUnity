@@ -104,7 +104,7 @@ public class FindMatches : MonoBehaviour
                         {
                             Dot leftDotDot = leftDot.GetComponent<Dot>();
                             Dot rightDotDot = rightDot.GetComponent<Dot>();
-                            if (leftDot != null && rightDot != null)
+                            if (leftDotDot != null && rightDotDot != null)
                             {
                                 if (leftDot.tag == currentDot.tag && rightDot.tag == currentDot.tag)
                                 {
@@ -126,7 +126,7 @@ public class FindMatches : MonoBehaviour
                         {
                             Dot upDotDot = upDot.GetComponent<Dot>();
                             Dot downDotDot = downDot.GetComponent<Dot>();
-                            if (upDot != null && downDot != null)
+                            if (upDotDot != null && downDotDot != null)
                             {
                                 if (upDot.tag == currentDot.tag && downDot.tag == currentDot.tag)
                                 {
@@ -172,7 +172,10 @@ public class FindMatches : MonoBehaviour
             {
                 if (i >= 0 && i<board.width && j>=0 && j<board.height)
                 {
-                    board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                    if (board.allDots[i, j] != null)
+                    {
+                        board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                    }
                 }
             }    
             
@@ -214,8 +217,11 @@ public class FindMatches : MonoBehaviour
             {
                 if (i >= 0 && i < board.width && j >= 0 && j < board.height)
                 {
-                    dots.Add(board.allDots[i, j]);
-                    board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                    if (board.allDots[i, j] != null)
+                    {
+                        dots.Add(board.allDots[i, j]);
+                        board.allDots[i, j].GetComponent<Dot>().isMatched = true;
+                    }
                 }
             }
 

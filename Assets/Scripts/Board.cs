@@ -346,21 +346,25 @@ public class Board : MonoBehaviour
                     }
                 }
             }
-        
+
             else if (typeOfMatch == 3)
             {
-                //findMatches.CheckBombs();
-                int indexRan = Random.Range(0, 2);
-                currentDot.isMatched = false;
-                if (indexRan == 0)
+                if (currentDot != null)
                 {
-                    
-                    currentDot.MakeColumnBomb();
+                    //findMatches.CheckBombs();
+                    int indexRan = Random.Range(0, 2);
+                    currentDot.isMatched = false;
+                    if (indexRan == 0)
+                    {
+
+                        currentDot.MakeColumnBomb();
+                    }
+                    else
+                    {
+                        currentDot.MakeRowBomb();
+                    }
                 }
-                else
-                {
-                    currentDot.MakeRowBomb();
-                }
+            
             }
         }
         #region
@@ -436,32 +440,34 @@ public class Board : MonoBehaviour
    
     private void DestroyMatchesAt(int column,int row)//Xóa Dot ơ vị tri col and row
     {
-       
-        if (allDots[column,row].GetComponent<Dot>().isMatched)
+        if (allDots[column, row] != null)
         {
-            CheckToMakeBombs();
-            
-            if (breakableTiles[column,row]!= null)
+            if (allDots[column, row].GetComponent<Dot>().isMatched)
             {
-                breakableTiles[column, row].TakeDamage(1);
-                if(breakableTiles[column, row].hitPoints <= 0)
+                CheckToMakeBombs();
+
+                if (breakableTiles[column, row] != null)
                 {
-                    breakableTiles[column, row] = null;
+                    breakableTiles[column, row].TakeDamage(1);
+                    if (breakableTiles[column, row].hitPoints <= 0)
+                    {
+                        breakableTiles[column, row] = null;
+                    }
                 }
+                if (goalsManager != null)
+                {
+                    goalsManager.CompareGoal(allDots[column, row].tag);
+                    goalsManager.UpdateGoal();
+                }
+                GameObject particle = Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+                UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
+                Destroy(particle, 0.5f);
+                Destroy(allDots[column, row]);
+                scoreManager.IncreaseScore(basePieceValue * streakValue);
+                allDots[column, row] = null;
             }
-            if (goalsManager != null)
-            {
-                goalsManager.CompareGoal(allDots[column, row].tag);
-                goalsManager.UpdateGoal();
-            }
-            GameObject particle=Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
-            UIManager.Instance.PlaySound(UIManager.Instance.audioclipgood);
-            Destroy(particle, 0.5f);
-            Destroy(allDots[column,row]);
-            scoreManager.IncreaseScore(basePieceValue*streakValue);
-            allDots[column,row] = null;
+            else { }
         }
-        else { }
     }
     public void DestroyMatches()//xóa dot đó sau khi check có match
     {
@@ -498,7 +504,7 @@ public class Board : MonoBehaviour
                 }
             }    
         }
-        yield return new WaitForSeconds(refillDelay*0.5f);
+        yield return new WaitForSeconds(0.4f);
         StartCoroutine(FillBoardCo());
     }
     private IEnumerator DecreaseRowCo()
@@ -574,12 +580,12 @@ public class Board : MonoBehaviour
             streakValue += 1;
             findMatches.FindAllMatches();
             DestroyMatches();
-            yield return new WaitForSeconds(2*refillDelay);
+            yield return new WaitForSeconds(4*refillDelay);
            
         }
         findMatches.currentMatches.Clear();
         currentDot = null;
-        yield return new WaitForSeconds(refillDelay);
+        yield return new WaitForSeconds(2*refillDelay);
         if (IsDeadLocked())
         {
             StartCoroutine(ShuffleBoard());

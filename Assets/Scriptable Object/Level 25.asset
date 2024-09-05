@@ -12,54 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5149821c03e83749abebff434d1e4b1, type: 3}
   m_Name: Level 25
   m_EditorClassIdentifier: 
-  width: 10
+  width: 7
   height: 7
-  boardLayout:
-  - x: 5
-    y: 5
-    tileKind: 0
-  - x: 5
-    y: 4
-    tileKind: 0
-  - x: 4
-    y: 5
-    tileKind: 0
-  - x: 4
-    y: 4
-    tileKind: 0
-  - x: 0
-    y: 0
-    tileKind: 1
-  - x: 0
-    y: 6
-    tileKind: 1
-  - x: 9
-    y: 6
-    tileKind: 1
-  - x: 9
-    y: 0
-    tileKind: 1
+  boardLayout: []
   dots:
   - {fileID: 135722, guid: 48e2b867fa77df2489266abb9c52c1db, type: 3}
   - {fileID: 153084, guid: 552227f7d7092a848bc3231f2a2a5a54, type: 3}
   - {fileID: 120900, guid: 28dd42fca7a476d478e583d0b8d8e192, type: 3}
   - {fileID: 141080, guid: 61b0811442153784f854e40753a2f925, type: 3}
-  - {fileID: 125166, guid: 0fa72a843191b2e4c924dfe0c98fd45e, type: 3}
-  - {fileID: 160020, guid: e300dff7dc1b9594492c09f5bfd331ea, type: 3}
-  scoreGoal: e8030000b80b000070170000a0860100
+  - {fileID: 101480, guid: 858a256717922b94c8c31524c3075d55, type: 3}
+  scoreGoal: e803000088130000401f0000a0860100
   endGameRequirements:
     gameType: 0
-    counterValue: 60
+    counterValue: 70
   levelGoals:
-  - numberNeeded: 75
-    numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 6c96b4b2aca12904a91d00ba3182e10d, type: 3}
-    matchValue: Fruit_Green_1
-  - numberNeeded: 75
-    numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 41270f81d8e46b143937878328a6432c, type: 3}
-    matchValue: Fruit_Green_2
-  - numberNeeded: 75
-    numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: 1a2034619c98c46419e742a2be1a60cb, type: 3}
-    matchValue: Fruit_Orange_1
+  - numberNeeded: 85
+    numberCollected: 57
+    goalSprite: {fileID: 21300000, guid: ed4730490fc5b1744af7de2156da1f4e, type: 3}
+    matchValue: Fruit_Blue_1
+  - numberNeeded: 45
+    numberCollected: 32
+    goalSprite: {fileID: 21300000, guid: b99346df828d5344dafd665deaa53d22, type: 3}
+    matchValue: Fruit_Blue_2
