@@ -12,10 +12,10 @@ public class LevelSelect : MonoBehaviour
     public string leveltoLoad;
     [Header("index")]
     public int level;
-    public int countLevel=100;
+    public int countLevel=500;
     int page = 15;
     int pageIndex=1;
-    //public int unclockLevel;
+
     [Header("Object")]
     public GameObject confirmPanel;
     public GameObject prefabLevelButton;
@@ -26,68 +26,79 @@ public class LevelSelect : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI starTextConfirm;
     public TextMeshProUGUI scoreTextConfirm;
-    int star;
-
-    private void Start()
-    {
-        //unclockLevel = PlayerPrefs.GetInt("Unclock Level", 1);
-        CreateButtonLevel();
-        Page();
-    }
-    
-    public void Play()
+    public GameManager gameManager;
+    private void Awake()
     {
        
-        PlayerPrefs.SetInt("Current Level", level - 1);
+        
+    }
+    private void Start()
+    {
+        gameManager = GameManager.instance;
+        gameManager.gameData =gameManager.LoadGameData(countLevel);
+        gameManager.gameData.totalLevel=countLevel;
+        gameManager.SaveGameData();
+        CreateButtonLevel();
+    
+    }
+
+  
+
+    public void Play()
+    {
+        PlayerPrefs.SetInt("Current Level",level-1);
         PlayerPrefs.Save();
-        //Debug.Log("Level" + level.ToString());
         SceneManager.LoadScene(leveltoLoad);
     }
   
     public void CreateButtonLevel()
     {
-        for(int i = 0; i < countLevel; i++)
-        {
-            GameObject levelButton=Instantiate(prefabLevelButton,transform.position,Quaternion.identity);
-            //if(i<unclockLevel)
-            //{
-            //    levelButton.GetComponent<LevelButton>().isActive = true;
-            //}
-            //else
-            //{
-            //    levelButton.GetComponent<LevelButton>().isActive = false;
-            //}
-            levelButton.GetComponent<LevelButton>().isActive = true;
-            levelButton.GetComponent<LevelButton>().ActivateStars(levelButton.GetComponent<LevelButton>().stars.Length, false);
-        
-            levelButton.transform.SetParent(transform,false);
-            //if (i < unclockLevel-1)
-            //{
-               
-            //        int countStar = PlayerPrefs.GetInt("Star in Level_" + (i+1), 0);
-            //        levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
+  
 
-                
-            //}
-            int countStar = PlayerPrefs.GetInt("Star in Level_" + (i + 1), 0);
-            levelButton.GetComponent<LevelButton>().ActivateStars(countStar, true);
+        for (int i = 0; i < gameManager.gameData.totalLevel; i++)
+        {
+            GameObject levelButton = Instantiate(prefabLevelButton, transform.position, Quaternion.identity);
+            LevelButton levelBtn = levelButton.GetComponent<LevelButton>();
+            if (i < gameManager.gameData.unclockLevel)
+            {
+                levelBtn.isActive = true;
+            }
+            else
+            {
+                levelBtn.isActive = false;
+            }
+            levelBtn.ActivateStars(levelBtn.stars.Length, false);
+            int countStar = gameManager.gameData.levels[i].stars;
+            levelBtn.ActivateStars(countStar, true);
+            levelButton.transform.SetParent(transform, false);
 
             int index = i;
-            Button btn=levelButton.transform.GetChild(0).GetComponent<Button>();
+            Button btn = levelButton.transform.GetChild(0).GetComponent<Button>();
             levelButton.transform.GetChild(0).transform.GetChild(0).
-                GetComponent<TextMeshProUGUI>().text = (i+1).ToString();
+                GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
             btn.onClick.AddListener(() => ConfirmPanel(index));
         }
+
+
+
     }
     public void ConfirmPanel(int level)
     {
+        
         levelText.text = "LEVEL: "+(level+1).ToString();
         this.level = level+1;
         confirmPanel.SetActive(true);
-        starTextConfirm.text = "" + PlayerPrefs.GetInt("Star in Level_" + (level + 1).ToString(), 0)+" / "+"3";
-        scoreTextConfirm.text= "" + PlayerPrefs.GetInt("Score in Level_" +(level+1).ToString(), 0);
+        if (gameManager.gameData.levels[level] != null)
+        {
+            starTextConfirm.text = "" + gameManager.gameData.levels[level].stars.ToString() + " / " + "3";
+            scoreTextConfirm.text = "" + gameManager.gameData.levels[level].score.ToString();
+        }
+        
     }
-
+    private void Update()
+    {
+        Page();
+    }
     void PageLevel()
     {
         for(int i=0;i<transform.childCount;i++)
@@ -115,12 +126,10 @@ public class LevelSelect : MonoBehaviour
     public void NextPage()
     {
         pageIndex++;
-        Page();
     }
     public void PreviousPage()
     {
         pageIndex--;
-        Page();
     }
     private void ShowPageButton()
     {

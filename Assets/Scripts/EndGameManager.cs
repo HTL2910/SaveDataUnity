@@ -26,9 +26,11 @@ public class EndGameManager : MonoBehaviour
     private float timeSeconds;
     private ScoreManager scoreManager;
     private Board board;
+    private GameManager gameManager;
     private void Start()
     {
-        board=FindObjectOfType<Board>();
+        gameManager=GameManager.instance;
+        board =FindObjectOfType<Board>();
         scoreManager=FindObjectOfType<ScoreManager>();
         SetGameType();
         SetUpGame();
@@ -91,29 +93,25 @@ public class EndGameManager : MonoBehaviour
         board.currentStates= GameStates.Win;
         currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
-        //if(board.level== PlayerPrefs.GetInt("Unclock Level") - 1)
-        //{
-        //    PlayerPrefs.SetInt("Unclock Level", board.level + 2);
-        //}
        
         int star = scoreManager.indexLevel-1;
-        if(PlayerPrefs.HasKey("Score in Level_" + (board.level + 1).ToString()))
+        if(gameManager!=null && gameManager.gameData != null)
         {
-            if(PlayerPrefs.GetInt("Score in Level_" + (board.level + 1).ToString()) < scoreManager.score)
+            if (board.level < gameManager.gameData.levels.Count)
             {
-                PlayerPrefs.SetInt("Star in Level_" + (board.level + 1).ToString(), star);
-                PlayerPrefs.SetInt("Score in Level_" + (board.level + 1).ToString(), scoreManager.score);
+                gameManager.gameData.unclockLevel = board.level + 2;
+                if (gameManager.gameData.levels[board.level] != null)
+                {
+                    if (gameManager.gameData.levels[board.level].score < scoreManager.score)
+                    {
+                        gameManager.gameData.levels[board.level].score = scoreManager.score;
+                        gameManager.gameData.levels[board.level].stars = star;
+                    }
+                }
             }
-            else { }
         }
-        else
-        {
-            PlayerPrefs.SetInt("Star in Level_" + (board.level + 1).ToString(), star);
-            PlayerPrefs.SetInt("Score in Level_" + (board.level + 1).ToString(), scoreManager.score);
-        }
-        
-        PlayerPrefs.Save();
 
+        gameManager.SaveGameData();
     }
     private void Update()
     {

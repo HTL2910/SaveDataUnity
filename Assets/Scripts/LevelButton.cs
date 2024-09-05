@@ -26,7 +26,6 @@ public class LevelButton : MonoBehaviour
   
     public void ActivateStars(int count,bool isActive)
     {
-        Debug.Log("ActivateStar");
         for(int i=0; i< count; i++)
         {
             stars[i].enabled = isActive;
