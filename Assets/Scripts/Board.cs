@@ -556,45 +556,60 @@ public class Board : MonoBehaviour
     }
     private bool MatchesInBoard()
     {
-        for(int i = 0; i < width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
-                if (allDots[i,j]!=null)
+                if (allDots[i, j] != null)
                 {
-                    if (allDots[i,j].GetComponent<Dot>().isMatched)
+                    if (allDots[i, j].GetComponent<Dot>().isMatched)
                     {
                         return true;
                     }
-                }    
+                }
             }
         }
         return false;
     }
     private IEnumerator FillBoardCo()
     {
-        yield return new WaitForSeconds(refillDelay);
+        yield return new WaitForSeconds(0.5f * refillDelay);
         RefillBoard();
-        while(MatchesInBoard())
+
+        // Đảm bảo rằng bảng đã đầy đủ và không có dot nào bị bỏ sót
+        findMatches.FindAllMatches();
+
+        while (findMatches.currentMatches.Count > 0)
         {
             streakValue += 1;
-            findMatches.FindAllMatches();
-            DestroyMatches();
-            yield return new WaitForSeconds(4*refillDelay);
-           
+            findMatches.FindAllMatches();  // Cập nhật lại danh sách match
+            DestroyMatches();              // Xoá các match hiện tại
+            yield return new WaitForSeconds(0.5f * refillDelay);  // Tăng delay để tránh việc chạy quá nhanh
         }
-        findMatches.currentMatches.Clear();
+
         currentDot = null;
-        yield return new WaitForSeconds(2*refillDelay);
+        yield return new WaitForSeconds(0.5f * refillDelay);  // Delay nhỏ trước khi kiểm tra deadlock
+
+        streakValue = 1;
+        currentStates = GameStates.Move;
+        yield return new WaitForSeconds(refillDelay);
+        // Kiểm tra thêm một lần để đảm bảo không còn match nào sót lại
+        findMatches.FindAllMatches();
+        while (findMatches.currentMatches.Count > 0)
+        {
+            streakValue += 1;
+            DestroyMatches();
+            yield return new WaitForSeconds(0.5f * refillDelay);  // Delay nhỏ để xử lý từng bước
+        }
+        yield return new WaitForSeconds(0.5f * refillDelay);
         if (IsDeadLocked())
         {
             StartCoroutine(ShuffleBoard());
         }
-        streakValue = 1;
-        currentStates = GameStates.Move;
 
-        findMatches.FindAllMatches();
-    }    
+      
+    }
+
     private void SwitchPieces(int column,int row,Vector2 direction)
     {
         GameObject holder = allDots[column + (int)direction.x, row + (int)direction.y];
