@@ -14,7 +14,7 @@ public class LevelSelect : MonoBehaviour
     public int level;
     public int countLevel=500;
     int page = 15;
-    int pageIndex=1;
+
 
     [Header("Object")]
     public GameObject confirmPanel;
@@ -38,6 +38,7 @@ public class LevelSelect : MonoBehaviour
         gameManager.gameData =gameManager.LoadGameData(countLevel);
         gameManager.gameData.totalLevel=countLevel;
         gameManager.SaveGameData();
+      
         CreateButtonLevel();
     
     }
@@ -103,7 +104,7 @@ public class LevelSelect : MonoBehaviour
     {
         for(int i=0;i<transform.childCount;i++)
         {
-            if(i>=page*(pageIndex-1) && i < page * pageIndex)
+            if(i>=page* (gameManager.gameData.pageIndex - 1) && i < page * gameManager.gameData.pageIndex)
             {
                 transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -121,24 +122,32 @@ public class LevelSelect : MonoBehaviour
     }
     private void ShowPageText()
     {
-        pageText.text = "Page: " + (pageIndex).ToString() + " / " + (Mathf.CeilToInt((float)countLevel / page).ToString());
+        pageText.text = "Page: " + (gameManager.gameData.pageIndex).ToString() + " / " + (Mathf.CeilToInt((float)countLevel / page).ToString());
     }
     public void NextPage()
     {
-        pageIndex++;
+        gameManager.gameData.pageIndex++;
+        if (gameManager.gameData.unclockLevel > (page*(gameManager.gameData.pageIndex-1)))
+        {
+            gameManager.SaveGameData();
+        }
     }
     public void PreviousPage()
     {
-        pageIndex--;
+        gameManager.gameData.pageIndex--;
+        if (gameManager.gameData.unclockLevel > (page * (gameManager.gameData.pageIndex-1)))
+        {
+            gameManager.SaveGameData();
+        }
     }
     private void ShowPageButton()
     {
-        if (pageIndex <= 1)
+        if (gameManager.gameData.pageIndex <= 1)
         {
             preViousButton.SetActive(false);
             nextButton.SetActive(true);
         }
-        else if(pageIndex >= Mathf.CeilToInt((float)countLevel / page))
+        else if (gameManager.gameData.pageIndex >= Mathf.CeilToInt((float)countLevel / page))
         {
             preViousButton.SetActive(true);
             nextButton.SetActive(false);

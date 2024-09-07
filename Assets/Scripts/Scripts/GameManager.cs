@@ -5,9 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public List<LevelData> levels = new List<LevelData>();
     public int totalLevel;
-    public int unclockLevel;  // stores the unlocked level
+    public int unclockLevel;
+    public int pageIndex;
+    public List<LevelData> levels = new List<LevelData>();
+    // stores the unlocked level
 
     // Constructor to initialize with a specified number of levels
     public GameData(int totalLevels, int unclockLevel)
@@ -18,6 +20,7 @@ public class GameData
             LevelData newLevel = new LevelData(i + 1);
             levels.Add(newLevel);
         }
+        pageIndex = 1;
     }
 
     // Method to check if a level is unlocked
