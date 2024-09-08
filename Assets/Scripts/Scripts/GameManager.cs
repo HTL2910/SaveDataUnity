@@ -6,6 +6,11 @@ using UnityEngine;
 public class GameData
 {
     public int totalLevel;
+    public int totalScore;
+    public int countColorBomb;
+    public int countAdjacenBomb;
+    public int countColumnBomb;
+    public int countRowBomb;
     public int unclockLevel;
     public int pageIndex;
     public List<LevelData> levels = new List<LevelData>();
@@ -15,12 +20,19 @@ public class GameData
     public GameData(int totalLevels, int unclockLevel)
     {
         this.unclockLevel = unclockLevel;
-        for (int i = 0; i < totalLevels; i++)
+        this.totalLevel = totalLevels;
+        for (int i = 0; i < totalLevel; i++)
         {
             LevelData newLevel = new LevelData(i + 1);
             levels.Add(newLevel);
         }
-        pageIndex = 1;
+      
+        this.pageIndex = 1;
+        this.totalScore = 0;
+        this.countAdjacenBomb = 0;
+        this.countColumnBomb = 0;
+        this.countRowBomb = 0;
+        this.countColorBomb = 0;
     }
 
     // Method to check if a level is unlocked
@@ -51,7 +63,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameData gameData;
     private string saveFilePath;
-
     void Awake()
     {
         // Đảm bảo chỉ có một instance của GameManager tồn tại
@@ -66,11 +77,13 @@ public class GameManager : MonoBehaviour
         }
         saveFilePath = Path.Combine(Application.persistentDataPath, "gamedata.json");
 
+       
+        gameData = LoadGameData();
+        SaveGameData();
 
-        
     }
-   
-    
+ 
+
     public void SaveGameData()
     {
         string json = JsonUtility.ToJson(gameData, true);
@@ -78,7 +91,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game data saved!"+ saveFilePath);
     }
 
-    public GameData LoadGameData(int totallevel)
+    public GameData LoadGameData()
     {
         GameData newgameData;
         if (File.Exists(saveFilePath))
@@ -91,7 +104,7 @@ public class GameManager : MonoBehaviour
         {
 
             // Initialize game data if no save exists
-            newgameData = new GameData(totallevel, 1); // 500 levels, starting with level 1 unlocked
+            newgameData = new GameData(500, 1); // 500 levels, starting with level 1 unlocked
             Debug.Log("New game data created!");
         
         }

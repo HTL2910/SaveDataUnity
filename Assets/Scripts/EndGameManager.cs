@@ -106,6 +106,7 @@ public class EndGameManager : MonoBehaviour
                     {
                         gameManager.gameData.levels[board.level].score = scoreManager.score;
                         gameManager.gameData.levels[board.level].stars = star;
+                        
                     }
                 }
             }
@@ -124,5 +125,9 @@ public class EndGameManager : MonoBehaviour
                 timeSeconds = 1;
             }
         }
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

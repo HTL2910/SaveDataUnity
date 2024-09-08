@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 public enum GameStates
 {
     Wait,
@@ -58,6 +59,7 @@ public class Board : MonoBehaviour
 
     public TextMeshProUGUI levelText;
     public GameObject panelItem;
+    private ItemManager itemManager;
     #endregion
     private void Awake()
     {
@@ -88,12 +90,12 @@ public class Board : MonoBehaviour
     {
         breakableTiles=new BackgroundTitle[width,height];
         findMatches=FindObjectOfType<FindMatches>();
+        itemManager = FindObjectOfType<ItemManager>();
         goalsManager = FindObjectOfType<GoalsManager>();
         scoreManager=FindObjectOfType<ScoreManager>();
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();
-        panelItem.SetActive(false);
         currentStates = GameStates.Pause;
     }
    
@@ -742,10 +744,12 @@ public class Board : MonoBehaviour
         int ranHeight = Random.Range(0, height);
         int attempts = 0;
 
-        while ((allDots[ranWidth, ranHeight].GetComponent<Dot>().isAdjacenBomb ||
+        while (allDots[ranWidth, ranHeight]!=null &&
+            (allDots[ranWidth, ranHeight].GetComponent<Dot>().isAdjacenBomb ||
                 allDots[ranWidth, ranHeight].GetComponent<Dot>().isColorBomb ||
                 allDots[ranWidth, ranHeight].GetComponent<Dot>().isColumnBomb ||
-                allDots[ranWidth, ranHeight].GetComponent<Dot>().isRowBomb) && attempts < 100)
+                allDots[ranWidth, ranHeight].GetComponent<Dot>().isRowBomb)
+                && attempts < 100)
         {
             ranWidth = Random.Range(0, width);
             ranHeight = Random.Range(0, height);
@@ -762,38 +766,89 @@ public class Board : MonoBehaviour
 
     public void CreateColorBomb()
     {
+        if (GameManager.instance == null) return;
         Vector2Int position = GetRandomPositionWithoutBomb();
-        allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+        GameManager gameManager =GameManager.instance;
+        if (gameManager.gameData.countColorBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        {
+     
+            allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+            gameManager.gameData.countColorBomb--;
+            itemManager.GetDataAll();
+            gameManager.SaveGameData();
+        }
+        else
+        {
+            itemManager.colorButton.GetComponent<CountBombButton>().Error();
+        }
+        
     }
 
     public void CreateAdjacenBomb()
     {
+        if (GameManager.instance == null) return;
         Vector2Int position = GetRandomPositionWithoutBomb();
-        allDots[position.x, position.y].GetComponent<Dot>().MakeAdjacenBomb();
+
+        GameManager gameManager = GameManager.instance;
+        if (gameManager.gameData.countAdjacenBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        {
+            allDots[position.x, position.y].GetComponent<Dot>().MakeAdjacenBomb();
+            gameManager.gameData.countAdjacenBomb--;
+            itemManager.GetDataAll();
+            gameManager.SaveGameData();
+        }
+        else
+        {
+            itemManager.adjacenButton.GetComponent<CountBombButton>().Error();
+        }
     }
 
     public void CreateColumnBomb()
     {
+        if (GameManager.instance == null) return;
         Vector2Int position = GetRandomPositionWithoutBomb();
-        allDots[position.x, position.y].GetComponent<Dot>().MakeColumnBomb();
+        GameManager gameManager = GameManager.instance;
+        if (gameManager.gameData.countColumnBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        {
+            allDots[position.x, position.y].GetComponent<Dot>().MakeColumnBomb();
+            gameManager.gameData.countColumnBomb--;
+            itemManager.GetDataAll();
+            gameManager.SaveGameData();
+        }
+        else
+        {
+            itemManager.columnButton.GetComponent<CountBombButton>().Error();
+        }
     }
 
     public void CreateRowBomb()
     {
+        if (GameManager.instance == null) return;
         Vector2Int position = GetRandomPositionWithoutBomb();
-        allDots[position.x, position.y].GetComponent<Dot>().MakeRowBomb();
+        GameManager gameManager = GameManager.instance;
+        if (gameManager.gameData.countRowBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        {
+            allDots[position.x, position.y].GetComponent<Dot>().MakeRowBomb();
+            gameManager.gameData.countRowBomb--;
+            itemManager.GetDataAll();
+            gameManager.SaveGameData();
+        }
+        else
+        {
+            itemManager.rowButton.GetComponent<CountBombButton>().Error();
+        }
     }
 
     #endregion
     
-    public void ActivePanelItem()
-    {
-        panelItem.SetActive(true);
-        StartCoroutine(DeactivePanelItem());
-    }
-    public IEnumerator DeactivePanelItem()
-    {
-        yield return new WaitForSeconds(1f);
-        panelItem.SetActive(false);
-    }
+    //public void ActivePanelItem()
+    //{
+    //    panelItem.SetActive(true);
+    //    StartCoroutine(DeactivePanelItem());
+    //}
+    //public IEnumerator DeactivePanelItem()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    panelItem.SetActive(false);
+    //}
 }

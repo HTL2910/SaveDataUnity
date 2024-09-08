@@ -12,7 +12,6 @@ public class LevelSelect : MonoBehaviour
     public string leveltoLoad;
     [Header("index")]
     public int level;
-    public int countLevel=500;
     int page = 15;
 
 
@@ -35,11 +34,16 @@ public class LevelSelect : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.instance;
-        gameManager.gameData =gameManager.LoadGameData(countLevel);
-        gameManager.gameData.totalLevel=countLevel;
-        gameManager.SaveGameData();
-      
-        CreateButtonLevel();
+        if (gameManager != null)
+        {
+            gameManager.gameData = gameManager.LoadGameData();
+            CreateButtonLevel();
+        }
+        else
+        {
+            Debug.Log("Not Game Manager");
+        }
+        
     
     }
 
@@ -122,44 +126,60 @@ public class LevelSelect : MonoBehaviour
     }
     private void ShowPageText()
     {
-        pageText.text = "Page: " + (gameManager.gameData.pageIndex).ToString() + " / " + (Mathf.CeilToInt((float)countLevel / page).ToString());
+        if (gameManager != null)
+        {
+            pageText.text = "Page: " + (gameManager.gameData.pageIndex).ToString() + " / " + (Mathf.CeilToInt((float)gameManager.gameData.totalLevel / page).ToString());
+        }
     }
     public void NextPage()
     {
-        gameManager.gameData.pageIndex++;
-        if (gameManager.gameData.unclockLevel > (page*(gameManager.gameData.pageIndex-1)))
+        gameManager.gameData.pageIndex++; 
+        if (gameManager != null)
         {
-            gameManager.SaveGameData();
+            if (gameManager.gameData.unclockLevel > (page * (gameManager.gameData.pageIndex - 1)))
+            {
+                gameManager.SaveGameData();
+            }
         }
     }
     public void PreviousPage()
     {
         gameManager.gameData.pageIndex--;
-        if (gameManager.gameData.unclockLevel > (page * (gameManager.gameData.pageIndex-1)))
+        if (gameManager != null)
         {
-            gameManager.SaveGameData();
+            if (gameManager.gameData.unclockLevel > (page * (gameManager.gameData.pageIndex - 1)))
+            {
+                gameManager.SaveGameData();
+            }
         }
     }
     private void ShowPageButton()
     {
-        if (gameManager.gameData.pageIndex <= 1)
+        if (gameManager != null)
         {
-            preViousButton.SetActive(false);
-            nextButton.SetActive(true);
-        }
-        else if (gameManager.gameData.pageIndex >= Mathf.CeilToInt((float)countLevel / page))
-        {
-            preViousButton.SetActive(true);
-            nextButton.SetActive(false);
-        }
-        else
-        {
-            preViousButton.SetActive(true);
-            nextButton.SetActive(true);
+            if (gameManager.gameData.pageIndex <= 1)
+            {
+                preViousButton.SetActive(false);
+                nextButton.SetActive(true);
+            }
+            else if (gameManager.gameData.pageIndex >= Mathf.CeilToInt((float)gameManager.gameData.totalLevel / page))
+            {
+                preViousButton.SetActive(true);
+                nextButton.SetActive(false);
+            }
+            else
+            {
+                preViousButton.SetActive(true);
+                nextButton.SetActive(true);
+            }
         }
     }
     public void Home()
     {
         SceneManager.LoadScene("Menu");
+    }
+    public void Shop()
+    {
+        SceneManager.LoadScene("Shop");
     }
 }
