@@ -63,7 +63,7 @@ public class Dot : MonoBehaviour
         UpdateDotPosition();
     }
 
-    private void UpdateDotPosition()
+    public void UpdateDotPosition()
     {
         targetX = column;
         targetY = row;
@@ -255,7 +255,7 @@ public class Dot : MonoBehaviour
         board.currentStates = GameStates.Move;
     }
 
-    void MovePiecesActual(Vector2 direction)
+    public void MovePiecesActual(Vector2 direction)
     {
         otherDot = board.allDots[column + (int)direction.x, row + (int)direction.y];
         previousColumn = column;

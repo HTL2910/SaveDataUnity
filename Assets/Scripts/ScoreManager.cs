@@ -44,6 +44,7 @@ public class ScoreManager : MonoBehaviour
             }
             else
             {
+            
                 scorebarImage.fillAmount = (float)(score - levelScore) / (float)(board.scoreGoal[indexLevel - 1] - levelScore);
                 if (scorebarImage.fillAmount >= 1)
                 {
@@ -57,7 +58,15 @@ public class ScoreManager : MonoBehaviour
                 starTextResult.text = (indexLevel - 1).ToString();
                 
             }
-            levelScore = score;
+         
+        }
+        if (indexLevel >= 2)
+        {
+            levelScore = board.scoreGoal[indexLevel - 2];
+        }
+        else
+        {
+            levelScore = 0;
         }
     }
 }

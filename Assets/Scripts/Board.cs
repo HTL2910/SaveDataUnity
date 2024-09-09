@@ -612,7 +612,7 @@ public class Board : MonoBehaviour
       
     }
 
-    private void SwitchPieces(int column,int row,Vector2 direction)
+    public void SwitchPieces(int column,int row,Vector2 direction)
     {
         GameObject holder = allDots[column + (int)direction.x, row + (int)direction.y];
         allDots[column + (int)direction.x, row + (int)direction.y] = allDots[column, row];
