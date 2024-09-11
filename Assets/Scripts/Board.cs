@@ -63,7 +63,6 @@ public class Board : MonoBehaviour
     #endregion
     private void Awake()
     {
-        Application.targetFrameRate = 60;
         if (PlayerPrefs.HasKey("Current Level"))
         {
             level = PlayerPrefs.GetInt("Current Level");

@@ -14,8 +14,11 @@ public class HintManager : MonoBehaviour
     public Toggle autoPlayToggle;  // Toggle để kích hoạt auto-play
     public bool autoPlayEnabled = false;
 
+    public GameObject autoObject;
+    private bool autoObjectIsActive= false;
     void Start()
     {
+        autoObject.SetActive(false);
         board = FindObjectOfType<Board>();
         hintDelaySeconds = hintDelay;
 
@@ -24,7 +27,7 @@ public class HintManager : MonoBehaviour
         {
             autoPlayToggle.onValueChanged.AddListener(delegate { ToggleAutoPlay(autoPlayToggle.isOn); });
         }
-        InvokeRepeating("Auto", 1f, hintDelay-1f); // Adjust the time interval as needed (5 seconds in this case)
+        InvokeRepeating("Auto", 1f, hintDelay-0.5f); // Adjust the time interval as needed (5 seconds in this case)
 
     }
 
@@ -44,7 +47,7 @@ public class HintManager : MonoBehaviour
     protected void Auto()
     {
         // If auto-play is enabled, call the AutoPlay function
-        if (autoPlayEnabled)
+        if (autoPlayEnabled && board.currentStates!=GameStates.Wait)
         {
             StartCoroutine(AutoPlayWithDelay());
         }
@@ -166,4 +169,10 @@ public class HintManager : MonoBehaviour
     {
         autoPlayEnabled = isOn;
     }
+    public void AutoActive()
+    {
+        autoObjectIsActive = !autoObjectIsActive;
+        autoObject.SetActive(autoObjectIsActive);
+    }
+
 }

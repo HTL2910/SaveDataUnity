@@ -103,7 +103,10 @@ public class EndGameManager : MonoBehaviour
         {
             if (board.level < gameManager.gameData.levels.Count)
             {
-                gameManager.gameData.unclockLevel = board.level + 2;
+                if(board.level+2>= gameManager.gameData.unclockLevel)
+                {
+                    gameManager.gameData.unclockLevel = board.level + 2;
+                }
                 if (gameManager.gameData.levels[board.level] != null)
                 {
                     if (gameManager.gameData.levels[board.level].score < scoreManager.score)
