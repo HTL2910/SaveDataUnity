@@ -765,76 +765,131 @@ public class Board : MonoBehaviour
 
     public void CreateColorBomb()
     {
-        if (GameManager.instance == null) return;
-        Vector2Int position = GetRandomPositionWithoutBomb();
-        GameManager gameManager =GameManager.instance;
-        if (gameManager.gameData.countColorBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        if (GameManager.instance != null)
         {
-     
-            allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
-            gameManager.gameData.countColorBomb--;
-            itemManager.GetDataAll();
-            gameManager.SaveGameData();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            GameManager gameManager = GameManager.instance;
+            if (gameManager.gameData.countColorBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+                gameManager.gameData.countColorBomb--;
+                itemManager.GetDataAll();
+                gameManager.SaveGameData();
+            }
+            else
+            {
+                itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            }
         }
         else
         {
-            itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            if (allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+            }
+            else
+            {
+                itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            }
         }
-        
     }
 
     public void CreateAdjacenBomb()
     {
-        if (GameManager.instance == null) return;
-        Vector2Int position = GetRandomPositionWithoutBomb();
-
-        GameManager gameManager = GameManager.instance;
-        if (gameManager.gameData.countAdjacenBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        if (GameManager.instance != null)
         {
-            allDots[position.x, position.y].GetComponent<Dot>().MakeAdjacenBomb();
-            gameManager.gameData.countAdjacenBomb--;
-            itemManager.GetDataAll();
-            gameManager.SaveGameData();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+
+            GameManager gameManager = GameManager.instance;
+            if (gameManager.gameData.countAdjacenBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeAdjacenBomb();
+                gameManager.gameData.countAdjacenBomb--;
+                itemManager.GetDataAll();
+                gameManager.SaveGameData();
+            }
+            else
+            {
+                itemManager.adjacenButton.GetComponent<CountBombButton>().Error();
+            }
         }
         else
         {
-            itemManager.adjacenButton.GetComponent<CountBombButton>().Error();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            if (allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+            }
+            else
+            {
+                itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            }
         }
     }
 
     public void CreateColumnBomb()
     {
-        if (GameManager.instance == null) return;
-        Vector2Int position = GetRandomPositionWithoutBomb();
-        GameManager gameManager = GameManager.instance;
-        if (gameManager.gameData.countColumnBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        if (GameManager.instance != null)
         {
-            allDots[position.x, position.y].GetComponent<Dot>().MakeColumnBomb();
-            gameManager.gameData.countColumnBomb--;
-            itemManager.GetDataAll();
-            gameManager.SaveGameData();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            GameManager gameManager = GameManager.instance;
+            if (gameManager.gameData.countColumnBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColumnBomb();
+                gameManager.gameData.countColumnBomb--;
+                itemManager.GetDataAll();
+                gameManager.SaveGameData();
+            }
+            else
+            {
+                itemManager.columnButton.GetComponent<CountBombButton>().Error();
+            }
         }
         else
         {
-            itemManager.columnButton.GetComponent<CountBombButton>().Error();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            if (allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+            }
+            else
+            {
+                itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            }
         }
     }
 
     public void CreateRowBomb()
     {
-        if (GameManager.instance == null) return;
-        Vector2Int position = GetRandomPositionWithoutBomb();
-        GameManager gameManager = GameManager.instance;
-        if (gameManager.gameData.countRowBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+        if (GameManager.instance != null)
         {
-            allDots[position.x, position.y].GetComponent<Dot>().MakeRowBomb();
-            gameManager.gameData.countRowBomb--;
-            itemManager.GetDataAll();
-            gameManager.SaveGameData();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            GameManager gameManager = GameManager.instance;
+            if (gameManager.gameData.countRowBomb > 0 && allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeRowBomb();
+                gameManager.gameData.countRowBomb--;
+                itemManager.GetDataAll();
+                gameManager.SaveGameData();
+            }
+            else
+            {
+                itemManager.rowButton.GetComponent<CountBombButton>().Error();
+            }
         }
         else
         {
-            itemManager.rowButton.GetComponent<CountBombButton>().Error();
+            Vector2Int position = GetRandomPositionWithoutBomb();
+            if (allDots[position.x, position.y].GetComponent<Dot>() != null)
+            {
+                allDots[position.x, position.y].GetComponent<Dot>().MakeColorBomb();
+            }
+            else
+            {
+                itemManager.colorButton.GetComponent<CountBombButton>().Error();
+            }
         }
     }
 

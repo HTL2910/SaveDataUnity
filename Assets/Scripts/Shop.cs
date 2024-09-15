@@ -33,6 +33,10 @@ public class Shop : MonoBehaviour
             totalScore=manager.gameData.totalScore;
            
         }
+        else
+        {
+            totalScore = 100000;
+        }
         
     }
     private void Update()

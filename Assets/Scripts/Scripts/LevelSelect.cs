@@ -57,10 +57,11 @@ public class LevelSelect : MonoBehaviour
     }
   
     public void CreateButtonLevel()
-    {
-  
+    {   
+        
+        
 
-        for (int i = 0; i < gameManager.gameData.totalLevel; i++)
+        for (int i = 0; i < 500; i++)
         {
             GameObject levelButton = Instantiate(prefabLevelButton, transform.position, Quaternion.identity);
             LevelButton levelBtn = levelButton.GetComponent<LevelButton>();

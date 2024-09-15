@@ -22,6 +22,10 @@ public class ItemManager : MonoBehaviour
         else
         {
             Debug.LogError("Not GameManager");
+            colorButton.GetComponent<CountBombButton>().countBomb = 99;
+            adjacenButton.GetComponent<CountBombButton>().countBomb = 99;
+            columnButton.GetComponent<CountBombButton>().countBomb = 99;
+            rowButton.GetComponent<CountBombButton>().countBomb = 99;
         }
     }
 
