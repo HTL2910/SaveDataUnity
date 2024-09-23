@@ -6,27 +6,13 @@ using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
-    protected GameManager gameManager;
     public GameObject colorButton;
     public GameObject adjacenButton;
     public GameObject columnButton;
     public GameObject rowButton;
     private void Start()
     {
-        gameManager = GameManager.instance;
-        if (gameManager != null)
-        {
-            GetDataAll();
-            Debug.Log("GetData");
-        }
-        else
-        {
-            Debug.LogError("Not GameManager");
-            colorButton.GetComponent<CountBombButton>().countBomb = 99;
-            adjacenButton.GetComponent<CountBombButton>().countBomb = 99;
-            columnButton.GetComponent<CountBombButton>().countBomb = 99;
-            rowButton.GetComponent<CountBombButton>().countBomb = 99;
-        }
+        GetDataAll();
     }
 
     public void GetDataAll()
@@ -47,16 +33,16 @@ public class ItemManager : MonoBehaviour
             switch (type)
             {
                 case "Color":
-                    count.countBomb = gameManager.gameData.countColorBomb;
+                    count.countBomb = PlayerPrefs.GetInt("countColorBomb", 0);
                     break;
                 case "Adjacen":
-                    count.countBomb = gameManager.gameData.countAdjacenBomb;
+                    count.countBomb = PlayerPrefs.GetInt("countAdjacenBomb", 0);
                     break;
                 case "Column":
-                    count.countBomb = gameManager.gameData.countColumnBomb;
+                    count.countBomb = PlayerPrefs.GetInt("countColumnBomb", 0);
                     break;
                 case "Row":
-                    count.countBomb = gameManager.gameData.countRowBomb;
+                    count.countBomb = PlayerPrefs.GetInt("countRowBomb", 0);
                     break;
                 default:
                     Debug.Log("wrong type");
@@ -66,7 +52,7 @@ public class ItemManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not have");
+            Debug.Log("Not have CountBombButton");
         }
     }
    

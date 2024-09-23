@@ -13,12 +13,10 @@ public class BackToSplash : MonoBehaviour
     }
     public void OkWin()
     {
-        if(GameManager.instance != null)
-        {
-            GameManager gameManager= GameManager.instance;
-            gameManager.gameData.totalScore += scoreManager.score;
-            gameManager.SaveGameData();
-        }
+        int totalScore = PlayerPrefs.GetInt("Total_Score",0);
+        totalScore += scoreManager.score;
+        PlayerPrefs.SetInt("Total_Score", totalScore);
+        PlayerPrefs.Save();
         SceneManager.LoadScene(sceneToLoad);
     }
     public void TryAgain()

@@ -15,29 +15,15 @@ public class Shop : MonoBehaviour
 
     public TextMeshProUGUI totalScoreText;
 
-    private GameManager manager;
     protected int totalScore;
-    private void Awake()
-    {
-        manager=GameManager.instance;
-    }
+
     private void Start()
     {
-        if (manager != null)
-        {
-            manager.gameData=manager.LoadGameData();
-            LoadCountBomb(bombColor);
-            LoadCountBomb(bombAdjacen);
-            LoadCountBomb(bombColumn);
-            LoadCountBomb(bombRow);
-            totalScore=manager.gameData.totalScore;
-           
-        }
-        else
-        {
-            totalScore = 100000;
-        }
-        
+        LoadCountBomb(bombColor);
+        LoadCountBomb(bombAdjacen);
+        LoadCountBomb(bombColumn);
+        LoadCountBomb(bombRow);
+        totalScore = PlayerPrefs.GetInt("Total_Score", 0);
     }
     private void Update()
     {
@@ -52,16 +38,16 @@ public class Shop : MonoBehaviour
             switch(type)
             {
                 case "Color":
-                    item.countBomb = manager.gameData.countColorBomb;
+                    item.countBomb = PlayerPrefs.GetInt("countColorBomb", 0);
                     break;
                 case "Adjacen":
-                    item.countBomb = manager.gameData.countAdjacenBomb;
+                    item.countBomb = PlayerPrefs.GetInt("countAdjacenBomb", 0);
                     break;
                 case "Column":
-                    item.countBomb = manager.gameData.countColumnBomb;
+                    item.countBomb = PlayerPrefs.GetInt("countColumnBomb", 0);
                     break;
                 case "Row":
-                    item.countBomb = manager.gameData.countRowBomb;
+                    item.countBomb = PlayerPrefs.GetInt("countRowBomb", 0);
                     break;
                 default:
                     Debug.Log("wrong type");
@@ -74,24 +60,25 @@ public class Shop : MonoBehaviour
     {
         ShopItem item = gameObject.GetComponent<ShopItem>();
         string type = item.typeBomb;
-        if (manager.gameData.totalScore > item.prices)
+        if (PlayerPrefs.GetInt("Total_Score", 0) > item.prices)
         {
             item.BuyItem();
-            manager.gameData.totalScore-=item.prices;
-            totalScore=manager.gameData.totalScore;
+            totalScore -= item.prices;
+            PlayerPrefs.SetInt("Total_Score", totalScore);
             switch (type)
             {
                 case "Color":
-                    manager.gameData.countColorBomb = item.countBomb;
+                    PlayerPrefs.SetInt("countColorBomb", item.countBomb);
                     break;
                 case "Adjacen":
-                    manager.gameData.countAdjacenBomb = item.countBomb;
+                    PlayerPrefs.SetInt("countAdjacenBomb", item.countBomb);
+               
                     break;
                 case "Column":
-                    manager.gameData.countColumnBomb = item.countBomb;
+                    PlayerPrefs.SetInt("countColumnBomb", item.countBomb);
                     break;
                 case "Row":
-                    manager.gameData.countRowBomb = item.countBomb;
+                    PlayerPrefs.SetInt("countRowBomb", item.countBomb);
                     break;
                 default:
                     Debug.Log("wrong type");
@@ -102,7 +89,7 @@ public class Shop : MonoBehaviour
         {
             item.BuyError();
         }
-        manager.SaveGameData();
+        PlayerPrefs.Save();
         Debug.Log("Save");
     }
 
