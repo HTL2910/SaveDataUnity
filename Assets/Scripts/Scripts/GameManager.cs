@@ -104,7 +104,14 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Active Scene");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+            if (indexScene >= 3)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            }
         }
     }
     public void SaveGameData()
