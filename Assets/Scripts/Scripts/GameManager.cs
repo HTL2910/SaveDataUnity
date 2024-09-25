@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [System.Serializable]
 public class GameData
 {
@@ -82,8 +83,30 @@ public class GameManager : MonoBehaviour
         SaveGameData();
 
     }
- 
-
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Back();
+                return;
+            }
+        }
+    }
+    void Back()
+    {
+        int indexScene = SceneManager.GetActiveScene().buildIndex;
+        if (indexScene<=0)
+        {
+            Application.Quit();
+        }
+        else
+        {
+            Debug.Log("Active Scene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+        }
+    }
     public void SaveGameData()
     {
         string json = JsonUtility.ToJson(gameData, true);
