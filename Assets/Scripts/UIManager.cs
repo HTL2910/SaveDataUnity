@@ -14,11 +14,17 @@ public class UIManager : MonoBehaviour
     public Transform attributeParent;
     public GameObject gunPrefabs;
     public Transform gunScrollViewContent;
-    int selectIndex = 0;
+    [SerializeField]int selectIndex = 0;
+ 
+
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI dispersionText;
+    public TextMeshProUGUI rateOfFireText;
+    public TextMeshProUGUI reloadSpeedText;
+    public TextMeshProUGUI ammunitionText;
     private void Start()
     {
         CreateUI();
-        UpdateGunIndex();
     }
 
     private void CreateUI()
@@ -28,32 +34,50 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < listGun.Count; i++)
         {
             GameObject gun = Instantiate(gunPrefabs);
-            gun.transform.SetParent(gunScrollViewContent);
-            gun.transform.position = gunScrollViewContent.transform.position;
-            gun.transform.localScale = Vector3.one;
+            gun.transform.SetParent(gunScrollViewContent,false);
             gun.transform.GetChild(0).GetComponent<Image>().sprite = listGun[i].sprite;
-            if (listGun[i].status==Status.rendted)
+           
+            int index = i;
+            gun.GetComponent<Button>().onClick.AddListener(() => ChangeIndex(index));
+        }
+        UpdateGunIndex();
+        ChangeStatus();
+    }
+    void ChangeStatus()
+    {
+        for (int i = 0; i < listGun.Count; i++)
+        {
+            TextMeshProUGUI textTmp = gunScrollViewContent.GetChild(i).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            if (listGun[i].status == Status.rendted)
             {
-                gun.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Rended out";
-                gun.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = new Color(1.0f, 0.64f, 0.0f);
+                textTmp.text = "Rended out";
+                textTmp.color = new Color(1.0f, 0.64f, 0.0f);
             }
-            else if(listGun[i].status == Status.used)
+            else if (listGun[i].status == Status.used)
             {
-                gun.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Used";
-                gun.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.green;
+                textTmp.text = "Used";
+                textTmp.color = Color.green;
 
             }
             else
             {
-                gun.transform.GetChild(1).gameObject.SetActive(false);
-
+                gunScrollViewContent.GetChild(i).transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }
-
-    private void UpdateGunIndex()
+    void ChangeIndex(int index)
     {
+        selectIndex = index;
+        UpdateGunIndex();
+    }
+    private void UpdateGunIndex() 
+    { 
         gunImage.sprite = listGun[selectIndex].sprite;
         nameGunText.text = listGun[selectIndex].Name;
+        damageText.text = listGun[selectIndex].damage.ToString();
+        dispersionText.text = listGun[selectIndex].dispersion.ToString();
+        rateOfFireText.text = listGun[selectIndex].rateOfFire.ToString()+ " RPM";
+        reloadSpeedText.text= listGun[selectIndex].reloadSpeed.ToString()+ '%';
+        ammunitionText.text = listGun[selectIndex].ammunition.ToString()+ "/100";
     }
 }

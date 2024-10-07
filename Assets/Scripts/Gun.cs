@@ -19,5 +19,4 @@ public class Gun
     public int reloadSpeed;
     public int ammunition;
     public Status status;
-    
 }
