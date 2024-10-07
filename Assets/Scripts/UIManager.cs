@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI rateOfFireText;
     public TextMeshProUGUI reloadSpeedText;
     public TextMeshProUGUI ammunitionText;
+    private int indexUsed=0;
     private void Start()
     {
         CreateUI();
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < listGun.Count; i++)
         {
             TextMeshProUGUI textTmp = gunScrollViewContent.GetChild(i).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            gunScrollViewContent.GetChild(i).transform.GetChild(1).gameObject.SetActive(true);
             if (listGun[i].status == Status.rendted)
             {
                 textTmp.text = "Rended out";
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
             {
                 textTmp.text = "Used";
                 textTmp.color = Color.green;
+                indexUsed = i;
 
             }
             else
@@ -79,5 +82,12 @@ public class UIManager : MonoBehaviour
         rateOfFireText.text = listGun[selectIndex].rateOfFire.ToString()+ " RPM";
         reloadSpeedText.text= listGun[selectIndex].reloadSpeed.ToString()+ '%';
         ammunitionText.text = listGun[selectIndex].ammunition.ToString()+ "/100";
+    }
+    public void UsedGun()
+    {
+        listGun[indexUsed].status = Status.normal;
+        listGun[selectIndex].status = Status.used;
+        indexUsed = selectIndex;
+        ChangeStatus();
     }
 }
