@@ -6,8 +6,10 @@ public class SelectTarget : MonoBehaviour
 {
     public Material Mattarget;
     public Material Matstart;
+    public Material Matdelete;
     public GameObject target;
     public GameObject player;
+    public GameObject delete;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -33,5 +35,17 @@ public class SelectTarget : MonoBehaviour
                 player.GetComponent<MeshRenderer>().material= Matstart;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log(hit.collider.name);
+                delete = hit.collider.gameObject;
+                delete.GetComponent<MeshRenderer>().material =Matdelete;
+            }
+        }
     }
+
 }
