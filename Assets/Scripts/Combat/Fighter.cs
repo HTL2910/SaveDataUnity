@@ -35,11 +35,17 @@ namespace RPG.Combat
             transform.LookAt(target.transform);
             if(timeSinceLastAttack>timeBetweenAttacks)
             {
-                GetComponent<Animator>().SetTrigger("Attack");
+                TriggerAttack();
 
                 timeSinceLastAttack = 0;
-                
+
             }
+        }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("StopAttack");
+            GetComponent<Animator>().SetTrigger("Attack");
         }
 
         private bool GetIsInRange()
@@ -60,10 +66,17 @@ namespace RPG.Combat
         }
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("StopAttack");
+            StopAttack();
 
             target = null;
         }
+
+        private void StopAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("Attack");
+            GetComponent<Animator>().SetTrigger("StopAttack");
+        }
+
         public void Hit()
         {
             target.TakeDamage(weaponDamage);
