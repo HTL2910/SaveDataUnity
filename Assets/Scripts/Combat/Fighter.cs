@@ -21,7 +21,7 @@ namespace RPG.Combat
             if (target.IsDead()) return;
             if (!GetIsInRange())
             {
-                GetComponent<Mover>().MoveTo(target.transform.position);
+                //GetComponent<Mover>().MoveTo(target.transform.position);
             }
             else
             {
@@ -79,6 +79,7 @@ namespace RPG.Combat
 
         public void Hit()
         {
+            if(target== null) return;
             target.TakeDamage(weaponDamage);
         }
     }

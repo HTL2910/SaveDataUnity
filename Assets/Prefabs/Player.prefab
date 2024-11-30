@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3872744371561282787}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRange: 5
+  timeBetweenAttacks: 1
+  weaponDamage: 5
 --- !u!114 &3872744371561282787
 MonoBehaviour:
   m_ObjectHideFlags: 0
