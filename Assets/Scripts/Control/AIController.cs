@@ -18,8 +18,10 @@ namespace RPG.Control
         Mover mover;
         Vector3 guardPosition;
         float timeSinceLastSawPlayer=Mathf.Infinity;
+        float timeSinceArrivedAtWayPoint=Mathf.Infinity;
         [SerializeField] PathPatrol pathPatrol;
         float wayPointTolerance = 1f;
+        float wayPointDwellTime = 3f;
         int currentWaypointIndex=0;
         private void Start()
         {
@@ -33,12 +35,11 @@ namespace RPG.Control
         private void Update()
         {
             if (health.IsDead()) return;
-            if (InRangeOfPlayer()  && fighter.CanAttack(player))
+            if (InRangeOfPlayer() && fighter.CanAttack(player))
             {
-                timeSinceLastSawPlayer = 0;
                 AttackBehaviour();
             }
-            else if(timeSinceLastSawPlayer< supicionTime)
+            else if (timeSinceLastSawPlayer < supicionTime)
             {
                 SupicionBehaviour();
             }
@@ -46,7 +47,13 @@ namespace RPG.Control
             {
                 PathPatrolBehaviour();
             }
+            UpdateTimer();
+        }
+
+        private void UpdateTimer()
+        {
             timeSinceLastSawPlayer += Time.deltaTime;
+            timeSinceArrivedAtWayPoint += Time.deltaTime;
         }
 
         private void PathPatrolBehaviour()
@@ -56,11 +63,16 @@ namespace RPG.Control
             {
                 if (AtWayPoint())
                 {
+                    timeSinceArrivedAtWayPoint = 0;
                     CycleWayPoint();
                 }
                 nextPosition = GetCurrentWayPoint();
             }
-            mover.StartMoveAction(nextPosition);
+            if (timeSinceArrivedAtWayPoint > wayPointDwellTime)
+            {
+                mover.StartMoveAction(nextPosition);
+
+            }
         }
 
         private Vector3 GetCurrentWayPoint()
@@ -86,6 +98,7 @@ namespace RPG.Control
 
         private void AttackBehaviour()
         {
+            timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
         }
 
