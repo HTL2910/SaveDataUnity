@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2f8703062d1154594be92b98af329f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 84482827}
+  target: {fileID: 1148130317}
 --- !u!1 &584245366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1090,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthPoints: 100
+--- !u!114 &1148130326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830097054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de879725a1e7a44c8c33c70bc0f50f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &1148130327
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830097054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1208335846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,7 +1507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795496840193459028, guid: a2e6c78eacd59594fa6cb651618a39b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.29
+      value: 6.14
       objectReference: {fileID: 0}
     - target: {fileID: 795496840193459028, guid: a2e6c78eacd59594fa6cb651618a39b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1714,7 +1740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 795496840193459028, guid: a2e6c78eacd59594fa6cb651618a39b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.62
       objectReference: {fileID: 0}
     - target: {fileID: 795496840193459028, guid: a2e6c78eacd59594fa6cb651618a39b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1801,7 +1827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2f8703062d1154594be92b98af329f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 84482827}
+  target: {fileID: 1148130317}
 --- !u!1 &2102555457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2f8703062d1154594be92b98af329f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 84482827}
+  target: {fileID: 1148130317}
 --- !u!1001 &2380582935520249193
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using RPG.Combat;
+using RPG.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,14 +11,17 @@ namespace RPG.Control
         [SerializeField] float chaseDistance=5f;
         Fighter fighter;
         GameObject player;
+        Health health;
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
 
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
         }
         private void Update()
         {
+            if (health.IsDead()) return;
             if (InRangeOfPlayer()  && fighter.CanAttack(player))
             {
                 fighter.Attack(player);
@@ -31,6 +35,11 @@ namespace RPG.Control
         private bool InRangeOfPlayer()
         {
             return Vector3.Distance(player.transform.position, transform.position) < chaseDistance;//
+        }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
     }
 }

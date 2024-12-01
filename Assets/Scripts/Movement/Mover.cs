@@ -10,6 +10,8 @@ namespace RPG.Movement
     {
         [SerializeField] Transform target;
         NavMeshAgent navMeshAgent;
+        Health health;
+
         //Ray lastRay;
         //private void Update() code move player to target and draw ray from camera to mouse position
         //{
@@ -23,10 +25,11 @@ namespace RPG.Movement
         private void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            health= GetComponent<Health>();
         }
         private void Update()
         {
-
+            navMeshAgent.enabled = !health.IsDead();
             UpdateAnimator();
         }
         public void StartMoveAction(Vector3 destination)
