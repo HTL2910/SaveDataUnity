@@ -1,6 +1,7 @@
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +10,17 @@ namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chaseDistance=5f;
-        [SerializeField] float supicionTime=3f;
+        float chaseDistance=5f;
+        float supicionTime=3f;
         Fighter fighter;
         GameObject player;
         Health health;
         Mover mover;
         Vector3 guardPosition;
         float timeSinceLastSawPlayer=Mathf.Infinity;
+        [SerializeField] PathPatrol pathPatrol;
+        float wayPointTolerance = 1f;
+        int currentWaypointIndex=0;
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
@@ -40,14 +44,39 @@ namespace RPG.Control
             }
             else
             {
-                GuardBehaviour();
+                PathPatrolBehaviour();
             }
             timeSinceLastSawPlayer += Time.deltaTime;
         }
 
-        private void GuardBehaviour()
+        private void PathPatrolBehaviour()
         {
-            mover.StartMoveAction(guardPosition);
+            Vector3 nextPosition = guardPosition;
+            if (pathPatrol != null)
+            {
+                if (AtWayPoint())
+                {
+                    CycleWayPoint();
+                }
+                nextPosition = GetCurrentWayPoint();
+            }
+            mover.StartMoveAction(nextPosition);
+        }
+
+        private Vector3 GetCurrentWayPoint()
+        {
+            return pathPatrol.GetWayPoint(currentWaypointIndex);
+        }
+
+        private void CycleWayPoint()
+        {
+            currentWaypointIndex = pathPatrol.GetNextIndex(currentWaypointIndex);
+        }
+
+        private bool AtWayPoint()
+        {
+            float distanceToWayPoint = Vector3.Distance(transform.position, GetCurrentWayPoint());
+            return distanceToWayPoint < wayPointTolerance;
         }
 
         private void SupicionBehaviour()
