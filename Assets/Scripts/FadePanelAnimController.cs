@@ -33,7 +33,7 @@ public class FadePanelAnimController : MonoBehaviour
     private IEnumerator GameStartCo()
     {
         yield return new WaitForSeconds(1f);
-        Board board=FindObjectOfType <Board>();
+        Board board=FindFirstObjectByType <Board>();
         board.currentStates = GameStates.Move;
     }
 }

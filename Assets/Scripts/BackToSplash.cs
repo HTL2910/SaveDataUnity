@@ -9,7 +9,7 @@ public class BackToSplash : MonoBehaviour
     private ScoreManager scoreManager;
     private void Start()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
     public void OkWin()
     {

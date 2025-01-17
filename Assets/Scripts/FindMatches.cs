@@ -10,7 +10,7 @@ public class FindMatches : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board=FindObjectOfType<Board>();
+        board=FindFirstObjectByType<Board>();
     }
     public void FindAllMatches()
     {

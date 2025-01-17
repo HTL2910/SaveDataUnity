@@ -31,9 +31,9 @@ public class EndGameManager : MonoBehaviour
     private void Start()
     {
         gameManager=GameManager.instance;
-        board =FindObjectOfType<Board>();
-        hintManager = FindObjectOfType<HintManager>();
-        scoreManager=FindObjectOfType<ScoreManager>();
+        board =FindFirstObjectByType<Board>();
+        hintManager = FindFirstObjectByType<HintManager>();
+        scoreManager=FindFirstObjectByType<ScoreManager>();
         SetGameType();
         SetUpGame();
     }
@@ -87,7 +87,7 @@ public class EndGameManager : MonoBehaviour
         currentCounterValue = 0;
         hintManager.autoPlayToggle.isOn = false;
         counter.text = "" + currentCounterValue;
-        FadePanelAnimController fadePanel = FindObjectOfType<FadePanelAnimController>();
+        FadePanelAnimController fadePanel = FindFirstObjectByType<FadePanelAnimController>();
         fadePanel.GameOver();
     }
     public void WinGame()

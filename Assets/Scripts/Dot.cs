@@ -32,10 +32,10 @@ public class Dot : MonoBehaviour
     private void InitializeDot()
     {
         isColumnBomb = isRowBomb = isColorBomb = isAdjacenBomb = false;
-        endGameManager = FindObjectOfType<EndGameManager>();
-        hintManager = FindObjectOfType<HintManager>();
-        board = FindObjectOfType<Board>();
-        findMatches = FindObjectOfType<FindMatches>();
+        endGameManager = FindFirstObjectByType<EndGameManager>();
+        hintManager = FindFirstObjectByType<HintManager>();
+        board = FindFirstObjectByType<Board>();
+        findMatches = FindFirstObjectByType<FindMatches>();
     }
 
     private void OnMouseOver()

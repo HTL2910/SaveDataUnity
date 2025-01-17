@@ -41,7 +41,7 @@ public class BackgroundTitle : MonoBehaviour
     private GoalsManager _goalsManager;
     private void Start()
     {
-        _goalsManager=FindObjectOfType<GoalsManager>();
+        _goalsManager=FindFirstObjectByType<GoalsManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()

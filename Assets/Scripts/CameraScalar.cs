@@ -11,7 +11,7 @@ public class CameraScalar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board = FindObjectOfType<Board>();
+        board = FindFirstObjectByType<Board>();
         if (board != null)
         {
             RepositionCamera(board.height - 1, board.width - 1);

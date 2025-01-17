@@ -23,8 +23,8 @@ public class GoalsManager : MonoBehaviour
     private Board board;
     private void Start()
     {
-        board=FindObjectOfType<Board>();
-        endGame=FindObjectOfType<EndGameManager>();
+        board=FindFirstObjectByType<Board>();
+        endGame=FindFirstObjectByType<EndGameManager>();
         GetGoals();
         SetUpIntroGoals();
     }

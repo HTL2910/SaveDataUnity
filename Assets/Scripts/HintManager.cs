@@ -19,7 +19,7 @@ public class HintManager : MonoBehaviour
     void Start()
     {
         autoObject.SetActive(false);
-        board = FindObjectOfType<Board>();
+        board = FindFirstObjectByType<Board>();
         hintDelaySeconds = hintDelay;
 
         // Thêm listener cho toggle auto-play

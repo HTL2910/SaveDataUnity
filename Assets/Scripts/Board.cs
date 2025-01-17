@@ -88,10 +88,10 @@ public class Board : MonoBehaviour
     private void Start()
     {
         breakableTiles=new BackgroundTitle[width,height];
-        findMatches=FindObjectOfType<FindMatches>();
-        itemManager = FindObjectOfType<ItemManager>();
-        goalsManager = FindObjectOfType<GoalsManager>();
-        scoreManager=FindObjectOfType<ScoreManager>();
+        findMatches= FindFirstObjectByType<FindMatches>();
+        itemManager = FindFirstObjectByType<ItemManager>();
+        goalsManager = FindFirstObjectByType<GoalsManager>();
+        scoreManager=FindFirstObjectByType<ScoreManager>();
         blankSpaces = new bool[width, height];
         allDots= new GameObject[width, height];
         SetUp();

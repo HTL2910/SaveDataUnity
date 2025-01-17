@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board=FindObjectOfType<Board>();
+        board=FindFirstObjectByType<Board>();
         goalTextResult.text= "Last Target Score: "+board.scoreGoal[2].ToString();
         starTextResult.text = (indexLevel-1).ToString();
     }
