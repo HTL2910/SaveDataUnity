@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Graph/Level")]
 public class LevelData : ScriptableObject
 {
-    public string nameKey;
-    public float showSeconds = 5f;
-    [TextArea] public string binary; // N:bits
+    public string m_nameKey;
+    public float m_showSeconds = 5f;
+    [TextArea] public string m_binary; // N:bits
 }

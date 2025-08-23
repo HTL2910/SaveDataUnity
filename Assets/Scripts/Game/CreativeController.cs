@@ -4,43 +4,43 @@ using TMPro;
 
 public class CreativeController : MonoBehaviour
 {
-    public GraphRenderer renderer;
-    public MatrixPanel matrixPanel;
-    public EdgeDragController dragger;
-    public TMP_InputField shareField;
+    public GraphRenderer m_renderer;
+    public MatrixPanel m_matrixPanel;
+    public EdgeDragController m_dragger;
+    public TMP_InputField m_shareField;
 
-    private GraphData authored;
-    private GraphData working;
+    private GraphData m_authored;
+    private GraphData m_working;
 
     public void NewGraph(int n)
     {
-        authored = new GraphData(n);
-        renderer.BuildNodes(n);
-        matrixPanel.Build(authored, editableCells:true);
-        matrixPanel.SetActive(true);
-        renderer.SyncFromData(authored);
+        m_authored = new GraphData(n);
+        m_renderer.BuildNodes(n);
+        m_matrixPanel.Build(m_authored, editableCells:true);
+        m_matrixPanel.SetActive(true);
+        m_renderer.SyncFromData(m_authored);
     }
 
     public void PlayYourGraph()
     {
         // copy để người chơi vẽ lại
-        working = new GraphData(authored.N);
-        matrixPanel.SetActive(false);
-        renderer.SyncFromData(new GraphData(authored.N));
-        dragger.Bind(working);
+        m_working = new GraphData(m_authored.m_N);
+        m_matrixPanel.SetActive(false);
+        m_renderer.SyncFromData(new GraphData(m_authored.m_N));
+        m_dragger.Bind(m_working);
     }
 
     public void ExportShareCode()
     {
-        shareField.text = authored.ToBinaryString(); // ví dụ: "5:010010..."
+        m_shareField.text = m_authored.ToBinaryString(); // ví dụ: "5:010010..."
     }
 
     public void ImportShareCode()
     {
-        authored = GraphData.FromBinaryString(shareField.text);
-        renderer.BuildNodes(authored.N);
-        matrixPanel.Build(authored, editableCells:true);
-        matrixPanel.SetActive(true);
-        renderer.SyncFromData(authored);
+        m_authored = GraphData.FromBinaryString(m_shareField.text);
+        m_renderer.BuildNodes(m_authored.m_N);
+        m_matrixPanel.Build(m_authored, editableCells:true);
+        m_matrixPanel.SetActive(true);
+        m_renderer.SyncFromData(m_authored);
     }
 }

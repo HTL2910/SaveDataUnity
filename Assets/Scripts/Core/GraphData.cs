@@ -5,44 +5,44 @@ using System.Text;
 [Serializable]
 public class GraphData
 {
-    public int N;
+    public int m_N;
     // Ma trận kề: A[i,j] = true nếu có cạnh i<->j (không self-loop)
-    public bool[,] A;
+    public bool[,] m_A;
 
     public GraphData(int n)
     {
-        N = Math.Max(2, n);
-        A = new bool[N, N];
+        m_N = Math.Max(2, n);
+        m_A = new bool[m_N, m_N];
     }
 
-    public bool Get(int i, int j) => A[i, j];
+    public bool Get(int i, int j) => m_A[i, j];
     public void SetUndirected(int i, int j, bool v)
     {
         if (i == j) return;
-        A[i, j] = v;
-        A[j, i] = v;
+        m_A[i, j] = v;
+        m_A[j, i] = v;
     }
 
     public void Clear()
     {
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                A[i, j] = false;
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m_N; j++)
+                m_A[i, j] = false;
     }
 
     public int Degree(int i)
     {
         int d = 0;
-        for (int j = 0; j < N; j++) if (A[i, j]) d++;
+        for (int j = 0; j < m_N; j++) if (m_A[i, j]) d++;
         return d;
     }
 
     public int EdgeCount()
     {
         int c = 0;
-        for (int i = 0; i < N; i++)
-            for (int j = i+1; j < N; j++)
-                if (A[i, j]) c++;
+        for (int i = 0; i < m_N; i++)
+            for (int j = i+1; j < m_N; j++)
+                if (m_A[i, j]) c++;
         return c;
     }
 
@@ -50,21 +50,21 @@ public class GraphData
     public int TriangleCount()
     {
         int tri = 0;
-        for (int i = 0; i < N; i++)
-            for (int j = i+1; j < N; j++) if (A[i, j])
-                for (int k = j+1; k < N; k++)
-                    if (A[i, k] && A[j, k]) tri++;
+        for (int i = 0; i < m_N; i++)
+            for (int j = i+1; j < m_N; j++) if (m_A[i, j])
+                for (int k = j+1; k < m_N; k++)
+                    if (m_A[i, k] && m_A[j, k]) tri++;
         return tri;
     }
 
     //binary string
     public string ToBinaryString()
     {
-        var sb = new StringBuilder(N*N);
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                sb.Append(i==j ? '0' : (A[i,j] ? '1' : '0'));
-        return $"{N}:{sb}";
+        var sb = new StringBuilder(m_N*m_N);
+        for (int i = 0; i < m_N; i++)
+            for (int j = 0; j < m_N; j++)
+                sb.Append(i==j ? '0' : (m_A[i,j] ? '1' : '0'));
+        return $"{m_N}:{sb}";
     }
     public static GraphData FromBinaryString(string s)
     {
@@ -75,11 +75,11 @@ public class GraphData
         int t = 0;
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++, t++)
-                if (i!=j) g.A[i,j] = bits[t] == '1';
+                if (i!=j) g.m_A[i,j] = bits[t] == '1';
         // đảm bảo đối xứng
         for (int i = 0; i < n; i++)
             for (int j = i+1; j < n; j++)
-                g.SetUndirected(i, j, g.A[i,j] || g.A[j,i]);
+                g.SetUndirected(i, j, g.m_A[i,j] || g.m_A[j,i]);
         return g;
     }
 }

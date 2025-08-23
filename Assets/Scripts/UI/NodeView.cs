@@ -4,14 +4,14 @@ using TMPro;
 
 public class NodeView : MonoBehaviour
 {
-    public int Index;
-    public RectTransform Rt;
-    public Button Btn;
-    public TMP_Text Label;
+    public int m_Index;
+    public RectTransform m_Rt;
+    public Button m_Btn;
+    public TMP_Text m_Label;
 
     public void Init(int index)
     {
-        Index = index;
-        Label.text = index.ToString();
+        m_Index = index;
+        m_Label.text = index.ToString();
     }
 }

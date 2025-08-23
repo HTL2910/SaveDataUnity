@@ -4,66 +4,66 @@ using UnityEngine.EventSystems;
 
 public class EdgeDragController : MonoBehaviour
 {
-    public GraphRenderer graph;
-    public GraphData working; // đồ thị người chơi đang vẽ
-    public EdgeView tempEdge;
-    private int? from = null;
+    public GraphRenderer m_graph;
+    public GraphData m_working; // đồ thị người chơi đang vẽ
+    public EdgeView m_tempEdge;
+    private int? m_from = null;
 
     void Start()
     {
         // gán sự kiện click cho node
-        foreach (var nv in graph.nodes)
-            nv.Btn.onClick.AddListener(()=> OnNodeClicked(nv.Index));
+        foreach (var nv in m_graph.m_nodes)
+            nv.m_Btn.onClick.AddListener(()=> OnNodeClicked(nv.m_Index));
     }
 
     public void Bind(GraphData data)
     {
-        working = data;
-        graph.SyncFromData(working);
+        m_working = data;
+        m_graph.SyncFromData(m_working);
         // rebind click (nếu nodes mới)
-        foreach (var nv in graph.nodes)
+        foreach (var nv in m_graph.m_nodes)
         {
-            nv.Btn.onClick.RemoveAllListeners();
-            nv.Btn.onClick.AddListener(()=> OnNodeClicked(nv.Index));
+            nv.m_Btn.onClick.RemoveAllListeners();
+            nv.m_Btn.onClick.AddListener(()=> OnNodeClicked(nv.m_Index));
         }
     }
 
     void Update()
     {
-        if (tempEdge!=null)
+        if (m_tempEdge!=null)
         {
             Vector3 mouse = Input.mousePosition;
-            tempEdge.UpdateB(mouse);
+            m_tempEdge.UpdateB(mouse);
             if (Input.GetMouseButtonUp(0))
             {
-                Destroy(tempEdge.gameObject);
-                tempEdge = null;
-                from = null;
+                Destroy(m_tempEdge.gameObject);
+                m_tempEdge = null;
+                m_from = null;
             }
         }
     }
 
     void OnNodeClicked(int idx)
     {
-        if (from==null)
+        if (m_from==null)
         {
-            from = idx;
-            tempEdge = Instantiate(graph.edgePrefab, graph.nodesParent);
-            tempEdge.Init(graph.GetNode(idx).Rt.position, Input.mousePosition);
+            m_from = idx;
+            m_tempEdge = Instantiate(m_graph.m_edgePrefab, m_graph.m_nodesParent);
+            m_tempEdge.Init(m_graph.GetNode(idx).m_Rt.position, Input.mousePosition);
         }
         else
         {
-            int i = from.Value;
+            int i = m_from.Value;
             int j = idx;
             if (i!=j)
             {
-                bool newVal = !working.Get(i,j);
-                working.SetUndirected(i, j, newVal);
-                graph.SetEdgeUndirected(i, j, newVal);
+                bool newVal = !m_working.Get(i,j);
+                m_working.SetUndirected(i, j, newVal);
+                m_graph.SetEdgeUndirected(i, j, newVal);
             }
-            Destroy(tempEdge?.gameObject);
-            tempEdge = null;
-            from = null;
+            Destroy(m_tempEdge?.gameObject);
+            m_tempEdge = null;
+            m_from = null;
         }
     }
 }
