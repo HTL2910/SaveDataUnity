@@ -28,6 +28,15 @@ public class EdgeDragController : MonoBehaviour
         }
     }
 
+    // Method for GameManager compatibility
+    public void StartDrag(NodeView node)
+    {
+        if (node != null)
+        {
+            OnNodeClicked(node.m_Index);
+        }
+    }
+
     void Update()
     {
         if (m_tempEdge!=null)

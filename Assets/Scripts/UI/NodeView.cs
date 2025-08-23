@@ -1,3 +1,4 @@
+// Assets/Scripts/View/NodeView.cs
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,6 +13,14 @@ public class NodeView : MonoBehaviour
     public void Init(int index)
     {
         m_Index = index;
-        m_Label.text = index.ToString();
+        SetLabel($"v{index}");
     }
+
+    public void SetLabel(string text)
+    {
+        if (m_Label != null)
+            m_Label.text = text;
+    }
+
+    public int GetIndex() => m_Index;
 }

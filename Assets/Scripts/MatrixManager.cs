@@ -1,16 +1,21 @@
 using UnityEngine;
 
+/// <summary>
+/// Quản lý graph hiện tại trong session game.
+/// </summary>
 public class MatrixManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GraphData CurrentGraph { get; private set; }
+
+    [SerializeField] private MatrixGenerator generator;
+
+    public void CreateNewGraph(int nodeCount)
     {
-        
+        CurrentGraph = generator.GenerateMatrix(nodeCount);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadGraph(GraphData data)
     {
-        
+        CurrentGraph = data;
     }
 }

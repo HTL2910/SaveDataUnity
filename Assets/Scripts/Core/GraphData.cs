@@ -1,6 +1,6 @@
-// Assets/Scripts/Core/GraphData.cs
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 [Serializable]
 public class GraphData
@@ -15,10 +15,40 @@ public class GraphData
         m_A = new bool[m_N, m_N];
     }
 
-    public bool Get(int i, int j) => m_A[i, j];
+    // Properties for compatibility with MatrixGenerator
+    public List<int> nodes
+    {
+        get
+        {
+            var result = new List<int>();
+            for (int i = 0; i < m_N; i++)
+                result.Add(i);
+            return result;
+        }
+    }
+
+    public List<(int, int)> edges
+    {
+        get
+        {
+            var result = new List<(int, int)>();
+            for (int i = 0; i < m_N; i++)
+                for (int j = i + 1; j < m_N; j++)
+                    if (m_A[i, j])
+                        result.Add((i, j));
+            return result;
+        }
+    }
+
+    public bool Get(int i, int j) 
+    {
+        if (i < 0 || i >= m_N || j < 0 || j >= m_N) return false;
+        return m_A[i, j];
+    }
+
     public void SetUndirected(int i, int j, bool v)
     {
-        if (i == j) return;
+        if (i < 0 || i >= m_N || j < 0 || j >= m_N || i == j) return;
         m_A[i, j] = v;
         m_A[j, i] = v;
     }
@@ -32,8 +62,10 @@ public class GraphData
 
     public int Degree(int i)
     {
+        if (i < 0 || i >= m_N) return 0;
         int d = 0;
-        for (int j = 0; j < m_N; j++) if (m_A[i, j]) d++;
+        for (int j = 0; j < m_N; j++)
+            if (m_A[i, j]) d++;
         return d;
     }
 
@@ -41,7 +73,7 @@ public class GraphData
     {
         int c = 0;
         for (int i = 0; i < m_N; i++)
-            for (int j = i+1; j < m_N; j++)
+            for (int j = i + 1; j < m_N; j++)
                 if (m_A[i, j]) c++;
         return c;
     }
@@ -51,35 +83,106 @@ public class GraphData
     {
         int tri = 0;
         for (int i = 0; i < m_N; i++)
-            for (int j = i+1; j < m_N; j++) if (m_A[i, j])
-                for (int k = j+1; k < m_N; k++)
-                    if (m_A[i, k] && m_A[j, k]) tri++;
+            for (int j = i + 1; j < m_N; j++) 
+                if (m_A[i, j])
+                    for (int k = j + 1; k < m_N; k++)
+                        if (m_A[i, k] && m_A[j, k]) tri++;
         return tri;
+    }
+
+    // === Các API tương thích với MatrixGenerator ===
+    public void AddEdge(int a, int b)
+    {
+        SetUndirected(a, b, true);
+    }
+
+    public bool IsConnected(int a, int b)
+    {
+        return Get(a, b);
+    }
+
+    // Method for MatrixGenerator compatibility
+    public void AddNode(int nodeId)
+    {
+        // Nodes are automatically created when GraphData is initialized
+        // This method exists for compatibility but doesn't need to do anything
+        // since the graph size is fixed at construction
+    }
+
+    // Check if the entire graph is connected (all nodes reachable)
+    public bool IsGraphConnected()
+    {
+        if (m_N <= 1) return true;
+        
+        // Use DFS to check connectivity
+        bool[] visited = new bool[m_N];
+        DFS(0, visited);
+        
+        // Check if all nodes were visited
+        for (int i = 0; i < m_N; i++)
+            if (!visited[i]) return false;
+        
+        return true;
+    }
+
+    private void DFS(int node, bool[] visited)
+    {
+        visited[node] = true;
+        for (int i = 0; i < m_N; i++)
+        {
+            if (m_A[node, i] && !visited[i])
+            {
+                DFS(i, visited);
+            }
+        }
     }
 
     //binary string
     public string ToBinaryString()
     {
-        var sb = new StringBuilder(m_N*m_N);
+        var sb = new StringBuilder(m_N * m_N);
         for (int i = 0; i < m_N; i++)
             for (int j = 0; j < m_N; j++)
-                sb.Append(i==j ? '0' : (m_A[i,j] ? '1' : '0'));
+                sb.Append(i == j ? '0' : (m_A[i, j] ? '1' : '0'));
         return $"{m_N}:{sb}";
     }
+
     public static GraphData FromBinaryString(string s)
     {
+        if (string.IsNullOrEmpty(s)) return new GraphData(2);
+        
         var parts = s.Split(':');
-        int n = int.Parse(parts[0]);
+        if (parts.Length != 2) return new GraphData(2);
+        
+        if (!int.TryParse(parts[0], out int n) || n < 2) return new GraphData(2);
+        
         var bits = parts[1];
+        if (bits.Length != n * n) return new GraphData(n);
+        
         var g = new GraphData(n);
         int t = 0;
         for (int i = 0; i < n; i++)
+        {
             for (int j = 0; j < n; j++, t++)
-                if (i!=j) g.m_A[i,j] = bits[t] == '1';
-        // đảm bảo đối xứng
+            {
+                if (i != j && t < bits.Length)
+                {
+                    g.m_A[i, j] = bits[t] == '1';
+                }
+            }
+        }
+        
+        // Đảm bảo ma trận đối xứng
         for (int i = 0; i < n; i++)
-            for (int j = i+1; j < n; j++)
-                g.SetUndirected(i, j, g.m_A[i,j] || g.m_A[j,i]);
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                bool hasEdge = g.m_A[i, j] || g.m_A[j, i];
+                g.m_A[i, j] = hasEdge;
+                g.m_A[j, i] = hasEdge;
+            }
+        }
+        
         return g;
     }
 }
