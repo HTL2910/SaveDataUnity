@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class MatrixUIController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject m_gridPrefab;
+    public int m_height=5;
+    public int m_width=7;
+
+    private void Start()
     {
-        
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Init()
     {
-        
+        for (int i = 0; i < m_height; i++)
+        {
+            for (int j = 0; j < m_width; j++)
+            {
+                GameObject grid = Instantiate(m_gridPrefab, transform);
+                grid.gameObject.name = $"Grid_{i}_{j}";
+            }
+        }
     }
 }
