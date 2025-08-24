@@ -13,6 +13,7 @@ public class GraphRenderer : MonoBehaviour
     [Header("Layout")]
     public float m_radius = 300f;               // nếu Canvas pixel
     public Vector2 m_center = Vector2.zero;
+    public bool m_useMatrixLayout = false;      // Use MatrixPanel-style layout for 4 and 6 nodes
 
     public List<NodeView> m_nodes = new();
     private Dictionary<(int,int), EdgeView> m_edges = new();
@@ -20,6 +21,66 @@ public class GraphRenderer : MonoBehaviour
     public void BuildNodes(int n)
     {
         ClearAll();
+        
+        if (m_useMatrixLayout && (n == 4 || n == 6))
+        {
+            BuildNodesMatrixLayout(n);
+        }
+        else
+        {
+            BuildNodesCircularLayout(n);
+        }
+    }
+
+    private void BuildNodesMatrixLayout(int n)
+    {
+        if (n == 4)
+        {
+            // For 4 nodes, place them at the four cardinal directions (like MatrixPanel)
+            Vector2[] offsets = new Vector2[]
+            {
+                new Vector2(0, m_radius),       // Top
+                new Vector2(0, -m_radius),      // Bottom
+                new Vector2(m_radius, 0),       // Right
+                new Vector2(-m_radius, 0)       // Left
+            };
+
+            for (int i = 0; i < n; i++)
+            {
+                var nv = Instantiate(m_nodePrefab, m_nodesParent);
+                nv.m_Rt = nv.GetComponent<RectTransform>();
+                nv.Init(i);
+                nv.m_Rt.anchoredPosition = m_center + offsets[i];
+                nv.name = $"Node_{i}";
+                m_nodes.Add(nv);
+            }
+        }
+        else if (n == 6)
+        {
+            // For 6 nodes, place them in a hexagonal pattern (like MatrixPanel)
+            float angleStep = 360f / n;
+            for (int i = 0; i < n; i++)
+            {
+                var nv = Instantiate(m_nodePrefab, m_nodesParent);
+                nv.m_Rt = nv.GetComponent<RectTransform>();
+                nv.Init(i);
+                
+                float angle = i * angleStep * Mathf.Deg2Rad;
+                Vector2 offset = new Vector2(
+                    m_radius * Mathf.Cos(angle),
+                    m_radius * Mathf.Sin(angle)
+                );
+                
+                nv.m_Rt.anchoredPosition = m_center + offset;
+                nv.name = $"Node_{i}";
+                m_nodes.Add(nv);
+            }
+        }
+    }
+
+    private void BuildNodesCircularLayout(int n)
+    {
+        // Original circular layout for other numbers of nodes
         float step = 360f / n;
         for (int i = 0; i < n; i++)
         {
@@ -28,6 +89,7 @@ public class GraphRenderer : MonoBehaviour
             nv.Init(i);
             float angle = Mathf.Deg2Rad * (i * step);
             nv.m_Rt.anchoredPosition = m_center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * m_radius;
+            nv.name = $"Node_{i}";
             m_nodes.Add(nv);
         }
     }
@@ -73,4 +135,16 @@ public class GraphRenderer : MonoBehaviour
     }
 
     public NodeView GetNode(int i) => m_nodes[i];
+
+    // Helper method to set layout type
+    public void SetMatrixLayout(bool useMatrixLayout)
+    {
+        m_useMatrixLayout = useMatrixLayout;
+    }
+
+    // Helper method to set radius (distance)
+    public void SetRadius(float radius)
+    {
+        m_radius = radius;
+    }
 }
