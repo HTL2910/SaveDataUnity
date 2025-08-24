@@ -23,4 +23,9 @@ public class NodeView : MonoBehaviour
     }
 
     public int GetIndex() => m_Index;
+    public void SetIndex(int index) 
+    {
+        m_Index = index;
+        SetLabel($"{index}");
+    }
 }

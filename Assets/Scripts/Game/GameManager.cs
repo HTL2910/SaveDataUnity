@@ -8,6 +8,12 @@ public enum GameMode { Memory, Creative }
 
 public class GameManager : MonoBehaviour
 {
+    public GraphRenderer m_graphRenderer;
+    
+    
+    /// <summary>
+    /// Old code
+    /// </summary>
     [Header("Refs")]
     public GraphRenderer m_renderer;         // vẽ node + cạnh
     public EdgeDragController m_dragger;     // xử lý kéo cạnh
