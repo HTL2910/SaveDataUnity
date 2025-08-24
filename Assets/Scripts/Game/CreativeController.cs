@@ -16,8 +16,7 @@ public class CreativeController : MonoBehaviour
     {
         m_authored = new GraphData(n);
         m_renderer.BuildNodes(n);
-        m_matrixPanel.Build(m_authored, editableCells:true);
-        m_matrixPanel.SetActive(true);
+        m_matrixPanel.Generate();
         m_renderer.SyncFromData(m_authored);
     }
 
@@ -25,7 +24,6 @@ public class CreativeController : MonoBehaviour
     {
         // copy để người chơi vẽ lại
         m_working = new GraphData(m_authored.m_N);
-        m_matrixPanel.SetActive(false);
         m_renderer.SyncFromData(new GraphData(m_authored.m_N));
         m_dragger.Bind(m_working);
     }
@@ -39,8 +37,7 @@ public class CreativeController : MonoBehaviour
     {
         m_authored = GraphData.FromBinaryString(m_shareField.text);
         m_renderer.BuildNodes(m_authored.m_N);
-        m_matrixPanel.Build(m_authored, editableCells:true);
-        m_matrixPanel.SetActive(true);
+        m_matrixPanel.Generate();
         m_renderer.SyncFromData(m_authored);
     }
 }

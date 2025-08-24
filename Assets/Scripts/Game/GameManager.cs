@@ -1,4 +1,4 @@
-// Assets/Scripts/Game/GameManager.cs
+    // Assets/Scripts/Game/GameManager.cs
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -45,8 +45,7 @@ public class GameManager : MonoBehaviour
         m_renderer.BuildNodes(level.m_N);
 
         // Hiện đúng ma trận trong vài giây
-        m_matrixPanel.Build(m_target, editableCells: false);
-        m_matrixPanel.SetActive(true);
+        m_matrixPanel.Generate();
 
         // Render đáp án để player ghi nhớ
         m_renderer.SyncFromData(m_target);
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Ẩn matrix, reset cạnh, bật drag để player vẽ lại
-        m_matrixPanel.SetActive(false);
+        m_matrixPanel.Generate();
         m_renderer.SyncFromData(new GraphData(m_target.m_N));
         m_dragger.Bind(m_working);
     }

@@ -5,48 +5,27 @@ using TMPro;
 
 public class MatrixPanel : MonoBehaviour
 {
-    public RectTransform m_gridParent;
-    public Toggle m_cellTogglePrefab;
-    public TMP_Text m_cellLabelPrefab;
+    public RectTransform m_graphCenter; // trung tâm của các node trong đồ thị
+    public RectTransform m_nodePrefab;  // prefab của node để instantiate xung quanh center
+    public int m_count = 4;            // tổng số lượng node
+    public float m_radius = 100f;         // bán kính
 
-    private GraphData m_data;
-    private bool m_editable;
-
-    public void Build(GraphData g, bool editableCells)
+    private void Start()
     {
-        Clear();
-        m_data = g; m_editable = editableCells;
-        int n = g.m_N;
-        var grid = m_gridParent.GetComponent<GridLayoutGroup>();
-        grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-        grid.constraintCount = n;
-
-        for (int i=0;i<n;i++)
-            for (int j=0;j<n;j++)
-            {
-                if (m_editable && i!=j)
-                {
-                    var t = Instantiate(m_cellTogglePrefab, m_gridParent);
-                    bool v = g.Get(i,j);
-                    t.isOn = v;
-                    int ii=i, jj=j;
-                    t.onValueChanged.AddListener(val=>{
-                        m_data.SetUndirected(ii, jj, val);
-                    });
-                }
-                else
-                {
-                    var lab = Instantiate(m_cellLabelPrefab, m_gridParent);
-                    lab.text = (i==j?0:(g.Get(i,j)?1:0)).ToString();
-                }
-            }
+        Generate();
     }
 
-    public void Clear()
+    public void Generate()
     {
-        for (int i = m_gridParent.childCount-1; i>=0; i--)
-            Destroy(m_gridParent.GetChild(i).gameObject);
-    }
+        float angleStep = 360f / m_count;
+        for (int i = 0; i < m_count; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector2 offset = new Vector2(100.0f, 100.0f);
 
-    public void SetActive(bool on) => gameObject.SetActive(on);
+            RectTransform node = Instantiate(m_nodePrefab, m_graphCenter);
+            node.anchoredPosition = offset; // đối xứng quanh center
+            node.name = $"Node_{i}";
+        }
+    }
 }
